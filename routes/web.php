@@ -9,6 +9,7 @@ use App\Http\Controllers\SessionsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CrimeRecordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::controller(CrimeRecordController::class)->prefix('crime-record')->group(function () {
+        Route::get('/', 'index')->name('cr.index');
+        Route::get('/create', 'create')->name('cr.create');
+
+    });
+
     Route::get('/', [HomeController::class, 'home']);
+
 	Route::get('dashboard', function () {
 		return view('dashboard');
 	})->name('dashboard');
