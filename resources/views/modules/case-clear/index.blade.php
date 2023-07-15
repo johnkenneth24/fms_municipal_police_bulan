@@ -9,11 +9,10 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Records</h5>
+                            <h5 class="mb-0">Case Cleared</h5>
                         </div>
                         <div>
-                            <input type="text" class="form-control-sm" placeholder="Search...">
-                            <a href="{{ route('cr.create') }}" class="btn bg-gradient-info  btn-sm mb-0" type="button">Add New Record</a>
+                            <input type="text" class="form-control-sm" placeholder="Search..."> 
                         </div>
                     </div>
                 </div>
