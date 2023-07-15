@@ -9,11 +9,10 @@
                 <div class="card-header pb-0">
                     <div class="d-flex flex-row justify-content-between">
                         <div>
-                            <h5 class="mb-0">All Records</h5>
+                            <h5 class="mb-0">Suspect's List</h5>
                         </div>
                         <div>
                             <input type="text" class="form-control-sm" placeholder="Search...">
-                            <a href="{{ route('cr.create') }}" class="btn bg-gradient-info  btn-sm mb-0" type="button">Add New Record</a>
                         </div>
                     </div>
                 </div>
@@ -24,6 +23,9 @@
                                 <tr>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Blotter Entry No.
+                                    </th>
+                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Suspect's Name
                                     </th>
                                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Date Reported
@@ -44,7 +46,9 @@
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">0001</p>
                                     </td>
-
+                                    <td class="text-center">
+                                        <p class="text-xs font-weight-bold mb-0">test</p>
+                                    </td>
                                     <td class="text-center">
                                         <p class="text-xs font-weight-bold mb-0">test</p>
                                     </td>

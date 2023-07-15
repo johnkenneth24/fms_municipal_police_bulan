@@ -10,6 +10,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CrimeRecordController;
+use App\Http\Controllers\CrimeGraphController;
+use App\Http\Controllers\CaseSolvedController;
+use App\Http\Controllers\CaseInvestController;
+use App\Http\Controllers\CaseClearedController;
+use App\Http\Controllers\VictimController;
+use App\Http\Controllers\SuspectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +34,36 @@ Route::group(['middleware' => 'auth'], function () {
     Route::controller(CrimeRecordController::class)->prefix('crime-record')->group(function () {
         Route::get('/', 'index')->name('cr.index');
         Route::get('/create', 'create')->name('cr.create');
+
+    });
+
+    Route::controller(CrimeGraphController::class)->prefix('crime-graph')->group(function () {
+        Route::get('/', 'index')->name('cg.index');
+
+    });
+
+    Route::controller(CaseSolvedController::class)->prefix('case-solved')->group(function () {
+        Route::get('/', 'index')->name('cs.index');
+
+    });
+
+    Route::controller(CaseClearedController::class)->prefix('case-cleared')->group(function () {
+        Route::get('/', 'index')->name('cc.index');
+
+    });
+
+    Route::controller(CaseInvestController::class)->prefix('case-investigation')->group(function () {
+        Route::get('/', 'index')->name('ci.index');
+
+    });
+
+    Route::controller(VictimController::class)->prefix('victim')->group(function () {
+        Route::get('/', 'index')->name('v.index');
+
+    });
+
+    Route::controller(SuspectController::class)->prefix('suspect')->group(function () {
+        Route::get('/', 'index')->name('s.index');
 
     });
 
