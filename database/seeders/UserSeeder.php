@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'email' => 'admin',
             'password' => Hash::make('admin'),
             'created_at' => now(),
-            'updated_at' => now()
+            'updated_at' => now(),
         ]);
     }
 }
