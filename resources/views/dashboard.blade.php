@@ -1,7 +1,6 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
 <div class="row">
     <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
         <div class="card">
@@ -76,7 +75,7 @@
                             <div class="d-flex flex-column h-100">
                                 <p class="mb-1 pt-2 text-bold">Hello Admin!</p>
                                 <h5 class="font-weight-bolder">Bulan MPS - FMS</h5>
-                                <p class="mb-5" >The Bulan Municipality Police Station File Management System is a digital solution that efficiently organizes and centralizes police records, enabling faster access and collaboration among law enforcement personnel. </p>
+                                <p class="mb-5" >The Bulan Municipal Police Station File Management System is a digital solution that efficiently organizes and centralizes police records, enabling faster access and collaboration among law enforcement personnel. </p>
 
                             </div>
                         </div>
@@ -97,7 +96,7 @@
                 <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" style="background-image: url('../assets/img/ivancik.jpg');">
                     <span class="mask bg-gradient-dark"></span>
                     <div class="card-body position-relative z-index-1 d-flex flex-column h-100 p-3">
-                        <h5 class="text-white font-weight-bolder mb-4 pt-2">Retrive Easily!</h5>
+                        <h5 class="text-white font-weight-bolder mb-4 pt-2">Retrieve Easily!</h5>
                         <p class="text-white">It enhances efficiency and accuracy in managing and retrieving information, ultimately improving the overall effectiveness of the police station.</p>
 
                     </div>

@@ -73,6 +73,11 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('dashboard');
 	})->name('dashboard');
 
+
+
+
+
+
 	Route::get('billing', function () {
 		return view('billing');
 	})->name('billing');
