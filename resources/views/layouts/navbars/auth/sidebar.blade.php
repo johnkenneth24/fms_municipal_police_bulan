@@ -18,22 +18,24 @@
     </style>
 @endpush
 
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2"
     id="sidenav-main">
     <div class="sidenav-header">
-        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+        <i class="fas fa-times p-2 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
             aria-hidden="true" id="iconSidenav"></i>
         <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard') }}">
-            <img src="../assets/img/bmps.png" class="navbar-brand-img" style="max-height: 60px;" alt="...">
+            <img src="{{ asset('assets/img/bmps.png') }}" class="navbar-brand-img me-1 ms-0" style="max-height: 60px;"
+                alt="...">
             <span class="ms-1 font-weight-bold text-logo" style="color: #ffffff; font-size: 15px;">FMS - Bulan
                 MPS</span>
         </a>
     </div>
-    <hr class="horizontal dark mt-0">
+    <hr class="horizontal dark mt-2 mb-1">
     <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main" style="height: 100vh;">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{ Request::is('dashboard') ? 'active' : '' }}" href="{{ url('dashboard') }}">
+                <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}"
+                    href="{{ route('dashboard') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg class="text-dark" width="16px" height="16px" viewBox="0 0 42 42" version="1.1"
@@ -64,78 +66,86 @@
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Records</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ !request()->routeIs(['cr.*']) ?: 'active' }}" href="{{ route('cr.index') }}">
+                <a class="nav-link  {{ request()->routeIs('crime-record.*') ? 'active' : '' }}"
+                    href="{{ route('crime-record.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
-                            class="ni ni-book-bookmark ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['cr.*']) ?: 'text-white' }}"
-                            aria-hidden="true"></i>
+                            class="ni ni-book-bookmark ps-2 pe-2 text-center text-dark {{ request()->routeIs('crime-record.*') ? 'text-white' : '' }} "
+                            aria-hidden="true">
+                        </i>
                     </div>
                     <span class="nav-link-text ms-1">Crime Records</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ !request()->routeIs(['cs.*']) ?: 'active' }}" href="{{ route('cs.index') }}">
+                <a class="nav-link  {{ request()->routeIs('case-solved.*') ? 'active' : '' }}"
+                    href="{{ route('case-solved.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
-                            class="ni ni-check-bold ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['cs.*']) ?: 'text-white' }}"
+                            class="ni ni-check-bold ps-2 pe-2 text-center text-dark {{ request()->routeIs('case-solved.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Case Solved</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ !request()->routeIs(['cc.*']) ?: 'active' }}" href="{{ route('cc.index') }}">
+                <a class="nav-link  {{ request()->routeIs('case-cleared.*') ? 'active' : '' }}"
+                    href="{{ route('case-cleared.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
-                            class="ni ni-tag ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['cc.*']) ?: 'text-white' }}"
+                            class="ni ni-tag ps-2 pe-2 text-center text-dark {{ request()->routeIs('case-cleared.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Case Cleared</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ !request()->routeIs(['ci.*']) ?: 'active' }}" href="{{ route('ci.index') }}">
+                <a class="nav-link  {{ request()->routeIs('case-investigation.*') ? 'active' : '' }}"
+                    href="{{ route('case-investigation.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
-                            class="ni ni-badge ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['ci.*']) ?: 'text-white' }}"
+                            class="ni ni-badge ps-2 pe-2 text-center text-dark {{ request()->routeIs('case-investigation.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Under Investigation</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ !request()->routeIs(['s.*']) ?: 'active' }}" href="{{ route('s.index') }}">
+                <a class="nav-link  {{ request()->routeIs('suspect.*') ? 'active' : '' }}"
+                    href="{{ route('suspect.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
-                            class="fa fa-id-badge ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['s.*']) ?: 'text-white' }}"
+                            class="fa fa-id-badge ps-2 pe-2 text-center text-dark {{ request()->routeIs('suspect.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Suspect</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ !request()->routeIs(['v.*']) ?: 'active' }}" href="{{ route('v.index') }}">
+                <a class="nav-link  {{ request()->routeIs('victim.*') ? 'active' : '' }}"
+                    href="{{ route('victim.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i style="font-size: 1rem;"
-                            class="fa fa-user ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['v.*']) ?: 'text-white' }}"
+                            class="fa fa-user ps-2 pe-2 text-center text-dark {{ request()->routeIs('victim.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Victim</span>
                 </a>
             </li>
             <li class="nav-item pb-2">
-                <a class="nav-link {{ !request()->routeIs(['cg.*']) ?: 'active' }}" href="{{ route('cg.index') }}">
+                <a class="nav-link {{ request()->routeIs('crime-graph.*') ? 'active' : '' }}"
+                    href="{{ route('crime-graph.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 
                         <i style="font-size: 1rem;"
-                            class="fa fa-bar-chart fa-list-ul ps-2 pe-2 text-center text-dark {{ !request()->routeIs(['cg.*']) ?: 'text-white' }}"
+                            class="fa fa-bar-chart fa-list-ul ps-2 pe-2 text-center text-dark {{ request()->routeIs('crime-graph.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Crime Infographs</span>
