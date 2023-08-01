@@ -13,6 +13,24 @@ return new class extends Migration
     {
         Schema::create('suspects', function (Blueprint $table) {
             $table->id();
+            $table->string('firstname');
+            $table->string('middlename')->nullable();
+            $table->string('lastname');
+            $table->string('suffix')->nullable();
+            $table->string('birthdate');
+            $table->string('birthplace');
+            $table->string('gender');
+            $table->string('marital_status');
+            $table->string('occupation')->nullable();
+            $table->string('education')->nullable();
+            $table->string('citizenship');
+            $table->string('address');
+            $table->string('ethnic');
+            $table->string('relation_to_victim')->nullable();
+            $table->string('used_weapon')->nullable();
+            $table->string('suspect_status');
+            $table->string('suspect_motive')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

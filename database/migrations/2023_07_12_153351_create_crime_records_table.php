@@ -13,6 +13,20 @@ return new class extends Migration
     {
         Schema::create('crime_records', function (Blueprint $table) {
             $table->id();
+            $table->string('blotter_entry_no');
+            $table->string('case_status');
+            $table->string('case_progress');
+            $table->string('date_committed');
+            $table->string('time_committed');
+            $table->string('date_reported');
+            $table->string('time_reported');
+            $table->string('incident_location');
+            $table->longText('incident_details');
+            $table->string('investigator')->nullable();
+            $table->string('stage_of_felony')->nullable();
+            $table->string('crime_category')->nullable();
+            $table->string('crime_committed')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
