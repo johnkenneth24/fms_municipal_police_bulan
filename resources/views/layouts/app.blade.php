@@ -50,8 +50,12 @@
     <script src="../assets/js/plugins/fullcalendar.min.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script>
 
+    <script src="{{ asset('assets/js/jquery.3.7.0.min.js') }}"></script>
+
     @stack('dashboard')
     @stack('scripts')
+
+    <script src="{{ mix('js/app.js') }}"></script>
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
         if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -80,7 +84,6 @@
 
         setInterval(updateDateTime, 1000);
     </script>
-
     <!-- Github buttons -->
     {{-- <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
 

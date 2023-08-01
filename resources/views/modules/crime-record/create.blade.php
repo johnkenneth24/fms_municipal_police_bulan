@@ -13,163 +13,183 @@
                             <a href="{{ route('crime-record.index') }}" class="btn btn-danger btn-sm">Cancel</a>
                         </div>
                     </div>
-                    <div class="card-body pt-0">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>First Name</label>
-                                    <input type="text" name="firstname"
-                                        class="form-control form-control-sm @error('firstname') is-invalid @enderror"
-                                        value="{{ old('firstname') }}" required placeholder="Enter First Name">
-                                    @error('firstname')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                    <form action="{{ route('crime-record.store') }}" method="post">
+                        @csrf
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" name="v_firstname"
+                                            class="form-control form-control-sm @error('v_firstname') is-invalid @enderror"
+                                            value="{{ old('v_firstname') }}" required placeholder="Enter First Name">
+                                        @error('v_firstname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Middle Name</label>
-                                    <input type="text" name="middlename" class="form-control form-control-sm"
-                                        value="{{ old('middlename') }}" placeholder="Enter Middle Name">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Middle Name</label>
+                                        <input type="text" name="v_middlename" class="form-control form-control-sm"
+                                            value="{{ old('v_middlename') }}" placeholder="Enter Middle Name">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Last Name</label>
-                                    <input type="text" name="lastname"
-                                        class="form-control form-control-sm @error('lastname') is-invalid @enderror"
-                                        value="{{ old('lastname') }}" required placeholder="Enter Last Name">
-                                    @error('lastname')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" name="v_lastname"
+                                            class="form-control form-control-sm @error('v_lastname') is-invalid @enderror"
+                                            value="{{ old('v_lastname') }}" required placeholder="Enter Last Name">
+                                        @error('v_lastname')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Suffix <span class="text-muted font-italic">(Optional)</span></label>
-                                    <select name="suffix" class="form-control form-control-sm">
-                                        <option value="">--Please Select--</option>
-                                        @foreach ($suffixes as $suffix)
-                                            <option value="{{ $suffix }}" @selected(old('suffix') == $suffix)>
-                                                {{ $suffix }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Suffix <span class="text-muted font-italic">(Optional)</span></label>
+                                        <select name="v_suffix" class="form-control form-control-sm">
+                                            <option value="">--Please Select--</option>
+                                            @foreach ($suffixes as $suffix)
+                                                <option value="{{ $suffix }}" @selected(old('v_suffix') == $suffix)>
+                                                    {{ $suffix }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Birthdate</label>
-                                    <input type="date" class="form-control form-control-sm" name="birthdate" required
-                                        value="{{ old('birthdate') }}">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Birthdate</label>
+                                        <input type="date" class="form-control form-control-sm bdate" name="v_birthdate"
+                                            required value="{{ old('v_birthdate') }}">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Birthplace</label>
-                                    <input type="text" class="form-control form-control-sm" name="birthplace" required
-                                        value="{{ old('birthplace') }}" placeholder="Enter Birthplace">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Age</label>
+                                        <input type="number" name="v_age"
+                                            class="form-control form-control-sm text-end age" readonly required
+                                            placeholder="0">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Age</label>
-                                    <input type="number" name="age" class="form-control form-control-sm text-end"
-                                        readonly required placeholder="0">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Birthplace</label>
+                                        <input type="text" class="form-control form-control-sm" name="v_birthplace"
+                                            required value="{{ old('birthplace') }}" placeholder="Enter Birthplace">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Gender</label>
-                                    <select class="form-control form-control-sm" name="gender" required>
-                                        <option value="">--Please Select--</option>
-                                        <option value="male" @selected(old('gender') == 'male')>Male</option>
-                                        <option value="female" @selected(old('gender') == 'female')>Female</option>
-                                    </select>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        <select class="form-control form-control-sm" name="v_gender" required>
+                                            <option value="">--Please Select--</option>
+                                            <option value="male" @selected(old('v_gender') == 'male')>Male</option>
+                                            <option value="female" @selected(old('v_gender') == 'female')>Female</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Marital Status</label>
-                                    <select class="form-control form-control-sm" name="marital_status" required>
-                                        <option value="">--Please Select--</option>
-                                        @foreach ($mar_status as $m_status)
-                                            <option value="{{ $m_status }}" @selected(old('marital_status') == $m_status)>
-                                                {{ $m_status }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Marital Status</label>
+                                        <select class="form-control form-control-sm" name="v_marital_status" required>
+                                            <option value="">--Please Select--</option>
+                                            @foreach ($mar_status as $m_status)
+                                                <option value="{{ $m_status }}" @selected(old('v_marital_status') == $m_status)>
+                                                    {{ $m_status }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Occupation</label>
-                                    <input type="text" class="form-control form-control-sm" name="occupation"
-                                        placeholder="Enter Occupation">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Occupation</label>
+                                        <input type="text" class="form-control form-control-sm" name="v_occupation"
+                                            value="{{ old('v_occupation') }}" placeholder="Enter Occupation">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Educational Attainment</label>
-                                    <input type="text" class="form-control form-control-sm" name="education"
-                                        placeholder="Enter Educational Attainment">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Educational Attainment</label>
+                                        <input type="text" class="form-control form-control-sm" name="v_education"
+                                            value="{{ old('v_education') }}" placeholder="Enter Educational Attainment">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Address</label>
-                                    <input type="text" class="form-control form-control-sm" name="address"
-                                        placeholder="Enter Address">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" class="form-control form-control-sm" name="v_address"
+                                            value="{{ old('v_address') }}" placeholder="Enter Address">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Contact Number</label>
-                                    <input type="text" class="form-control form-control-sm" name="contact_number"
-                                        placeholder="Enter Contact No.">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Contact Number</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                            name="v_contact_number" value="{{ old('v_contact_number') }}"
+                                            placeholder="Enter Contact No.">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Nationality</label>
-                                    <input type="text" class="form-control form-control-sm" value="Filipino"
-                                        name="citizenship" placeholder="Enter Nationality">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Nationality</label>
+                                        <input type="text" class="form-control form-control-sm" name="v_citizenship"
+                                            value={{ old('v_citizenship') }} placeholder="Enter Nationality">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label>Ethnic Group</label>
-                                    <input type="text" class="form-control form-control-sm" name="ethnic"
-                                        placeholder="Enter Ethnic Group">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="checkbox-inline text-muted">
+                                            <input type="checkbox" id="ethnicCheckbox" class="form-checkbox">
+                                            Are you a member of an ethnic group?
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Relation to Suspect</label>
-                                    <input type="text" class="form-control form-control-sm" name="relation_to_suspect"
-                                        placeholder="Enter Relation to Suspect">
+
+                                <div class="col-md-3" id="ethnicGroupContainer" style="display: none;">
+                                    <div class="form-group">
+                                        <label>Ethnic Group</label>
+                                        <input type="text" class="form-control form-control-sm" name="v_ethnic"
+                                            value="{{ old('v_ethnic') }}" placeholder="Enter Ethnic Group">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Victim Status</label>
-                                    <select class="form-control form-control-sm" name="victim_status">
-                                        <option value="">--Please Select--</option>
-                                        @foreach ($vic_status as $v_status)
-                                            <option value="{{ $v_status }}" @selected(old('victim_status') == $v_status)>
-                                                {{ $v_status }}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Relation to Suspect</label>
+                                        <input type="text" class="form-control form-control-sm"
+                                            name="relation_to_suspect" value="{{ old('relation_to_suspect') }}"
+                                            placeholder="Enter Relation to Suspect">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Victim Status</label>
+                                        <select class="form-control form-control-sm" name="victim_status">
+                                            <option value="">--Please Select--</option>
+                                            @foreach ($vic_status as $v_status)
+                                                <option value="{{ $v_status }}" @selected(old('victim_status') == $v_status)>
+                                                    {{ $v_status }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="card-footer d-flex justify-content-end">
+                            <button type="submit" class="btn btn-info col-md-3 btn-lg">Submit</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <div class="row">
+
+        {{-- <div class="row">
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header pb-1">
@@ -274,21 +294,20 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="form-group">
-                                    <label>Ralation to Suspect</label>
+                                    <label>Relation to Suspect</label>
                                     <input type="text" class="form-control form-control-sm" name=""
-                                        placeholder="Enter Ralation to Suspect">
+                                        placeholder="Enter Relation to Suspect">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Weapon Use</label>
-                                    <select class="form-control form-control-sm" name="">
+                                    <select class="form-control form-control-sm" name="used_weapon">
                                         <option value="">--Please Select--</option>
-                                        <option value="">Firearms</option>
-                                        <option value="">Bladed Weapon</option>
-                                        <option value="">Blunt Object</option>
-                                        <option value="">Hand/Fist/Feet</option>
-                                        <option value="">Others</option>
+                                        @foreach ($used_weapons as $weapons)
+                                            <option value="{{ $weapons }}" @selected(old('weapon_use') == $weapons)>
+                                                {{ $weapons }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -297,16 +316,10 @@
                                     <label>Suspect Status</label>
                                     <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
-                                        <option value="">Arrested</option>
-                                        <option value="">At Large</option>
-                                        <option value="">On-bail</option>
-                                        <option value="">Released</option>
-                                        <option value="">On-probation</option>
-                                        <option value="">Convicted</option>
-                                        <option value="">Serving Sentence</option>
-                                        <option value="">Turned-over to MSWD</option>
-                                        <option value="">Turned-over to Barangay</option>
-                                        <option value="">Turned-over to Parents/Legal Guardian</option>
+                                        @foreach ($sus_status as $s_status)
+                                            <option value="{{ $s_status }}" @selected(old('suspect_status') == $s_status)>
+                                                {{ $s_status }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -320,8 +333,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
+        </div> --}}
+        {{-- <div class="row">
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header pb-1">
@@ -408,8 +421,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-7">
+        </div> --}}
+        {{-- <div class="row mb-7">
             <div class="col-md-12 mt-2">
                 <div class="card">
                     <div class="card-header pb-1">
@@ -458,6 +471,40 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        function calculateAge() {
+            var bdateValue = document.querySelector('.bdate').value;
+            var bdate = new Date(bdateValue);
+            var today = new Date();
+            var age = today.getFullYear() - bdate.getFullYear();
+            var monthDiff = today.getMonth() - bdate.getMonth();
+
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < bdate.getDate())) {
+                age--;
+            }
+
+            document.querySelector('.age').value = age;
+        }
+
+        // Attach the function to the input event and change event
+        document.querySelector('.bdate').addEventListener('input', calculateAge);
+        document.querySelector('.bdate').addEventListener('change', calculateAge);
+    </script>
+
+    <script>
+        document.getElementById('ethnicCheckbox').addEventListener('change', function() {
+            var checkbox = this;
+            var ethnicGroupContainer = document.getElementById('ethnicGroupContainer');
+            if (checkbox.checked) {
+                ethnicGroupContainer.style.display = 'block';
+            } else {
+                ethnicGroupContainer.style.display = 'none';
+            }
+        });
+    </script>
+@endpush

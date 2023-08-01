@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('education')->nullable();
             $table->string('citizenship');
             $table->string('address');
-            $table->string('contact_number');
+            $table->string('contact_number')->nullable();
             $table->string('ethnic');
             $table->string('relation_to_suspect')->nullable();
             $table->string('victim_status');
