@@ -28,6 +28,8 @@ class CrimeRecordController extends Controller
     {
         $validated = $request->validated();
 
+        dd($validated);
+
         $victim = Victim::create([
             'firstname' => $validated['v_firstname'],
             'middlename' => $validated['v_middlename'],
