@@ -17,132 +17,150 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">First Name</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
-                                        placeholder="Enter First Name">
+                                    <label>First Name</label>
+                                    <input type="text" name="firstname"
+                                        class="form-control form-control-sm @error('firstname') is-invalid @enderror"
+                                        value="{{ old('firstname') }}" required placeholder="Enter First Name">
+                                    @error('firstname')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Middle Name</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
-                                        placeholder="Enter Middle Name">
+                                    <label>Middle Name</label>
+                                    <input type="text" name="middlename" class="form-control form-control-sm"
+                                        value="{{ old('middlename') }}" placeholder="Enter Middle Name">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Last Name</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
-                                        placeholder="Enter Last Name">
+                                    <label>Last Name</label>
+                                    <input type="text" name="lastname"
+                                        class="form-control form-control-sm @error('lastname') is-invalid @enderror"
+                                        value="{{ old('lastname') }}" required placeholder="Enter Last Name">
+                                    @error('lastname')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Extension</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
-                                        placeholder="Enter Victim's Name">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">Birthdate</label>
-                                    <input type="date" class="form-control form-control-sm" id=""
-                                        placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">Birthplace</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
-                                        placeholder="Enter Birthplace">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">Age</label>
-                                    <input type="number" class="form-control form-control-sm text-end" id=""
-                                        placeholder="0">
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label for="">Gender</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Suffix <span class="text-muted font-italic">(Optional)</span></label>
+                                    <select name="suffix" class="form-control form-control-sm">
                                         <option value="">--Please Select--</option>
-                                        <option value="">Male</option>
-                                        <option value="">Female</option>
+                                        @foreach ($suffixes as $suffix)
+                                            <option value="{{ $suffix }}" @selected(old('suffix') == $suffix)>
+                                                {{ $suffix }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Birthdate</label>
+                                    <input type="date" class="form-control form-control-sm" name="birthdate" required
+                                        value="{{ old('birthdate') }}">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Birthplace</label>
+                                    <input type="text" class="form-control form-control-sm" name="birthplace" required
+                                        value="{{ old('birthplace') }}" placeholder="Enter Birthplace">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Age</label>
+                                    <input type="number" name="age" class="form-control form-control-sm text-end"
+                                        readonly required placeholder="0">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Gender</label>
+                                    <select class="form-control form-control-sm" name="gender" required>
+                                        <option value="">--Please Select--</option>
+                                        <option value="male" @selected(old('gender') == 'male')>Male</option>
+                                        <option value="female" @selected(old('gender') == 'female')>Female</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Marital Status</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Marital Status</label>
+                                    <select class="form-control form-control-sm" name="marital_status" required>
                                         <option value="">--Please Select--</option>
-                                        <option value="">Single</option>
-                                        <option value="">Married</option>
-                                        <option value="">Separated</option>
-                                        <option value="">Widowed</option>
-                                        <option value="">Divorced</option>
+                                        @foreach ($mar_status as $m_status)
+                                            <option value="{{ $m_status }}" @selected(old('marital_status') == $m_status)>
+                                                {{ $m_status }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Occupation</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Occupation</label>
+                                    <input type="text" class="form-control form-control-sm" name="occupation"
                                         placeholder="Enter Occupation">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Educational Attainment</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Educational Attainment</label>
+                                    <input type="text" class="form-control form-control-sm" name="education"
                                         placeholder="Enter Educational Attainment">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Address</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Address</label>
+                                    <input type="text" class="form-control form-control-sm" name="address"
                                         placeholder="Enter Address">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Contact Number</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Contact Number</label>
+                                    <input type="text" class="form-control form-control-sm" name="contact_number"
                                         placeholder="Enter Contact No.">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Nationality</label>
+                                    <label>Nationality</label>
                                     <input type="text" class="form-control form-control-sm" value="Filipino"
-                                        id="" placeholder="">
+                                        name="citizenship" placeholder="Enter Nationality">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Ethnic Group</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Ethnic Group</label>
+                                    <input type="text" class="form-control form-control-sm" name="ethnic"
                                         placeholder="Enter Ethnic Group">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Ralation to Suspect</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
-                                        placeholder="Enter Ralation to Suspect">
+                                    <label>Relation to Suspect</label>
+                                    <input type="text" class="form-control form-control-sm" name="relation_to_suspect"
+                                        placeholder="Enter Relation to Suspect">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Victim Status</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Victim Status</label>
+                                    <select class="form-control form-control-sm" name="victim_status">
                                         <option value="">--Please Select--</option>
-                                        <option value="">Unharmed</option>
-                                        <option value="">Harmed</option>
+                                        @foreach ($vic_status as $v_status)
+                                            <option value="{{ $v_status }}" @selected(old('victim_status') == $v_status)>
+                                                {{ $v_status }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -163,57 +181,57 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">First Name</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter First Name">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Middle Name</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Middle Name</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Middle Name">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Last Name</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Last Name">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Extension</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Extension</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Victim's Name">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Birthdate</label>
-                                    <input type="date" class="form-control form-control-sm" id=""
+                                    <label>Birthdate</label>
+                                    <input type="date" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Birthplace</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Birthplace</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Birthplace">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Age</label>
-                                    <input type="number" class="form-control form-control-sm text-end" id=""
+                                    <label>Age</label>
+                                    <input type="number" class="form-control form-control-sm text-end" name=""
                                         placeholder="0">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Gender</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Gender</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Male</option>
                                         <option value="">Female</option>
@@ -222,8 +240,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Marital Status</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Marital Status</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Single</option>
                                         <option value="">Married</option>
@@ -235,36 +253,36 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Occupation</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Occupation</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Occupation">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Educational Attainment</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Educational Attainment</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Educational Attainment">
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="">Nationality</label>
+                                    <label>Nationality</label>
                                     <input type="text" class="form-control form-control-sm" value="Filipino"
-                                        id="" placeholder="">
+                                        name="" placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-7">
                                 <div class="form-group">
-                                    <label for="">Ralation to Suspect</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Ralation to Suspect</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="Enter Ralation to Suspect">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Weapon Use</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Weapon Use</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Firearms</option>
                                         <option value="">Bladed Weapon</option>
@@ -276,8 +294,8 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="form-group">
-                                    <label for="">Suspect Status</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Suspect Status</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Arrested</option>
                                         <option value="">At Large</option>
@@ -294,8 +312,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Suspect Motive</label>
-                                    <textarea class="form-control form-control-sm" id="" rows="2" placeholder="Type here..."></textarea>
+                                    <label>Suspect Motive</label>
+                                    <textarea class="form-control form-control-sm" name="" rows="2" placeholder="Type here..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -315,15 +333,15 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Blotter Entry No.</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Blotter Entry No.</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Case Status</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Case Status</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Solved</option>
                                         <option value="">Cleared</option>
@@ -333,8 +351,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Case Progress</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Case Progress</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Release to Prosecution</option>
                                         <option value="">Filed in Court</option>
@@ -347,43 +365,43 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Date Commited</label>
-                                    <input type="date" class="form-control form-control-sm" id=""
+                                    <label>Date Commited</label>
+                                    <input type="date" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Time Commited</label>
-                                    <input type="time" class="form-control form-control-sm" id=""
+                                    <label>Time Commited</label>
+                                    <input type="time" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Date Reported</label>
-                                    <input type="date" class="form-control form-control-sm" id=""
+                                    <label>Date Reported</label>
+                                    <input type="date" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label for="">Time Reported</label>
-                                    <input type="time" class="form-control form-control-sm" id=""
+                                    <label>Time Reported</label>
+                                    <input type="time" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Place of Incident</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Place of Incident</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Synopsis/Narrative</label>
-                                    <textarea class="form-control form-control-sm" id="" rows="2" placeholder="Type here..."></textarea>
+                                    <label>Synopsis/Narrative</label>
+                                    <textarea class="form-control form-control-sm" name="" rows="2" placeholder="Type here..."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -403,15 +421,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Name of Investigator On-case</label>
-                                    <input type="text" class="form-control form-control-sm" id=""
+                                    <label>Name of Investigator On-case</label>
+                                    <input type="text" class="form-control form-control-sm" name=""
                                         placeholder="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Stage of Felmy</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Stage of Felmy</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                         <option value="">Attempted</option>
                                         <option value="">Frustrated</option>
@@ -421,16 +439,16 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Crime Category</label>
-                                    <select class="form-control form-control-sm" id="">
+                                    <label>Crime Category</label>
+                                    <select class="form-control form-control-sm" name="">
                                         <option value="">--Please Select--</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="">Crime Commited</label>
-                                    <textarea class="form-control form-control-sm" id="" rows="2" placeholder="Type here..."></textarea>
+                                    <label>Crime Commited</label>
+                                    <textarea class="form-control form-control-sm" name="" rows="2" placeholder="Type here..."></textarea>
                                 </div>
                             </div>
                         </div>
