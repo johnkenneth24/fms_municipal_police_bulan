@@ -70,7 +70,8 @@
                 </a>
             </li>
             <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Records</h6>
+                <h6 class="text-uppercase text-xs font-weight-bolder text-center opacity-6">
+                    Records</h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link  {{ request()->routeIs('crime-record.*') ? 'active' : '' }}"
