@@ -36,7 +36,7 @@ class StoreRequest extends FormRequest
             'v_citizenship' => 'required',
             'v_address' => 'required',
             'v_contact_number' => 'nullable',
-            'v_ethnic' => 'required',
+            'v_ethnic' => 'nullable',
             'relation_to_suspect' => 'nullable',
             'victim_status' => 'required',
 

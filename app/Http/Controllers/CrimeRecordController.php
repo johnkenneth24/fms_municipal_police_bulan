@@ -9,6 +9,7 @@ class CrimeRecordController extends Controller
 {
     public function index()
     {
+
         return view('modules.crime-record.index');
     }
 
@@ -28,7 +29,7 @@ class CrimeRecordController extends Controller
     {
         $validated = $request->validated();
 
-        dd($validated);
+        // dd($validated);
 
         $victim = Victim::create([
             'firstname' => $validated['v_firstname'],
@@ -36,10 +37,19 @@ class CrimeRecordController extends Controller
             'lastname' => $validated['v_lastname'],
             'suffix' => $validated['v_suffix'],
             'birthdate' => $validated['v_birthdate'],
+            'birthplace' => $validated['v_birthplace'],
             'gender' => $validated['v_gender'],
-
+            'marital_status' => $validated['v_marital_status'],
+            'occupation' => $validated['v_occupation'],
+            'education' => $validated['v_education'],
+            'citizenship' => $validated['v_citizenship'],
+            'address' => $validated['v_address'],
+            'contact_number' => $validated['v_contact_number'],
+            'ethnic' => $validated['v_ethnic'] ?? 'none',
+            'relation_to_suspect' => $validated['relation_to_suspect'],
+            'victim_status' => $validated['victim_status'],
         ]);
 
-        return view('modules.crime-record.index');
+        return view('modules.crime-record.index')->with('success', 'Crime record successfully created!');
     }
 }

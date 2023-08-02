@@ -17,9 +17,9 @@
                         @csrf
                         <div class="card-body pt-0">
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>First Name</label>
+                                        <label>First Name <span class="text-danger">*</span> </label>
                                         <input type="text" name="v_firstname"
                                             class="form-control form-control-sm @error('v_firstname') is-invalid @enderror"
                                             value="{{ old('v_firstname') }}" required placeholder="Enter First Name">
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label>Last Name</label>
+                                        <label>Last Name <span class="text-danger">*</span> </label>
                                         <input type="text" name="v_lastname"
                                             class="form-control form-control-sm @error('v_lastname') is-invalid @enderror"
                                             value="{{ old('v_lastname') }}" required placeholder="Enter Last Name">
@@ -64,12 +64,12 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label>Birthdate</label>
+                                        <label>Birthdate <span class="text-danger">*</span> </label>
                                         <input type="date" class="form-control form-control-sm bdate" name="v_birthdate"
                                             required value="{{ old('v_birthdate') }}">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <label>Age</label>
                                         <input type="number" name="v_age"
@@ -80,14 +80,14 @@
 
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Birthplace</label>
+                                        <label>Birthplace <span class="text-danger">*</span> </label>
                                         <input type="text" class="form-control form-control-sm" name="v_birthplace"
-                                            required value="{{ old('birthplace') }}" placeholder="Enter Birthplace">
+                                            required value="{{ old('v_birthplace') }}" placeholder="Enter Birthplace">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label>Gender</label>
+                                        <label>Gender <span class="text-danger">*</span> </label>
                                         <select class="form-control form-control-sm" name="v_gender" required>
                                             <option value="">--Please Select--</option>
                                             <option value="male" @selected(old('v_gender') == 'male')>Male</option>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Marital Status</label>
+                                        <label>Marital Status <span class="text-danger">*</span> </label>
                                         <select class="form-control form-control-sm" name="v_marital_status" required>
                                             <option value="">--Please Select--</option>
                                             @foreach ($mar_status as $m_status)
@@ -123,9 +123,10 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
-                                        <label>Address</label>
+                                        <label>Address <span class="text-danger">*</span> </label>
                                         <input type="text" class="form-control form-control-sm" name="v_address"
-                                            value="{{ old('v_address') }}" placeholder="Enter Address">
+                                            value="{{ old('v_address') }}"
+                                            placeholder="(House No., Street Name, Barangay, Municipality, Province)">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -138,45 +139,59 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
-                                        <label>Nationality</label>
+                                        <label>Nationality <span class="text-danger">*</span> </label>
                                         <input type="text" class="form-control form-control-sm" name="v_citizenship"
-                                            value={{ old('v_citizenship') }} placeholder="Enter Nationality">
+                                            value="{{ old('v_citizenship') }}" placeholder="Enter Nationality">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label class="checkbox-inline text-muted">
-                                            <input type="checkbox" id="ethnicCheckbox" class="form-checkbox">
-                                            Are you a member of an ethnic group?
-                                        </label>
+                                <div class="row m-0 px-0">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label class="text-center">Is a member of an ethnic group? <span
+                                                        class="text-danger">*</span> </label>
+                                                <div class="form-group d-flex justify-content-center">
+                                                    <label class="radio-inline text-muted me-2">
+                                                        <input type="radio" name="is_ethnic_member" value="yes"
+                                                            id="ethnicYes" class="form-radio">
+                                                        Yes
+                                                    </label>
+                                                    <label class="radio-inline text-muted">
+                                                        <input type="radio" name="is_ethnic_member" value="no"
+                                                            id="ethnicNo" class="form-radio">
+                                                        No
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" id="ethnicGroupContainer" style="display: none;">
+                                                <div class="form-group">
+                                                    <label>Ethnic Group</label>
+                                                    <input type="text" class="form-control form-control-sm"
+                                                        name="v_ethnic" id="ethnicInput" value="{{ old('v_ethnic') }}"
+                                                        placeholder="Enter Ethnic Group">
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-
-                                <div class="col-md-3" id="ethnicGroupContainer" style="display: none;">
-                                    <div class="form-group">
-                                        <label>Ethnic Group</label>
-                                        <input type="text" class="form-control form-control-sm" name="v_ethnic"
-                                            value="{{ old('v_ethnic') }}" placeholder="Enter Ethnic Group">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Relation to Suspect</label>
-                                        <input type="text" class="form-control form-control-sm"
-                                            name="relation_to_suspect" value="{{ old('relation_to_suspect') }}"
-                                            placeholder="Enter Relation to Suspect">
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        <label>Victim Status</label>
-                                        <select class="form-control form-control-sm" name="victim_status">
-                                            <option value="">--Please Select--</option>
-                                            @foreach ($vic_status as $v_status)
-                                                <option value="{{ $v_status }}" @selected(old('victim_status') == $v_status)>
-                                                    {{ $v_status }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-6 form-group">
+                                                <label>Relation to Suspect</label>
+                                                <input type="text" class="form-control form-control-sm"
+                                                    name="relation_to_suspect" value="{{ old('relation_to_suspect') }}"
+                                                    placeholder="Enter Relation to Suspect">
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>Victim Status <span class="text-danger">*</span> </label>
+                                                <select class="form-control form-control-sm" name="victim_status">
+                                                    <option value="">--Please Select--</option>
+                                                    @foreach ($vic_status as $v_status)
+                                                        <option value="{{ $v_status }}" @selected(old('victim_status') == $v_status)>
+                                                            {{ $v_status }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -497,6 +512,26 @@
     </script>
 
     <script>
+        // Get the input field and radio buttons
+        const inputField = document.getElementById('ethnicGroupContainer');
+        const yesRadio = document.getElementById('ethnicYes');
+        const noRadio = document.getElementById('ethnicNo');
+
+        // Add event listener to radio buttons
+        yesRadio.addEventListener('change', handleRadioChange);
+        noRadio.addEventListener('change', handleRadioChange);
+
+        // Function to handle radio button change
+        function handleRadioChange() {
+            if (yesRadio.checked) {
+                inputField.style.display = 'block';
+            } else if (noRadio.checked) {
+                inputField.style.display = 'none';
+            }
+        }
+    </script>
+
+    {{-- <script>
         document.getElementById('ethnicCheckbox').addEventListener('change', function() {
             var checkbox = this;
             var ethnicGroupContainer = document.getElementById('ethnicGroupContainer');
@@ -506,5 +541,5 @@
                 ethnicGroupContainer.style.display = 'none';
             }
         });
-    </script>
+    </script> --}}
 @endpush
