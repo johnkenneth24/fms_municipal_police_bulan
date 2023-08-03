@@ -32,6 +32,12 @@
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/soft-ui-dashboard.css') }}" id="pagestyle">
+    <style>
+        .form-control:focus {
+            border-color: #2187FE !important;
+            box-shadow: 0 0 0 2px #a0b4f6 !important;
+        }
+    </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">

@@ -12,9 +12,9 @@
                             </div>
                             <div class="ms-auto px-5">
                                 <form action="{{ route('victim.index') }}" method="get">
-                                    <div>
-                                        <input type="text" name="search" placeholder="Search..."
-                                            class="form-control form-control-sm" style="width: 300px;">
+                                    <div class="form-group">
+                                        <input class="form-control form-control-sm" type="search" value="Search..."
+                                            name="search" style="width: 300px;">
                                     </div>
                                 </form>
                             </div>

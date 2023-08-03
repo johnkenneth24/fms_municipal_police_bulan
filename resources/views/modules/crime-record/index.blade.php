@@ -7,10 +7,10 @@
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 text-uppercase">All Records</h5>
                     <div class="card-tool d-flex justify-content-end">
-                        <form action="{{-- route('product.index') --}}" method="get">
-                            <div class="col-md-10 me-2">
-                                <input type="text" name="search" placeholder="Search..."
-                                    class="form-control form-control-sm">
+                        <form action="{{ route('crime-record.index') }}" method="get">
+                            <div class="form-group">
+                                <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
+                                    placeholder="Search..." name="search" style="width: 300px;">
                             </div>
                         </form>
 
@@ -23,27 +23,12 @@
                     <div class="table-responsive">
                         <table class="table align-items-center mb-0">
                             <thead>
-                                <tr>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
-                                        Blotter Entry No.
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
-                                        Date Reported
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
-                                        Date Commited
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
-                                        Place of Incident
-                                    </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-sm font-weight-bolder opacity-10">
-                                        Action
-                                    </th>
+                                <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">
+                                    <th class="text-uppercase">Blotter Entry No.</th>
+                                    <th class="text-uppercase">Date Reported</th>
+                                    <th class="text-uppercase">Date Commited</th>
+                                    <th class="text-uppercase">Place of Incident</th>
+                                    <th class="text-uppercase">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>

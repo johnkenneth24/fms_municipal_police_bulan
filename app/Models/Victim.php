@@ -11,6 +11,7 @@ class Victim extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'crime_record_id',
         'firstname',
         'middlename',
         'lastname',
@@ -35,5 +36,10 @@ class Victim extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function crimeRecord()
+    {
+        return $this->belongsTo(CrimeRecord::class);
+    }
 
 }

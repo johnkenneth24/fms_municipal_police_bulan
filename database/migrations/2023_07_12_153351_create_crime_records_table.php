@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('time_reported');
             $table->string('incident_location');
             $table->longText('incident_details');
+
             $table->string('investigator')->nullable();
             $table->string('stage_of_felony')->nullable();
             $table->string('crime_category')->nullable();
