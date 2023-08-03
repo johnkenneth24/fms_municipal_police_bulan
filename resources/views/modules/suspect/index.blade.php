@@ -28,48 +28,48 @@
                                         <th class="text-uppercase">Blotter Entry No.</th>
                                         <th class="text-uppercase">Suspect's Name</th>
                                         <th class="text-uppercase">Date Reported</th>
-                                        <th class="text-uppercase">Date Commited</th>
+                                        <th class="text-uppercase">Date Committed</th>
                                         <th class="text-uppercase">Place of Incident</th>
-                                        <th class="text-uppercase">Action</th>
+                                        <th class="text-uppercase">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">0001</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">test</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">test</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">test</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <p class="text-xs font-weight-bold mb-0">test</p>
-                                        </td>
-                                        <td class="text-center">
-                                            <a href="" class="me-2" data-bs-toggle="tooltip"
-                                                data-bs-original-title="Export">
-                                                <i class="fas fa-download text-primary"></i>
-                                            </a>
-                                            <a href="#" class="me-2" data-bs-toggle="tooltip"
-                                                data-bs-original-title="View">
-                                                <i class="fas fa-eye text-info"></i>
-                                            </a>
-                                            <a href="#" class="me-2" data-bs-toggle="tooltip"
-                                                data-bs-original-title="Update">
-                                                <i class="fas fa-user-edit text-success"></i>
-                                            </a>
-                                            <a href="" data-bs-toggle="tooltip" data-bs-original-title="Delete">
-                                                <i class="fas fa-trash text-danger"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                    @forelse ($suspects as $suspect)
+                                        <tr class="text-sm font-weight-bold mb-0 text-center">
+                                            <td>BMPS-{{ $suspect->crimeRecord->blotter_entry_no }}</td>
+                                            <td>{{ implode(' ', array_filter([$suspect->firstname, $suspect->middlename, $suspect->lastname, $suspect->suffix])) }}
+                                            </td>
+                                            <td>{{ $suspect->crimeRecord->date_reported->format('M. d, Y') }}</td>
+                                            <td>{{ $suspect->crimeRecord->date_committed->format('M. d, Y') }}</td>
+                                            <td>{{ $suspect->crimeRecord->incident_location }}</td>
+                                            <td class="text-center">
+                                                <a href="" class="me-2" data-bs-toggle="tooltip"
+                                                    data-bs-original-title="Export">
+                                                    <i class="fas fa-download text-primary"></i>
+                                                </a>
+                                                <a href="#" class="me-2" data-bs-toggle="tooltip"
+                                                    data-bs-original-title="View">
+                                                    <i class="fas fa-eye text-info"></i>
+                                                </a>
+                                                <a href="#" class="me-2" data-bs-toggle="tooltip"
+                                                    data-bs-original-title="Update">
+                                                    <i class="fas fa-user-edit text-success"></i>
+                                                </a>
+                                                <a href="" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                                    <i class="fas fa-trash text-danger"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="6" class="text-center">No Records Found!</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $suspects->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

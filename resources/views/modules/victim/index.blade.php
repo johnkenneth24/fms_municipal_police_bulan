@@ -28,7 +28,7 @@
                                         <th class="text-uppercase">Blotter <br> Entry No.</th>
                                         <th class="text-uppercase">Victim's Name</th>
                                         <th class="text-uppercase">Victim's Status</th>
-                                        <th class="text-uppercase">Date Commited</th>
+                                        <th class="text-uppercase">Date Committed</th>
                                         <th class="text-uppercase">Place of Incident</th>
                                         <th class="text-uppercase">Actions</th>
                                     </tr>
