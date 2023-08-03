@@ -6,6 +6,7 @@ use App\Http\Requests\CrimeRecord\StoreRequest;
 use App\Models\CrimeRecord;
 use App\Models\Suspect;
 use App\Models\Victim;
+use Illuminate\Http\Request;
 
 class CrimeRecordController extends Controller
 {
@@ -33,13 +34,40 @@ class CrimeRecordController extends Controller
         ],
     ];
 
-    public function index()
+    public function index(Request $request)
     {
-        $crime_records = CrimeRecord::with('victim', 'suspect')->get();
+        $search = $request->input('search');
 
-        dd($crime_records);
+        $query = CrimeRecord::query()->with(['victim', 'suspect'])->orderBy('blotter_entry_no', 'asc');
 
-        return view('modules.crime-record.index');
+        if ($search) {
+            $query->where('blotter_entry_no', 'like', '%' . $search . '%')
+                ->orWhere('case_status', 'like', '%' . $search . '%')
+                ->orWhere('case_progress', 'like', '%' . $search . '%')
+                ->orWhere('date_reported', 'like', '%' . $search . '%')
+                ->orWhere('incident_location', 'like', '%' . $search . '%')
+                ->orWhere('stage_of_felony', 'like', '%' . $search . '%')
+                ->orWhere('crime_category', 'like', '%' . $search . '%')
+                ->orWhere('date_committed', 'like', '%' . $search . '%')
+                ->orWhereHas('victim', function ($query) use ($search) {
+                    $query->where('firstname', 'like', '%' . $search . '%')
+                        ->orWhere('lastname', 'like', '%' . $search . '%')
+                        ->orWhere('victim_status', 'like', '%' . $search . '%');
+                    // Add more conditions for victim model columns as needed
+                })
+                ->orWhereHas('suspect', function ($query) use ($search) {
+                    $query->where('firstname', 'like', '%' . $search . '%')
+                        ->orWhere('lastname', 'like', '%' . $search . '%')
+                        ->orWhere('suspect_status', 'like', '%' . $search . '%')
+                        ->orWhere('used_weapon', 'like', '%' . $search . '%');
+                    // Add more conditions for suspect model columns as needed
+                })
+            ;
+        }
+
+        $crime_records = $query->paginate(10);
+
+        return view('modules.crime-record.index', compact('crime_records'));
     }
 
     public function create()

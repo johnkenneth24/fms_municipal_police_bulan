@@ -20,24 +20,28 @@
                 </div>
                 <hr class="horizontal dark mt-2 mb-0">
                 <div class="card-body px-0 pt-2 pb-2">
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
-                                <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">
-                                    <th class="text-uppercase">Blotter Entry No.</th>
-                                    <th class="text-uppercase">Date Reported</th>
-                                    <th class="text-uppercase">Date Commited</th>
-                                    <th class="text-uppercase">Place of Incident</th>
-                                    <th class="text-uppercase">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <table class="table table-hover table-responsive align-items-center mb-">
+                        <thead>
+                            <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">
+                                <th class="text-uppercase">Blotter Entry No.</th>
+                                <th class="text-uppercase">Date Reported</th>
+                                <th class="text-uppercase">Date Commited</th>
+                                <th class="text-uppercase">Place of Incident</th>
+                                <th class="text-uppercase" style="min-width: 200px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($crime_records as $crime_record)
                                 <tr>
-                                    <td class="text-center text-xs font-weight-bold mb-0">0001</td>
-                                    <td class="text-center text-xs font-weight-bold mb-0">test</td>
-                                    <td class="text-center text-xs font-weight-bold mb-0">test</td>
-                                    <td class="text-center text-xs font-weight-bold mb-0">test</td>
-                                    <td class="text-center text-xs font-weight-bold mb-0">
+                                    <td class="text-sm text-center mb-0">
+                                        BMPS-{{ $crime_record->blotter_entry_no }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->date_reported->format('M. d, Y') }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->date_committed->format('M. d, Y') }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->incident_location }}</td>
+                                    <td class="text-center text-sm mb-0">
                                         <a href="#" class="me-2" title="Export">
                                             <i class="fas fa-download text-primary"></i>
                                         </a>
@@ -52,8 +56,15 @@
                                         </a>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-danger">No Records Found!</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $crime_records->links() }}
                     </div>
                 </div>
             </div>
