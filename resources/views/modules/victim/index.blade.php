@@ -13,8 +13,8 @@
                             <div class="ms-auto px-5">
                                 <form action="{{ route('victim.index') }}" method="get">
                                     <div class="form-group">
-                                        <input class="form-control form-control-sm" type="search" value="Search..."
-                                            name="search" style="width: 300px;">
+                                        <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
+                                            placeholder="Search..." name="search" style="width: 300px;">
                                     </div>
                                 </form>
                             </div>
@@ -27,8 +27,8 @@
                                     <tr class="text-center text-secondary text-xs font-weight-bolder opacity-7">
                                         <th class="text-uppercase">Blotter <br> Entry No.</th>
                                         <th class="text-uppercase">Victim's Name</th>
-                                        <th class="text-uppercase">Date Reported</th>
-                                        <th class="text-uppercase">Date Commited</th>
+                                        <th class="text-uppercase">Victim's Status</th>
+                                        <th class="text-uppercase">Date Committed</th>
                                         <th class="text-uppercase">Place of Incident</th>
                                         <th class="text-uppercase">Actions</th>
                                     </tr>
@@ -37,19 +37,19 @@
                                     @forelse ($victims as $victim)
                                         <tr>
                                             <td class="text-center text-xs font-weight-bold mb-0">
-                                                {{ $victim->id }}
+                                                BMPS-{{ $victim->crimeRecord->blotter_entry_no }}
                                             </td>
                                             <td class="text-center text-xs font-weight-bold mb-0">
                                                 {{ implode(' ', array_filter([$victim->firstname, $victim->middlename, $victim->lastname, $victim->suffix])) }}
                                             </td>
                                             <td class="text-center text-xs font-weight-bold mb-0">
-                                                {{ $victim->id }}
+                                                {{ $victim->victim_status }}
                                             </td>
                                             <td class="text-center text-xs font-weight-bold mb-0">
-                                                {{ $victim->id }}
+                                                {{ $victim->crimeRecord->date_committed->format('M. d, Y') }}
                                             </td>
                                             <td class="text-center text-xs font-weight-bold mb-0">
-                                                {{ $victim->id }}
+                                                {{ $victim->crimeRecord->incident_location }}
                                             </td>
                                             <td class="text-center">
                                                 <a href="" class="me-2" data-bs-toggle="tooltip"

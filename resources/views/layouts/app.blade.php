@@ -37,6 +37,10 @@
             border-color: #2187FE !important;
             box-shadow: 0 0 0 2px #a0b4f6 !important;
         }
+
+        body {
+            font-family: "Open Sans", sans-serif !important;
+        }
     </style>
 </head>
 
