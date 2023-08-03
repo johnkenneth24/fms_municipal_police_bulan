@@ -2,6 +2,7 @@
     <style>
         .sidenav {
             background-color: #2e92df !important;
+            overflow: hidden !important;
         }
 
         .sidenav .nav-link-text {
@@ -12,13 +13,19 @@
             background-image: linear-gradient(310deg, #0025a9, rgb(0, 174, 255)) !important;
         }
 
+        .navbar-vertical.navbar-expand-xs .navbar-collapse {
+            display: block !important;
+            height: auto !important;
+            overflow: hidden !important;
+        }
+
         .navbar-vertical .navbar-nav>.nav-item .nav-link.active .nav-link-text {
             color: #434343 !important;
         }
     </style>
 @endpush
 
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-2"
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3"
     id="sidenav-main">
     <div class="sidenav-header">
         <i class="fas fa-times p-2 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
@@ -63,7 +70,8 @@
                 </a>
             </li>
             <li class="nav-item mt-2">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Records</h6>
+                <h6 class="text-uppercase text-xs font-weight-bolder text-center opacity-6">
+                    Records</h6>
             </li>
             <li class="nav-item">
                 <a class="nav-link  {{ request()->routeIs('crime-record.*') ? 'active' : '' }}"
