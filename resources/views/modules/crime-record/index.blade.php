@@ -8,6 +8,7 @@
                     <h5 class="mb-0 text-uppercase">All Records</h5>
                     <div class="card-tool d-flex justify-content-end">
                         <form action="{{ route('crime-record.index') }}" method="get">
+                            @csrf
                             <div class="form-group">
                                 <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
                                     placeholder="Search..." name="search" style="width: 300px;">
