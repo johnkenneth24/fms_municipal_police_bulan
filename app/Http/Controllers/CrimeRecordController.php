@@ -50,21 +50,7 @@ class CrimeRecordController extends Controller
                 ->orWhere('incident_location', 'like', '%' . $search . '%')
                 ->orWhere('stage_of_felony', 'like', '%' . $search . '%')
                 ->orWhere('crime_category', 'like', '%' . $search . '%')
-                ->orWhere('date_committed', 'like', '%' . $search . '%')
-                ->orWhereHas('victim', function ($query) use ($search) {
-                    $query->where('firstname', 'like', '%' . $search . '%')
-                        ->orWhere('lastname', 'like', '%' . $search . '%')
-                        ->orWhere('victim_status', 'like', '%' . $search . '%');
-                    // Add more conditions for victim model columns as needed
-                })
-                ->orWhereHas('suspect', function ($query) use ($search) {
-                    $query->where('firstname', 'like', '%' . $search . '%')
-                        ->orWhere('lastname', 'like', '%' . $search . '%')
-                        ->orWhere('suspect_status', 'like', '%' . $search . '%')
-                        ->orWhere('used_weapon', 'like', '%' . $search . '%');
-                    // Add more conditions for suspect model columns as needed
-                })
-            ;
+                ->orWhere('date_committed', 'like', '%' . $search . '%');
         }
 
         $crime_records = $query->paginate(10);
@@ -148,14 +134,13 @@ class CrimeRecordController extends Controller
             'education' => $validated['s_education'],
             'citizenship' => $validated['s_citizenship'],
             'address' => $validated['s_address'],
-            // 'ethnic' => $validated['s_ethnic'] ?? 'none',
             'relation_to_victim' => $validated['relation_to_victim'],
             'used_weapon' => $validated['used_weapon'],
             'suspect_status' => $validated['suspect_status'],
             'suspect_motive' => $validated['suspect_motive'],
         ]);
 
-        return view('modules.crime-record.index')->with('success', 'Crime record successfully created!');
+        return redirect()->route('crime-record.index')->with('success', 'Crime Record created successfully');
     }
 
     public function edit()
