@@ -1,81 +1,73 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
-<div>
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4 mx-4">
-                <div class="card-header pb-0">
-                    <div class="d-flex flex-row justify-content-between">
-                        <div>
-                            <h5 class="mb-0">All Records</h5>
-                        </div>
-                        <div>
-                            <input type="text" class="form-control-sm" placeholder="Search...">
-                            <a href="{{ route('cr.create') }}" class="btn bg-gradient-info  btn-sm mb-0" type="button">Add New Record</a>
-                        </div>
+            <div class="card mb-4 me-2">
+                <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0 text-uppercase">All Records</h5>
+                    <div class="card-tool d-flex justify-content-end">
+                        <form action="{{ route('crime-record.index') }}" method="get">
+                            <div class="form-group">
+                                <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
+                                    placeholder="Search..." name="search" style="width: 300px;">
+                            </div>
+                        </form>
+
+                        <a href="{{ route('crime-record.create') }}" class="btn btn-sm bg-gradient-info">
+                            <span><i class="fa fa-plus" aria-hidden="true"></i></span> Add New Record</a>
                     </div>
                 </div>
-                <div class="card-body px-0 pt-4 pb-2">
-                    <div class="table-responsive">
-                        <table class="table align-items-center mb-0">
-                            <thead>
+                <hr class="horizontal dark mt-2 mb-0">
+                <div class="card-body px-0 pt-2 pb-2">
+                    <table class="table table-hover table-responsive align-items-center mb-">
+                        <thead>
+                            <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">
+                                <th class="text-uppercase">Blotter Entry No.</th>
+                                <th class="text-uppercase">Date Reported</th>
+                                <th class="text-uppercase">Date Committed</th>
+                                <th class="text-uppercase">Place of Incident</th>
+                                <th class="text-uppercase" style="min-width: 200px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($crime_records as $crime_record)
                                 <tr>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Blotter Entry No.
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Date Reported
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Date Commited
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Place of Incident
-                                    </th>
-                                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Action
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">0001</p>
-                                    </td>
-
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">test</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">test</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <p class="text-xs font-weight-bold mb-0">test</p>
-                                    </td>
-                                    <td class="text-center">
-                                        <a href="" class="me-2" data-bs-toggle="tooltip" data-bs-original-title="Export">
+                                    <td class="text-sm text-center mb-0">
+                                        BMPS-{{ $crime_record->blotter_entry_no }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->date_reported->format('M. d, Y') }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->date_committed->format('M. d, Y') }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->incident_location }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        <a href="#" class="me-2" title="Export">
                                             <i class="fas fa-download text-primary"></i>
                                         </a>
-                                        <a href="#" class="me-2" data-bs-toggle="tooltip" data-bs-original-title="View">
+                                        <a href="#" class="me-2" title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
-                                        <a href="#" class="me-2" data-bs-toggle="tooltip" data-bs-original-title="Update">
+                                        <a href="#" class="me-2" title="Update">
                                             <i class="fas fa-user-edit text-success"></i>
                                         </a>
-                                        <a href="" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+                                        <a href="" title="Delete">
                                             <i class="fas fa-trash text-danger"></i>
                                         </a>
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-danger">No Records Found!</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $crime_records->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
 @endsection
