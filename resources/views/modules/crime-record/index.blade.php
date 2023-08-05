@@ -25,7 +25,7 @@
                             <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">
                                 <th class="text-uppercase">Blotter Entry No.</th>
                                 <th class="text-uppercase">Date Reported</th>
-                                <th class="text-uppercase">Date Commited</th>
+                                <th class="text-uppercase">Date Committed</th>
                                 <th class="text-uppercase">Place of Incident</th>
                                 <th class="text-uppercase" style="min-width: 200px;">Actions</th>
                             </tr>

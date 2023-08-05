@@ -11,7 +11,7 @@ class VictimController extends Controller
     {
         $search = $request->input('search');
 
-        $query = Victim::query()->orderBy('lastname', 'asc');
+        $query = Victim::query()->with('crimeRecord')->orderBy('lastname', 'asc');
 
         if ($search) {
             $query->where('firstname', 'like', '%' . $search . '%')
