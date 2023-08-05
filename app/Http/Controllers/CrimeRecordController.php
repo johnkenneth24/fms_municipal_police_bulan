@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CrimeRecord\StoreRequest;
+use App\Http\Requests\CrimeRecord\UpdateRequest;
+
 use App\Models\CrimeRecord;
 use App\Models\Suspect;
 use App\Models\Victim;
@@ -158,6 +160,74 @@ class CrimeRecordController extends Controller
 
     public function edit()
     {
-        
+
     }
+
+    public function update(UpdateRequest $request, $id)
+{
+    $validated = $request->validated();
+    // dd($validated);
+
+    // Find the existing CrimeRecord instance by ID
+    $crime_record = CrimeRecord::findOrFail($id);
+    $crime_record->update([
+        'blotter_entry_no' => $validated['blotter_entry_no'],
+        'case_status' => $validated['case_status'],
+        'case_progress' => $validated['case_progress'],
+        'date_committed' => $validated['date_committed'],
+        'time_committed' => $validated['time_committed'],
+        'date_reported' => $validated['date_reported'],
+        'time_reported' => $validated['time_reported'],
+        'incident_location' => $validated['incident_location'],
+        'incident_details' => $validated['incident_details'],
+        'investigator' => $validated['investigator'],
+        'stage_of_felony' => $validated['stage_of_felony'],
+        'crime_category' => $validated['crime_category'],
+        'crime_committed' => $validated['crime_committed'],
+    ]);
+
+    // Find the Victim instance related to the CrimeRecord or create a new one if not found
+    $victim = Victim::updateOrCreate(['crime_record_id' => $crime_record->id], [
+        'firstname' => $validated['v_firstname'],
+        'middlename' => $validated['v_middlename'],
+        'lastname' => $validated['v_lastname'],
+        'suffix' => $validated['v_suffix'],
+        'birthdate' => $validated['v_birthdate'],
+        'birthplace' => $validated['v_birthplace'],
+        'gender' => $validated['v_gender'],
+        'marital_status' => $validated['v_marital_status'],
+        'occupation' => $validated['v_occupation'],
+        'education' => $validated['v_education'],
+        'citizenship' => $validated['v_citizenship'],
+        'address' => $validated['v_address'],
+        'contact_number' => $validated['v_contact_number'],
+        'ethnic' => $validated['v_ethnic'] ?? 'none',
+        'relation_to_suspect' => $validated['relation_to_suspect'],
+        'victim_status' => $validated['victim_status'],
+    ]);
+
+    // Find the Suspect instance related to the CrimeRecord or create a new one if not found
+    $suspect = Suspect::updateOrCreate(['crime_record_id' => $crime_record->id], [
+        'firstname' => $validated['s_firstname'],
+        'middlename' => $validated['s_middlename'],
+        'lastname' => $validated['s_lastname'],
+        'suffix' => $validated['s_suffix'],
+        'birthdate' => $validated['s_birthdate'],
+        'birthplace' => $validated['s_birthplace'],
+        'gender' => $validated['s_gender'],
+        'marital_status' => $validated['s_marital_status'],
+        'occupation' => $validated['s_occupation'],
+        'education' => $validated['s_education'],
+        'citizenship' => $validated['s_citizenship'],
+        'address' => $validated['s_address'],
+        // 'ethnic' => $validated['s_ethnic'] ?? 'none',
+        'relation_to_victim' => $validated['relation_to_victim'],
+        'used_weapon' => $validated['used_weapon'],
+        'suspect_status' => $validated['suspect_status'],
+        'suspect_motive' => $validated['suspect_motive'],
+    ]);
+
+    return view('modules.crime-record.index')->with('success', 'Crime record successfully updated!');
+}
+
 }
