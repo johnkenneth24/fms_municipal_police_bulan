@@ -67,6 +67,7 @@ class CrimeRecordController extends Controller
 
         $crime_records = $query->paginate(10);
 
+
         return view('modules.crime-record.index', compact('crime_records'));
     }
 
@@ -153,5 +154,10 @@ class CrimeRecordController extends Controller
         ]);
 
         return view('modules.crime-record.index')->with('success', 'Crime record successfully created!');
+    }
+
+    public function edit()
+    {
+        
     }
 }

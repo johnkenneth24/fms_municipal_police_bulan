@@ -5,7 +5,7 @@
         @csrf
         <div class="row">
             <div class="col-md-12">
-                <div class="card shadow shadow-card border border-radius-2xl border-info">
+                <div class="card shadow shadow-card border border-radius-2xl border-info" style="border-rA">
                     <div class="card-header d-flex justify-content-between pb-1">
                         <div>
                             <h5 class="mb-0">CASE DETAILS</h5>
