@@ -34,6 +34,72 @@ class CrimeRecordController extends Controller
         ],
     ];
 
+    public $barangay = [
+        "A. Bonifacio",
+        "Abad Santos",
+        "Aguinaldo",
+        "Antipolo",
+        "Beguin",
+        "Benigno S. Aquino",
+        "Bical",
+        "Bonga",
+        "Butag",
+        "Cadandanan",
+        "Calomagon",
+        "Calpi",
+        "Cocok-Cabitan",
+        "Daganas",
+        "Danao",
+        "Dolos",
+        "E. Quirino",
+        "Fabrica",
+        "G. del Pilar",
+        "Gate",
+        "Inararan",
+        "J. Gerona",
+        "J. P. Laurel",
+        "Jamorawon",
+        "Lajong",
+        "Libertad",
+        "M. Roxas",
+        "Magsaysay",
+        "Managanaga",
+        "Marinab",
+        "Montecalvario",
+        "N. Roque",
+        "Namo",
+        "Nasuje",
+        "Obrero",
+        "Osmeña",
+        "Otavi",
+        "Padre Diaz",
+        "Palale",
+        "Quezon",
+        "R. Gerona",
+        "Recto",
+        "Sagrada",
+        "San Francisco",
+        "San Isidro",
+        "San Juan Bag-o",
+        "San Juan Daan",
+        "San Rafael",
+        "San Ramon",
+        "San Vicente",
+        "Santa Remedios",
+        "Santa Teresita",
+        "Sigad",
+        "Somagongsong",
+        "Taromata",
+        "Zone I Poblacion",
+        "Zone II Poblacion",
+        "Zone III Poblacion",
+        "Zone IV Poblacion",
+        "Zone V Poblacion",
+        "Zone VI Poblacion",
+        "Zone VII Poblacion",
+        "Zone VIII Poblacion"
+    ];
+
     public function index(Request $request)
     {
         $search = $request->input('search');
@@ -82,12 +148,13 @@ class CrimeRecordController extends Controller
         $case_progress = $this->case_progress;
         $stage_felony = $this->stage_felony;
         $crime_category = $this->crime_category;
+        $barangays = $this->barangay;
 
         $latestBlotterNo = CrimeRecord::latest()->first('blotter_entry_no');
         $latestBlotterNo = $latestBlotterNo ? $latestBlotterNo->blotter_entry_no + 1 : 1;
         $latestBlotterNo = str_pad($latestBlotterNo, 4, '0', STR_PAD_LEFT);
 
-        return view('modules.crime-record.create', compact('suffixes', 'mar_status', 'vic_status', 'sus_status', 'used_weapons', 'case_status', 'case_progress', 'stage_felony', 'crime_category', 'latestBlotterNo'));
+        return view('modules.crime-record.create', compact('suffixes', 'barangays', 'mar_status', 'vic_status', 'sus_status', 'used_weapons', 'case_status', 'case_progress', 'stage_felony', 'crime_category', 'latestBlotterNo'));
     }
 
     public function store(StoreRequest $request)
@@ -158,6 +225,6 @@ class CrimeRecordController extends Controller
 
     public function edit()
     {
-        
+
     }
 }
