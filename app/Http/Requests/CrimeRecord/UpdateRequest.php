@@ -67,6 +67,7 @@ class UpdateRequest extends FormRequest
             's_occupation' => 'nullable',
             's_education' => 'nullable',
             's_citizenship' => 'required',
+            's_contact_number' => 'nullable',
             's_address' => 'required',
             // 's_ethnic' => 'nullable',
             'used_weapon' => 'required',

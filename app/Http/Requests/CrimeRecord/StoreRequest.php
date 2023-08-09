@@ -31,8 +31,7 @@ class StoreRequest extends FormRequest
             'date_reported' => 'required',
             'time_reported' => 'required',
             'incident_location' => 'required',
-            'incident_details' => 'required',
-
+            'incident_details' => 'required', 
             'investigator' => 'required',
             'stage_of_felony' => 'required',
             'crime_category' => 'required',
@@ -68,6 +67,7 @@ class StoreRequest extends FormRequest
             's_occupation' => 'nullable',
             's_education' => 'nullable',
             's_citizenship' => 'required',
+            's_contact_number' => 'nullable',
             's_address' => 'required',
             // 's_ethnic' => 'nullable',
             'used_weapon' => 'required',
