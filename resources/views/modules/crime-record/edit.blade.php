@@ -1,8 +1,9 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-<form action="{{ route('crime-record.store') }}" method="post">
+<form action="{{ route('crime-record.update', [$crime_record]) }}" method="post">
     @csrf
+    @method('PUT')
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow shadow-card border  border-info" style="border-rA">
@@ -149,7 +150,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Birthdate <span class="text-danger">*</span> </label>
-                                <input type="date" class="form-control form-control-sm v_bdate" name="v_birthdate" required value="{{ $crime_record->victim->birthdate->format('Y-m-d') }}">
+                                <input type="date" class="form-control form-control-sm v_bdate" name="v_birthdate" required value="{{ $crime_record->victim->birthdate }}">
                             </div>
                         </div>
                         <div class="col-md-1">
@@ -221,11 +222,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label class="text-center">Is a member of an ethnic group? <span class="text-danger">*</span> </label>
-                                        <div class="form-group d-flex justify-content-center">    
+                                        <div class="form-group d-flex justify-content-center">
                                             <label class="radio-inline text-muted me-2">
                                                 <input type="radio" name="is_ethnic_member" value="yes" checked id="ethnicYes" class="form-radio">
                                                 Yes
-                                            </label> 
+                                            </label>
                                             <label class="radio-inline text-muted">
                                                 <input type="radio" name="is_ethnic_member" value="no" id="ethnicNo" class="form-radio">
                                                 No
@@ -322,7 +323,7 @@
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label>Age</label>
-                                <input type="number" name="s_age" value="{{ $crime_record->suspect->age }}" class="form-control form-control-sm text-end s_age" readonly required placeholder="0">
+                                <input type="number" name="s_age" value="{{ $s_age }}" class="form-control form-control-sm text-end s_age" readonly required placeholder="0">
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -476,7 +477,7 @@
                     </div>
                 </div>
                 <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-info col-md-3 btn-lg">Submit</button>
+                    <button type="submit" class="btn btn-info col-md-3 btn-lg">Update</button>
                 </div>
             </div>
         </div>

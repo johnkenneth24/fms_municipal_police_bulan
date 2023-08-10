@@ -7,6 +7,7 @@ use App\Http\Requests\CrimeRecord\UpdateRequest;
 use App\Models\CrimeRecord;
 use App\Models\Suspect;
 use App\Models\Victim;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class CrimeRecordController extends Controller
@@ -149,7 +150,7 @@ class CrimeRecordController extends Controller
         return redirect()->route('crime-record.index')->with('success', 'Crime Record created successfully');
     }
 
-    public function edit( CrimeRecord $crime_record)
+    public function edit(CrimeRecord $crime_record)
     {
         $suffixes = $this->suffixes;
         $mar_status = $this->mar_status;
@@ -163,79 +164,79 @@ class CrimeRecordController extends Controller
         $barangays = $this->barangay;
 
         //get age
-        $v_age = $crime_record->victim->birthdate->diffInYears(now());
+        $v_age = Carbon::parse($crime_record->victim->birthdate)->age;
+        $s_age = Carbon::parse($crime_record->suspect->birthdate)->age;
 
         // dd($v_age);
 
-        return view('modules.crime-record.edit', compact('v_age', 'suffixes', 'barangays', 'mar_status', 'vic_status', 'sus_status', 'used_weapons', 'case_status', 'case_progress', 'stage_felony', 'crime_category', 'crime_record'));
+        return view('modules.crime-record.edit', compact('v_age', 's_age', 'suffixes', 'barangays', 'mar_status', 'vic_status', 'sus_status', 'used_weapons', 'case_status', 'case_progress', 'stage_felony', 'crime_category', 'crime_record'));
     }
 
     public function update(UpdateRequest $request, $crime_record)
-{
-    $validated = $request->validated();
-    // dd($validated);
+    {
+        $validated = $request->validated();
+        // dd($validated);
 
-    // Find the existing CrimeRecord instance by ID
-    $crime_record = CrimeRecord::findOrFail($crime_record);
+        // Find the existing CrimeRecord instance by ID
+        $crime_record = CrimeRecord::findOrFail($crime_record);
 
-    $crime_record->update([
-        'blotter_entry_no' => $validated['blotter_entry_no'],
-        'case_status' => $validated['case_status'],
-        'case_progress' => $validated['case_progress'],
-        'date_committed' => $validated['date_committed'],
-        'time_committed' => $validated['time_committed'],
-        'date_reported' => $validated['date_reported'],
-        'time_reported' => $validated['time_reported'],
-        'incident_location' => $validated['incident_location'],
-        'incident_details' => $validated['incident_details'],
-        'investigator' => $validated['investigator'],
-        'stage_of_felony' => $validated['stage_of_felony'],
-        'crime_category' => $validated['crime_category'],
-        'crime_committed' => $validated['crime_committed'],
-    ]);
+        $crime_record->update([
+            'blotter_entry_no' => $validated['blotter_entry_no'],
+            'case_status' => $validated['case_status'],
+            'case_progress' => $validated['case_progress'],
+            'date_committed' => $validated['date_committed'],
+            'time_committed' => $validated['time_committed'],
+            'date_reported' => $validated['date_reported'],
+            'time_reported' => $validated['time_reported'],
+            'incident_location' => $validated['incident_location'],
+            'incident_details' => $validated['incident_details'],
+            'investigator' => $validated['investigator'],
+            'stage_of_felony' => $validated['stage_of_felony'],
+            'crime_category' => $validated['crime_category'],
+            'crime_committed' => $validated['crime_committed'],
+        ]);
 
-    // Find the Victim instance related to the CrimeRecord or create a new one if not found
-    $victim = Victim::updateOrCreate(['crime_record_id' => $crime_record->id], [
-        'firstname' => $validated['v_firstname'],
-        'middlename' => $validated['v_middlename'],
-        'lastname' => $validated['v_lastname'],
-        'suffix' => $validated['v_suffix'],
-        'birthdate' => $validated['v_birthdate'],
-        'birthplace' => $validated['v_birthplace'],
-        'gender' => $validated['v_gender'],
-        'marital_status' => $validated['v_marital_status'],
-        'occupation' => $validated['v_occupation'],
-        'education' => $validated['v_education'],
-        'citizenship' => $validated['v_citizenship'],
-        'address' => $validated['v_address'],
-        'contact_number' => $validated['v_contact_number'],
-        'ethnic' => $validated['v_ethnic'] ?? 'none',
-        'relation_to_suspect' => $validated['relation_to_suspect'],
-        'victim_status' => $validated['victim_status'],
-    ]);
+        // Find the Victim instance related to the CrimeRecord or create a new one if not found
+        $victim = Victim::updateOrCreate(['crime_record_id' => $crime_record->id], [
+            'firstname' => $validated['v_firstname'],
+            'middlename' => $validated['v_middlename'],
+            'lastname' => $validated['v_lastname'],
+            'suffix' => $validated['v_suffix'],
+            'birthdate' => $validated['v_birthdate'],
+            'birthplace' => $validated['v_birthplace'],
+            'gender' => $validated['v_gender'],
+            'marital_status' => $validated['v_marital_status'],
+            'occupation' => $validated['v_occupation'],
+            'education' => $validated['v_education'],
+            'citizenship' => $validated['v_citizenship'],
+            'address' => $validated['v_address'],
+            'contact_number' => $validated['v_contact_number'],
+            'ethnic' => $validated['v_ethnic'] ?? 'none',
+            'relation_to_suspect' => $validated['relation_to_suspect'],
+            'victim_status' => $validated['victim_status'],
+        ]);
 
-    // Find the Suspect instance related to the CrimeRecord or create a new one if not found
-    $suspect = Suspect::updateOrCreate(['crime_record_id' => $crime_record->id], [
-        'firstname' => $validated['s_firstname'],
-        'middlename' => $validated['s_middlename'],
-        'lastname' => $validated['s_lastname'],
-        'suffix' => $validated['s_suffix'],
-        'birthdate' => $validated['s_birthdate'],
-        'birthplace' => $validated['s_birthplace'],
-        'gender' => $validated['s_gender'],
-        'marital_status' => $validated['s_marital_status'],
-        'occupation' => $validated['s_occupation'],
-        'education' => $validated['s_education'],
-        'citizenship' => $validated['s_citizenship'],
-        'contact_number' => $validated['s_contact_number'],
-        'address' => $validated['s_address'],
-        'relation_to_victim' => $validated['relation_to_victim'],
-        'used_weapon' => $validated['used_weapon'],
-        'suspect_status' => $validated['suspect_status'],
-        'suspect_motive' => $validated['suspect_motive'],
-    ]);
+        // Find the Suspect instance related to the CrimeRecord or create a new one if not found
+        $suspect = Suspect::updateOrCreate(['crime_record_id' => $crime_record->id], [
+            'firstname' => $validated['s_firstname'],
+            'middlename' => $validated['s_middlename'],
+            'lastname' => $validated['s_lastname'],
+            'suffix' => $validated['s_suffix'],
+            'birthdate' => $validated['s_birthdate'],
+            'birthplace' => $validated['s_birthplace'],
+            'gender' => $validated['s_gender'],
+            'marital_status' => $validated['s_marital_status'],
+            'occupation' => $validated['s_occupation'],
+            'education' => $validated['s_education'],
+            'citizenship' => $validated['s_citizenship'],
+            'contact_number' => $validated['s_contact_number'],
+            'address' => $validated['s_address'],
+            'relation_to_victim' => $validated['relation_to_victim'],
+            'used_weapon' => $validated['used_weapon'],
+            'suspect_status' => $validated['suspect_status'],
+            'suspect_motive' => $validated['suspect_motive'],
+        ]);
 
-    return view('modules.crime-record.index')->with('success', 'Crime record successfully updated!');
-}
-
+        return redirect()->route('crime-record.index')->with('success', 'Crime record successfully updated!');
+    }
 }
