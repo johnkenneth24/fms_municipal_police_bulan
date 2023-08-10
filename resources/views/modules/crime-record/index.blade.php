@@ -49,7 +49,7 @@
                                         <a href="#" class="me-2" title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
-                                        <a href="#" class="me-2" title="Update">
+                                        <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2" title="Update">
                                             <i class="fas fa-user-edit text-success"></i>
                                         </a>
                                         <a href="" title="Delete">

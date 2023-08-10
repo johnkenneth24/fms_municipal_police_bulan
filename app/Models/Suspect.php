@@ -24,6 +24,7 @@ class Suspect extends Model
         'education',
         'citizenship',
         'address',
+        'contact_number',
         'relation_to_victim',
         'used_weapon',
         'suspect_status',

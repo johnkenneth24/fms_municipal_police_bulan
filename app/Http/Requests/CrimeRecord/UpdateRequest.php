@@ -4,7 +4,7 @@ namespace App\Http\Requests\CrimeRecord;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-
             'blotter_entry_no' => 'required',
             'case_status' => 'required',
             'case_progress' => 'required',
@@ -31,7 +30,8 @@ class StoreRequest extends FormRequest
             'date_reported' => 'required',
             'time_reported' => 'required',
             'incident_location' => 'required',
-            'incident_details' => 'required', 
+            'incident_details' => 'required',
+
             'investigator' => 'required',
             'stage_of_felony' => 'required',
             'crime_category' => 'required',

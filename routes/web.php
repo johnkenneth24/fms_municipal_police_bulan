@@ -35,6 +35,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/', 'index')->name('crime-record.index');
             Route::get('/create', 'create')->name('crime-record.create');
             Route::post('/store', 'store')->name('crime-record.store');
+            Route::get('/edit/{crime_record}', 'edit')->name('crime-record.edit');
+            Route::put('/update/{crime_record}', 'update')->name('crime-record.update');
         });
 
     Route::controller(CrimeGraphController::class)

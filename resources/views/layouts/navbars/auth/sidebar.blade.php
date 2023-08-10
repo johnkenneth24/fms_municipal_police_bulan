@@ -70,7 +70,7 @@
                 </a>
             </li>
             <li class="nav-item mt-2">
-                <h6 class="text-uppercase text-xs font-weight-bolder text-center opacity-6">
+                <h6 class="text-uppercase text-xs font-weight-bolder text-left ms-5 opacity-6">
                     Records</h6>
             </li>
             <li class="nav-item">

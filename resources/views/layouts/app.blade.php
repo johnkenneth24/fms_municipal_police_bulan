@@ -38,8 +38,8 @@
             box-shadow: 0 0 0 2px #a0b4f6 !important;
         }
 
-        body {
-            font-family: "Open Sans", sans-serif !important;
+        body, table, div {
+            font-family: 'Poppins', sans-serif !important;
         }
     </style>
 </head>
