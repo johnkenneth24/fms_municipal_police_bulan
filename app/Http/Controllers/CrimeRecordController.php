@@ -145,6 +145,7 @@ class CrimeRecordController extends Controller
             'suspect_motive' => $validated['suspect_motive'],
         ]);
 
+
         return redirect()->route('crime-record.index')->with('success', 'Crime Record created successfully');
     }
 
@@ -226,8 +227,8 @@ class CrimeRecordController extends Controller
         'occupation' => $validated['s_occupation'],
         'education' => $validated['s_education'],
         'citizenship' => $validated['s_citizenship'],
+        'contact_number' => $validated['s_contact_number'],
         'address' => $validated['s_address'],
-        // 'ethnic' => $validated['s_ethnic'] ?? 'none',
         'relation_to_victim' => $validated['relation_to_victim'],
         'used_weapon' => $validated['used_weapon'],
         'suspect_status' => $validated['suspect_status'],

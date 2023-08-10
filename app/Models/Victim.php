@@ -37,10 +37,6 @@ class Victim extends Model
         'updated_at',
     ];
 
-    protected $casts = [
-        'birthdate' => 'date',
-    ];
-
     public function crimeRecord()
     {
         return $this->belongsTo(CrimeRecord::class);

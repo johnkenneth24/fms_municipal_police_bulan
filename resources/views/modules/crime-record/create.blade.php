@@ -32,7 +32,7 @@
                                 <select class="form-control form-control-sm" name="case_status" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($case_status as $c_status)
-                                    <option value="{{ $c_status }}" @selected(old('case_status')==$c_status)>
+                                    <option value="{{ $c_status }}" @selected(old('case_status')== $c_status)>
                                         {{ $c_status }}</option>
                                     @endforeach
                                 </select>
@@ -44,7 +44,7 @@
                                 <select class="form-control form-control-sm" name="case_progress" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($case_progress as $c_progress)
-                                    <option value="{{ $c_progress }}" @selected(old('case_progress')==$c_progress)>
+                                    <option value="{{ $c_progress }}" @selected( old('case_progress')== $c_progress )>
                                         {{ $c_progress }}</option>
                                     @endforeach
                                 </select>
@@ -80,7 +80,7 @@
                                 <select class="form-control form-control-sm" name="incident_location" placeholder="Specify location where incident occurred" required>
                                     <option value="">--Please specify location where incident occurred--</option>
                                     @foreach ($barangays as $barangay)
-                                    <option value="{{ $barangay }}" @selected(old('incident_location')==$barangay)>
+                                    <option value="{{ $barangay }}" @selected(old('incident_location')== $barangay)>
                                         {{ $barangay }}</option>
                                     @endforeach
                                 </select>
@@ -140,7 +140,7 @@
                                 <select name="v_suffix" class="form-control form-control-sm">
                                     <option value="">--Please Select--</option>
                                     @foreach ($suffixes as $suffix)
-                                    <option value="{{ $suffix }}" @selected(old('v_suffix')==$suffix)>
+                                    <option value="{{ $suffix }}" @selected(old('v_suffix')== $suffix)>
                                         {{ $suffix }}</option>
                                     @endforeach
                                 </select>
@@ -180,7 +180,7 @@
                                 <select class="form-control form-control-sm" name="v_marital_status" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($mar_status as $m_status)
-                                    <option value="{{ $m_status }}" @selected(old('v_marital_status')==$m_status)>
+                                    <option value="{{ $m_status }}" @selected(old('v_marital_status')== $m_status)>
                                         {{ $m_status }}</option>
                                     @endforeach
                                 </select>
@@ -251,7 +251,7 @@
                                         <select class="form-control form-control-sm" name="victim_status">
                                             <option value="">--Please Select--</option>
                                             @foreach ($vic_status as $v_status)
-                                            <option value="{{ $v_status }}" @selected(old('victim_status')==$v_status)>
+                                            <option value="{{ $v_status }}" @selected(old('victim_status')== $v_status)>
                                                 {{ $v_status }}</option>
                                             @endforeach
                                         </select>
@@ -307,7 +307,7 @@
                                 <select name="s_suffix" class="form-control form-control-sm">
                                     <option value="">--Please Select--</option>
                                     @foreach ($suffixes as $suffix)
-                                    <option value="{{ $suffix }}" @selected(old('s_suffix')==$suffix)>
+                                    <option value="{{ $suffix }}" @selected(old('s_suffix')== $suffix)>
                                         {{ $suffix }}</option>
                                     @endforeach
                                 </select>
@@ -319,13 +319,21 @@
                                 <input type="date" class="form-control form-control-sm s_bdate" name="s_birthdate" required value="{{ old('s_birthdate') }}">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-1">
                             <div class="form-group">
-                                <label>Contact Number</label>
-                                <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('v_contact_number') }}" placeholder="Enter Contact No.">
+                                <label>Age</label>
+                                <input type="number" name="s_age"
+                                    class="form-control form-control-sm text-end s_age" readonly required
+                                    placeholder="0">
                             </div>
                         </div>
                         <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
                             <div class="form-group">
                                 <label>Birthplace <span class="text-danger">*</span> </label>
                                 <input type="text" class="form-control form-control-sm" name="s_birthplace" required value="{{ old('s_birthplace') }}" placeholder="Enter Birthplace">
@@ -341,25 +349,25 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <div class="form-group">
                                 <label>Marital Status <span class="text-danger">*</span> </label>
                                 <select class="form-control form-control-sm" name="s_marital_status" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($mar_status as $m_status)
-                                    <option value="{{ $m_status }}" @selected(old('s_marital_status')==$m_status)>
+                                    <option value="{{ $m_status }}" @selected(old('s_marital_status')== $m_status)>
                                         {{ $m_status }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Occupation</label>
                                 <input type="text" class="form-control form-control-sm" name="s_occupation" value="{{ old('s_occupation') }}" placeholder="Enter Occupation">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Educational Attainment</label>
                                 <input type="text" class="form-control form-control-sm" name="s_education" value="{{ old('s_education') }}" placeholder="Enter Educational Attainment">
@@ -377,37 +385,35 @@
                                 <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Nationality <span class="text-danger">*</span> </label>
                                 <input type="text" class="form-control form-control-sm" name="s_citizenship" value="{{ old('s_citizenship') }}" placeholder="Enter Nationality">
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Relation to Victim</label>
                                 <input type="text" class="form-control form-control-sm" name="relation_to_victim" placeholder="Enter Relation to Victim">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
+                            <div class="form-group col-md-3">
                                 <label>Used Weapon</label>
                                 <select class="form-control form-control-sm" name="used_weapon">
                                     <option value="">--Please Select--</option>
                                     @foreach ($used_weapons as $weapons)
-                                    <option value="{{ $weapons }}" @selected(old('weapon_use')==$weapons)>
+                                    <option value="{{ $weapons }}" @selected(old('weapon_use')== $weapons)>
                                         {{ $weapons }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Suspect Status</label>
                                 <select class="form-control form-control-sm" name="suspect_status">
                                     <option value="">--Please Select--</option>
                                     @foreach ($sus_status as $s_status)
-                                    <option value="{{ $s_status }}" @selected(old('suspect_status')==$s_status)>
+                                    <option value="{{ $s_status }}" @selected(old('suspect_status')== $s_status)>
                                         {{ $s_status }}</option>
                                     @endforeach
                                 </select>
@@ -416,7 +422,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Suspect Motive</label>
-                                <textarea class="form-control form-control-sm" name="suspect_motive" rows="2" placeholder="Type here..."></textarea>
+                                <textarea class="form-control form-control-sm" name="suspect_motive" rows="2" placeholder="Type here...">{{ old('suspect_motive') }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -445,7 +451,7 @@
                                 <select class="form-control form-control-sm" name="stage_of_felony">
                                     <option value="">--Please Select--</option>
                                     @foreach ($stage_felony as $sfelony)
-                                    <option value="{{ $sfelony }}" @selected(old('stage_of_felony')==$sfelony)>
+                                    <option value="{{ $sfelony }}" @selected(old('stage_of_felony')== $sfelony)>
                                         {{ $sfelony }}</option>
                                     @endforeach
                                 </select>
@@ -459,7 +465,7 @@
                                     @foreach ($crime_category as $group_label => $group_options)
                                     <optgroup class="font-weight-bolder" label="{{ $group_label }}">
                                         @foreach ($group_options as $option_value => $option_label)
-                                        <option value="{{ $option_value }}" @selected(old('crime_category')==$option_value)>
+                                        <option value="{{ $option_value }}" @selected(old('crime_category')== $option_value)>
                                             {{ $option_label }}</option>
                                         @endforeach
                                     </optgroup>
