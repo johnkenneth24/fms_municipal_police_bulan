@@ -114,6 +114,65 @@
 
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="{{ asset('assets/js/soft-ui-dashboard.min.js') }}"></script>
+
+    <script>
+        if (window.livewire) {
+            window.livewire.on('hideModal', (modalId) => {
+                $(modalId).modal('hide');
+            });
+        }
+
+        window.addEventListener('SwalSuccess', event => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: event.detail.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        });
+
+        window.addEventListener('SwalError', event => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'error',
+                title: event.detail.message,
+                showConfirmButton: true,
+            })
+        });
+
+        window.addEventListener('already-confirmed', event => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: event.detail.message,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        });
+
+        window.addEventListener('swal:confirm', event => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: event.detail.message,
+                showCancelButton: true,
+                confirmButtonText: `Yes`,
+                denyButtonText: `Cancel`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('delete', event.detail.id)
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Successfully Deleted',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

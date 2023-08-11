@@ -55,9 +55,7 @@
                                             title="Update">
                                             <i class="fas fa-user-edit text-success"></i>
                                         </a>
-                                        <a href="" title="Delete">
-                                            <i class="fas fa-trash text-danger"></i>
-                                        </a>
+                                        @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
                                     </td>
                                 </tr>
                             @empty
@@ -75,3 +73,4 @@
         </div>
     </div>
 @endsection
+
