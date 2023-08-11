@@ -1,5 +1,7 @@
 @extends('layouts.user_type.auth')
 
+@livewireStyles
+
 @section('content')
     <x-errors></x-errors>
     <x-success></x-success>
@@ -73,4 +75,5 @@
         </div>
     </div>
 @endsection
+@livewireScripts
 
