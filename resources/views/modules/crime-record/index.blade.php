@@ -1,6 +1,8 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+    <x-errors></x-errors>
+    <x-success></x-success>
     <div class="row">
         <div class="col-12">
             <div class="card mb-4 me-2">
@@ -49,7 +51,8 @@
                                         <a href="#" class="me-2" title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
-                                        <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2" title="Update">
+                                        <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
+                                            title="Update">
                                             <i class="fas fa-user-edit text-success"></i>
                                         </a>
                                         <a href="" title="Delete">

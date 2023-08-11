@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CrimeRecord\StoreRequest;
-use App\Http\Requests\CrimeRecord\UpdateRequest;
 use App\Models\CrimeRecord;
 use App\Models\Suspect;
 use App\Models\Victim;
@@ -37,7 +36,7 @@ class CrimeRecordController extends Controller
     ];
 
     public $barangay = [
-        "A. Bonifacio", "Abad Santos", "Aguinaldo", "Antipolo", "Beguin", "Benigno S. Aquino", "Bical", "Bonga", "Butag", "Cadandanan", "Calomagon", "Calpi", "Cocok-Cabitan", "Daganas",  "Danao", "Dolos", "E. Quirino", "Fabrica",  "G. del Pilar",  "Gate", "Inararan", "J. Gerona", "J. P. Laurel", "Jamorawon", "Lajong", "Libertad", "M. Roxas", "Magsaysay", "Managanaga", "Marinab", "Montecalvario", "N. Roque", "Namo", "Nasuje", "Obrero", "Osmeña", "Otavi", "Padre Diaz",  "Palale",  "Quezon", "R. Gerona", "Recto", "Sagrada", "San Francisco", "San Isidro", "San Juan Bag-o", "San Juan Daan", "San Rafael", "San Ramon", "San Vicente", "Santa Remedios", "Santa Teresita", "Sigad", "Somagongsong", "Taromata", "Zone I Poblacion", "Zone II Poblacion", "Zone III Poblacion", "Zone IV Poblacion", "Zone V Poblacion", "Zone VI Poblacion", "Zone VII Poblacion", "Zone VIII Poblacion"
+        "A. Bonifacio", "Abad Santos", "Aguinaldo", "Antipolo", "Beguin", "Benigno S. Aquino", "Bical", "Bonga", "Butag", "Cadandanan", "Calomagon", "Calpi", "Cocok-Cabitan", "Daganas", "Danao", "Dolos", "E. Quirino", "Fabrica", "G. del Pilar", "Gate", "Inararan", "J. Gerona", "J. P. Laurel", "Jamorawon", "Lajong", "Libertad", "M. Roxas", "Magsaysay", "Managanaga", "Marinab", "Montecalvario", "N. Roque", "Namo", "Nasuje", "Obrero", "Osmeña", "Otavi", "Padre Diaz", "Palale", "Quezon", "R. Gerona", "Recto", "Sagrada", "San Francisco", "San Isidro", "San Juan Bag-o", "San Juan Daan", "San Rafael", "San Ramon", "San Vicente", "Santa Remedios", "Santa Teresita", "Sigad", "Somagongsong", "Taromata", "Zone I Poblacion", "Zone II Poblacion", "Zone III Poblacion", "Zone IV Poblacion", "Zone V Poblacion", "Zone VI Poblacion", "Zone VII Poblacion", "Zone VIII Poblacion",
     ];
 
     public function index(Request $request)
@@ -58,7 +57,6 @@ class CrimeRecordController extends Controller
         }
 
         $crime_records = $query->paginate(10);
-
 
         return view('modules.crime-record.index', compact('crime_records'));
     }
@@ -146,12 +144,15 @@ class CrimeRecordController extends Controller
             'suspect_motive' => $validated['suspect_motive'],
         ]);
 
-
         return redirect()->route('crime-record.index')->with('success', 'Crime Record created successfully');
     }
 
     public function edit(CrimeRecord $crime_record)
     {
+        $crime_record->load(['victim', 'suspect']);
+
+        // dd($crime_record);
+
         $suffixes = $this->suffixes;
         $mar_status = $this->mar_status;
         $vic_status = $this->vic_status;
@@ -172,13 +173,15 @@ class CrimeRecordController extends Controller
         return view('modules.crime-record.edit', compact('v_age', 's_age', 'suffixes', 'barangays', 'mar_status', 'vic_status', 'sus_status', 'used_weapons', 'case_status', 'case_progress', 'stage_felony', 'crime_category', 'crime_record'));
     }
 
-    public function update(UpdateRequest $request, $crime_record)
+    public function update(StoreRequest $request, $crime_record)
     {
         $validated = $request->validated();
-        // dd($validated);
+        // dd($validated, $crime_record);
 
         // Find the existing CrimeRecord instance by ID
         $crime_record = CrimeRecord::findOrFail($crime_record);
+
+        // dd($crime_record);
 
         $crime_record->update([
             'blotter_entry_no' => $validated['blotter_entry_no'],

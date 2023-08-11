@@ -30,6 +30,8 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.css') }}">
     <link href="{{ asset('assets/css/nucleo-svg.css') }}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{{ asset('assets/sweetalert/dist/sweetalert2.min.css') }}">
     <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/soft-ui-dashboard.css') }}" id="pagestyle">
     <style>
@@ -38,7 +40,9 @@
             box-shadow: 0 0 0 2px #a0b4f6 !important;
         }
 
-        body, table, div {
+        body,
+        table,
+        div {
             font-family: 'Poppins', sans-serif !important;
         }
     </style>
@@ -59,6 +63,7 @@
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/fullcalendar.min.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script src="{{ asset('assets/sweetalert/dist/sweetalert2.min.js') }}"></script>
 
     <script src="{{ asset('assets/js/jquery.3.7.0.min.js') }}"></script>
 
@@ -94,6 +99,16 @@
 
         setInterval(updateDateTime, 1000);
     </script>
+
+    {{-- script to auto close alert --}}
+    <script>
+        window.setTimeout(function() {
+            $(".alert").fadeTo(1000, 0).slideUp(1000, function() {
+                $(this).remove();
+            });
+        }, 7000);
+    </script>
+
     <!-- Github buttons -->
     {{-- <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
 
