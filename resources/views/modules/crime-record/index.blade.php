@@ -1,5 +1,7 @@
 @extends('layouts.user_type.auth')
 
+@livewireStyles
+
 @section('content')
     <x-errors></x-errors>
     <x-success></x-success>
@@ -48,16 +50,14 @@
                                         <a href="#" class="me-2" title="Export">
                                             <i class="fas fa-download text-primary"></i>
                                         </a>
-                                        <a href="#" class="me-2" title="View">
+                                        <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2" title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
                                         <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
                                             title="Update">
                                             <i class="fas fa-user-edit text-success"></i>
                                         </a>
-                                        <a href="" title="Delete">
-                                            <i class="fas fa-trash text-danger"></i>
-                                        </a>
+                                        @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
                                     </td>
                                 </tr>
                             @empty
@@ -75,3 +75,5 @@
         </div>
     </div>
 @endsection
+@livewireScripts
+

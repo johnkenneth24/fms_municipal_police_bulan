@@ -19,6 +19,7 @@
         "sass-loader": "^12.3.0"
     },
     "dependencies": {
-        "moment": "^2.29.4"
+        "moment": "^2.29.4",
+        "sweetalert2": "^11.7.22"
     }
 }
