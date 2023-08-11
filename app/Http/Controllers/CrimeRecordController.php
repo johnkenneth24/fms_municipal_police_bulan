@@ -147,6 +147,32 @@ class CrimeRecordController extends Controller
         return redirect()->route('crime-record.index')->with('success', 'Crime Record created successfully');
     }
 
+    public function view(CrimeRecord $crime_record)
+    {
+        $crime_record->load(['victim', 'suspect']);
+
+        // dd($crime_record);
+
+        $suffixes = $this->suffixes;
+        $mar_status = $this->mar_status;
+        $vic_status = $this->vic_status;
+        $sus_status = $this->sus_status;
+        $used_weapons = $this->used_weapons;
+        $case_status = $this->case_status;
+        $case_progress = $this->case_progress;
+        $stage_felony = $this->stage_felony;
+        $crime_category = $this->crime_category;
+        $barangays = $this->barangay;
+
+        //get age
+        $v_age = Carbon::parse($crime_record->victim->birthdate)->age;
+        $s_age = Carbon::parse($crime_record->suspect->birthdate)->age;
+
+        // dd($v_age);
+
+        return view('modules.crime-record.view', compact('v_age', 's_age', 'suffixes', 'barangays', 'mar_status', 'vic_status', 'sus_status', 'used_weapons', 'case_status', 'case_progress', 'stage_felony', 'crime_category', 'crime_record'));
+    }
+
     public function edit(CrimeRecord $crime_record)
     {
         $crime_record->load(['victim', 'suspect']);

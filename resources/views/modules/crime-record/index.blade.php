@@ -48,7 +48,7 @@
                                         <a href="#" class="me-2" title="Export">
                                             <i class="fas fa-download text-primary"></i>
                                         </a>
-                                        <a href="#" class="me-2" title="View">
+                                        <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2" title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
                                         <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
