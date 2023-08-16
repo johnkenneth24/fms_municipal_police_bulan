@@ -31,6 +31,10 @@ class Suspect extends Model
         'suspect_motive',
     ];
 
+    protected $casts = [
+        'birthdate' => 'date',
+    ];
+
     protected $dates = [
         'birthdate',
         'deleted_at',

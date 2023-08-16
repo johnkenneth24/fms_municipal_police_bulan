@@ -41,4 +41,5 @@ class CaseSolvedController extends Controller
         $crime_records = $query->paginate(10);
 
         return view('modules.case-solved.index', compact('crime_records'));
-    }}
+    }
+}

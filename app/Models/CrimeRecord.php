@@ -29,7 +29,10 @@ class CrimeRecord extends Model
     protected $casts = [
         'date_committed' => 'date',
         'date_reported' => 'date',
+        'time_committed' => 'datetime:H:i',
+        'time_reported' => 'datetime:H:i',
     ];
+
 
     public function victim()
     {

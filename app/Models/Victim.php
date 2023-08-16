@@ -30,6 +30,10 @@ class Victim extends Model
         'victim_status',
     ];
 
+    protected $casts = [
+        'birthdate' => 'date',
+    ];
+
     protected $dates = [
         'birthdate',
         'deleted_at',
