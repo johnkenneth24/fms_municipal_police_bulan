@@ -267,6 +267,5 @@ class CrimeRecordController extends Controller
         ]);
 
         return redirect()->route('crime-record.index')->with('success', 'Crime record successfully updated!');
+    } 
     }
-
-}
