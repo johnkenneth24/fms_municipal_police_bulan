@@ -219,7 +219,7 @@
                         <div class="col-md-4" id="ethnicGroupContainer">
                             <div class="form-group">
                                 <label>Ethnic Group</label>
-                                <input type="text" class="form-control form-control-sm" name="v_ethnic" id="ethnicInput" value="{{ old('v_ethnic') }}" placeholder="Enter Ethnic Group">
+                                <input type="text" class="form-control form-control-sm" name="v_ethnic" id="ethnicInput" value="{{ old('v_ethnic') }}" placeholder="Input only if applicable">
                             </div>
                         </div>
                         <div class="col-md-4 form-group">

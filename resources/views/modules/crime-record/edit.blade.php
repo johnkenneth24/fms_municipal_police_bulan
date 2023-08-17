@@ -244,38 +244,28 @@
                                 </div>
                             </div>
                             <div class="row m-0 px-0">
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6" id="ethnicGroupContainer"">
-                                            <div class="form-group">
-                                                <label>Ethnic Group</label>
-                                                <input type="text" class="form-control form-control-sm"
-                                                    name="v_ethnic" id="ethnicInput"
-                                                    value="{{ $crime_record->victim->ethnic }}"
-                                                    placeholder="Enter Ethnic Group">
-                                            </div>
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Ethnic Group</label>
+                                        <input  type="text" class="form-control form-control-sm" name="v_ethnic" id="ethnicInput" value="{{ $crime_record->victim->ethnic }}" placeholder="Enter Ethnic Group">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="row">
-                                        <div class="col-md-6 form-group">
-                                            <label>Relation to Suspect</label>
-                                            <input type="text" class="form-control form-control-sm"
-                                                name="relation_to_suspect"
-                                                value="{{ $crime_record->victim->relation_to_suspect }}"
-                                                placeholder="Enter Relation to Suspect">
-                                        </div>
-                                        <div class="col-md-6 form-group">
-                                            <label>Victim Status <span class="text-danger">*</span> </label>
-                                            <select class="form-control form-control-sm" name="victim_status">
-                                                <option value="">--Please Select--</option>
-                                                @foreach ($vic_status as $v_status)
-                                                    <option value="{{ $v_status }}" @selected($crime_record->victim->victim_status == $v_status)>
-                                                        {{ $v_status }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Relation to Suspect</label>
+                                        <input  type="text" class="form-control form-control-sm" name="relation_to_suspect" value="{{ $crime_record->victim->relation_to_suspect }}" placeholder="Enter Relation to Suspect">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Victim Status <span class="text-danger">*</span> </label>
+                                        <select class="form-control form-control-sm" name="victim_status">
+                                            <option value="">--Please Select--</option>
+                                            @foreach ($vic_status as $v_status)
+                                            <option value="{{ $v_status }}" @selected($crime_record->victim->victim_status == $v_status)>
+                                                {{ $v_status }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
