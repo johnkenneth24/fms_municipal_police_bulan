@@ -43,10 +43,7 @@
                                             <td>{{ $suspect->crimeRecord->date_committed->format('M. d, Y') }}</td>
                                             <td>{{ $suspect->crimeRecord->incident_location }}</td>
                                             <td class="text-center">
-                                                <a href="" class="me-2" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Export">
-                                                    <i class="fas fa-download text-primary"></i>
-                                                </a>
+                                                @livewire('crime-rec.export', ['crime_record' => $suspect->crimeRecord], key($suspect->crimeRecord->id))
                                                 <a href="#" class="me-2" data-bs-toggle="tooltip"
                                                     data-bs-original-title="View">
                                                     <i class="fas fa-eye text-info"></i>

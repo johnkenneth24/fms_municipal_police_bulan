@@ -52,10 +52,7 @@
                                                 {{ $victim->crimeRecord->incident_location }}
                                             </td>
                                             <td class="text-center">
-                                                <a href="" class="me-2" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Export">
-                                                    <i class="fas fa-download text-primary"></i>
-                                                </a>
+                                                @livewire('crime-rec.export', ['crime_record' => $victim], key($victim->crimeRecord->id))
                                                 <a href="#" class="me-2" data-bs-toggle="tooltip"
                                                     data-bs-original-title="View">
                                                     <i class="fas fa-eye text-info"></i>
