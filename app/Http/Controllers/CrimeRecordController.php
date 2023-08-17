@@ -267,18 +267,5 @@ class CrimeRecordController extends Controller
         ]);
 
         return redirect()->route('crime-record.index')->with('success', 'Crime record successfully updated!');
+    } 
     }
-
-    public function confirmDelete($cm)
-    {
-        $crime_record = CrimeRecord::findOrFail($cm);
-        return view('items.confirm-delete', compact('crime_record'));
-    }
-
-    public function delete($cm)
-    {
-        $crime_record = CrimeRecord::findOrFail($cm);
-        $crime_record->delete();
-        return redirect()->route('items.index')->with('success', 'Item deleted successfully.');
-    }
-}

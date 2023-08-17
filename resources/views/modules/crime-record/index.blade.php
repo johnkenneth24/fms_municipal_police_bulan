@@ -10,10 +10,10 @@
             <div class="card mb-4 me-2">
                 <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                     <h5 class="mb-0 text-uppercase">All Records</h5>
-                    <div class="card-tool d-flex justify-content-end">
-                        <form action="{{ route('crime-record.index') }}" method="get">
+                    <div class="card-tool d-flex justify-content-end align-items-center">
+                        <form action="{{ route('crime-record.index') }}" method="get" class="">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group pt-3">
                                 <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
                                     placeholder="Search..." name="search" style="width: 300px;">
                             </div>
@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <hr class="horizontal dark mt-2 mb-0">
-                <div class="card-body px-0 pt-2 pb-2">
+                <div class="card-body px-0 pt-2 pb-2" style="overflow-x: scroll;">
                     <table class="table table-hover table-responsive align-items-center mb-">
                         <thead>
                             <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">
@@ -32,6 +32,8 @@
                                 <th class="text-uppercase">Date Reported</th>
                                 <th class="text-uppercase">Date Committed</th>
                                 <th class="text-uppercase">Place of Incident</th>
+                                <th class="text-uppercase">Case Status</th>
+                                <th class="text-uppercase">Case Progress</th>
                                 <th class="text-uppercase" style="min-width: 200px;">Actions</th>
                             </tr>
                         </thead>
@@ -46,10 +48,12 @@
                                         {{ $crime_record->date_committed->format('M. d, Y') }}</td>
                                     <td class="text-center text-sm mb-0">
                                         {{ $crime_record->incident_location }}</td>
+                                        <td class="text-center text-sm mb-0">
+                                            {{ $crime_record->case_status }}</td>
+                                            <td class="text-center text-sm mb-0">
+                                                {{ $crime_record->case_progress }}</td>
                                     <td class="text-center text-sm mb-0">
-                                        <a href="#" class="me-2" title="Export">
-                                            <i class="fas fa-download text-primary"></i>
-                                        </a>
+                                        @livewire('crime-rec.export', ['crime_record' => $crime_record], key($crime_record->id))
                                         <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2" title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
@@ -58,6 +62,7 @@
                                             <i class="fas fa-user-edit text-success"></i>
                                         </a>
                                         @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
+
                                     </td>
                                 </tr>
                             @empty

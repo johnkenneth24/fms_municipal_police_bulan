@@ -32,7 +32,7 @@
                                 <select class="form-control form-control-sm" name="case_status" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($case_status as $c_status)
-                                    <option value="{{ $c_status }}" @selected(old('case_status')== $c_status)>
+                                    <option value="{{ $c_status }}" @selected(old('case_status')==$c_status)>
                                         {{ $c_status }}</option>
                                     @endforeach
                                 </select>
@@ -44,7 +44,7 @@
                                 <select class="form-control form-control-sm" name="case_progress" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($case_progress as $c_progress)
-                                    <option value="{{ $c_progress }}" @selected( old('case_progress')== $c_progress )>
+                                    <option value="{{ $c_progress }}" @selected( old('case_progress')==$c_progress )>
                                         {{ $c_progress }}</option>
                                     @endforeach
                                 </select>
@@ -80,7 +80,7 @@
                                 <select class="form-control form-control-sm" name="incident_location" placeholder="Specify location where incident occurred" required>
                                     <option value="">--Please specify location where incident occurred--</option>
                                     @foreach ($barangays as $barangay)
-                                    <option value="{{ $barangay }}" @selected(old('incident_location')== $barangay)>
+                                    <option value="{{ $barangay }}" @selected(old('incident_location')==$barangay)>
                                         {{ $barangay }}</option>
                                     @endforeach
                                 </select>
@@ -140,7 +140,7 @@
                                 <select name="v_suffix" class="form-control form-control-sm">
                                     <option value="">--Please Select--</option>
                                     @foreach ($suffixes as $suffix)
-                                    <option value="{{ $suffix }}" @selected(old('v_suffix')== $suffix)>
+                                    <option value="{{ $suffix }}" @selected(old('v_suffix')==$suffix)>
                                         {{ $suffix }}</option>
                                     @endforeach
                                 </select>
@@ -180,7 +180,7 @@
                                 <select class="form-control form-control-sm" name="v_marital_status" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($mar_status as $m_status)
-                                    <option value="{{ $m_status }}" @selected(old('v_marital_status')== $m_status)>
+                                    <option value="{{ $m_status }}" @selected(old('v_marital_status')==$m_status)>
                                         {{ $m_status }}</option>
                                     @endforeach
                                 </select>
@@ -216,48 +216,25 @@
                                 <input type="text" class="form-control form-control-sm" name="v_citizenship" value="{{ old('v_citizenship') }}" placeholder="Enter Nationality">
                             </div>
                         </div>
-                        <div class="row m-0 px-0">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label class="text-center">Is a member of an ethnic group? <span class="text-danger">*</span> </label>
-                                        <div class="form-group d-flex justify-content-center">
-                                            <label class="radio-inline text-muted me-2">
-                                                <input type="radio" name="is_ethnic_member" value="yes" id="ethnicYes" class="form-radio">
-                                                Yes
-                                            </label>
-                                            <label class="radio-inline text-muted">
-                                                <input type="radio" name="is_ethnic_member" value="no" id="ethnicNo" class="form-radio">
-                                                No
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6" id="ethnicGroupContainer" style="display: none;">
-                                        <div class="form-group">
-                                            <label>Ethnic Group</label>
-                                            <input type="text" class="form-control form-control-sm" name="v_ethnic" id="ethnicInput" value="{{ old('v_ethnic') }}" placeholder="Enter Ethnic Group">
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="col-md-4" id="ethnicGroupContainer">
+                            <div class="form-group">
+                                <label>Ethnic Group</label>
+                                <input type="text" class="form-control form-control-sm" name="v_ethnic" id="ethnicInput" value="{{ old('v_ethnic') }}" placeholder="Enter Ethnic Group">
                             </div>
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-6 form-group">
-                                        <label>Relation to Suspect</label>
-                                        <input type="text" class="form-control form-control-sm" name="relation_to_suspect" value="{{ old('relation_to_suspect') }}" placeholder="Enter Relation to Suspect">
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <label>Victim Status <span class="text-danger">*</span> </label>
-                                        <select class="form-control form-control-sm" name="victim_status">
-                                            <option value="">--Please Select--</option>
-                                            @foreach ($vic_status as $v_status)
-                                            <option value="{{ $v_status }}" @selected(old('victim_status')== $v_status)>
-                                                {{ $v_status }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Relation to Suspect</label>
+                            <input type="text" class="form-control form-control-sm" name="relation_to_suspect" value="{{ old('relation_to_suspect') }}" placeholder="Enter Relation to Suspect">
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <label>Victim Status <span class="text-danger">*</span> </label>
+                            <select class="form-control form-control-sm" name="victim_status">
+                                <option value="">--Please Select--</option>
+                                @foreach ($vic_status as $v_status)
+                                <option value="{{ $v_status }}" @selected(old('victim_status')==$v_status)>
+                                    {{ $v_status }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -307,7 +284,7 @@
                                 <select name="s_suffix" class="form-control form-control-sm">
                                     <option value="">--Please Select--</option>
                                     @foreach ($suffixes as $suffix)
-                                    <option value="{{ $suffix }}" @selected(old('s_suffix')== $suffix)>
+                                    <option value="{{ $suffix }}" @selected(old('s_suffix')==$suffix)>
                                         {{ $suffix }}</option>
                                     @endforeach
                                 </select>
@@ -322,170 +299,168 @@
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label>Age</label>
-                                <input type="number" name="s_age"
-                                    class="form-control form-control-sm text-end s_age" readonly required
-                                    placeholder="0">
+                                <input type="number" name="s_age" class="form-control form-control-sm text-end s_age" readonly required placeholder="0">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{-- <div class="col-md-3">
                             <div class="form-group">
                                 <label>Contact Number</label>
                                 <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="form-group">
-                                <label>Birthplace <span class="text-danger">*</span> </label>
-                                <input type="text" class="form-control form-control-sm" name="s_birthplace" required value="{{ old('s_birthplace') }}" placeholder="Enter Birthplace">
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Gender <span class="text-danger">*</span> </label>
-                                <select class="form-control form-control-sm" name="s_gender" required>
-                                    <option value="">--Please Select--</option>
-                                    <option value="male" @selected(old('s_gender')=='male' )>Male</option>
-                                    <option value="female" @selected(old('s_gender')=='female' )>Female</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                <label>Marital Status <span class="text-danger">*</span> </label>
-                                <select class="form-control form-control-sm" name="s_marital_status" required>
-                                    <option value="">--Please Select--</option>
-                                    @foreach ($mar_status as $m_status)
-                                    <option value="{{ $m_status }}" @selected(old('s_marital_status')== $m_status)>
-                                        {{ $m_status }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Occupation</label>
-                                <input type="text" class="form-control form-control-sm" name="s_occupation" value="{{ old('s_occupation') }}" placeholder="Enter Occupation">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Educational Attainment</label>
-                                <input type="text" class="form-control form-control-sm" name="s_education" value="{{ old('s_education') }}" placeholder="Enter Educational Attainment">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Address <span class="text-danger">*</span> </label>
-                                <input type="text" class="form-control form-control-sm" name="s_address" value="{{ old('s_address') }}" placeholder="(House No., Street Name, Barangay, Municipality, Province)">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Contact Number</label>
-                                <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Nationality <span class="text-danger">*</span> </label>
-                                <input type="text" class="form-control form-control-sm" name="s_citizenship" value="{{ old('s_citizenship') }}" placeholder="Enter Nationality">
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Relation to Victim</label>
-                                <input type="text" class="form-control form-control-sm" name="relation_to_victim" placeholder="Enter Relation to Victim">
-                            </div>
-                        </div>
-                            <div class="form-group col-md-3">
-                                <label>Used Weapon</label>
-                                <select class="form-control form-control-sm" name="used_weapon">
-                                    <option value="">--Please Select--</option>
-                                    @foreach ($used_weapons as $weapons)
-                                    <option value="{{ $weapons }}" @selected(old('weapon_use')== $weapons)>
-                                        {{ $weapons }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Suspect Status</label>
-                                <select class="form-control form-control-sm" name="suspect_status">
-                                    <option value="">--Please Select--</option>
-                                    @foreach ($sus_status as $s_status)
-                                    <option value="{{ $s_status }}" @selected(old('suspect_status')== $s_status)>
-                                        {{ $s_status }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Suspect Motive</label>
-                                <textarea class="form-control form-control-sm" name="suspect_motive" rows="2" placeholder="Type here...">{{ old('suspect_motive') }}</textarea>
-                            </div>
-                        </div>
+                    </div>
+                </div> --}}
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Birthplace <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control form-control-sm" name="s_birthplace" required value="{{ old('s_birthplace') }}" placeholder="Enter Birthplace">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Gender <span class="text-danger">*</span> </label>
+                        <select class="form-control form-control-sm" name="s_gender" required>
+                            <option value="">--Please Select--</option>
+                            <option value="male" @selected(old('s_gender')=='male' )>Male</option>
+                            <option value="female" @selected(old('s_gender')=='female' )>Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Marital Status <span class="text-danger">*</span> </label>
+                        <select class="form-control form-control-sm" name="s_marital_status" required>
+                            <option value="">--Please Select--</option>
+                            @foreach ($mar_status as $m_status)
+                            <option value="{{ $m_status }}" @selected(old('s_marital_status')==$m_status)>
+                                {{ $m_status }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Occupation</label>
+                        <input type="text" class="form-control form-control-sm" name="s_occupation" value="{{ old('s_occupation') }}" placeholder="Enter Occupation">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Educational Attainment</label>
+                        <input type="text" class="form-control form-control-sm" name="s_education" value="{{ old('s_education') }}" placeholder="Enter Educational Attainment">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Address <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control form-control-sm" name="s_address" value="{{ old('s_address') }}" placeholder="(House No., Street Name, Barangay, Municipality, Province)">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Nationality <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control form-control-sm" name="s_citizenship" value="{{ old('s_citizenship') }}" placeholder="Enter Nationality">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Relation to Victim</label>
+                        <input type="text" class="form-control form-control-sm" name="relation_to_victim" placeholder="Enter Relation to Victim">
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Used Weapon</label>
+                    <select class="form-control form-control-sm" name="used_weapon">
+                        <option value="">--Please Select--</option>
+                        @foreach ($used_weapons as $weapons)
+                        <option value="{{ $weapons }}" @selected(old('weapon_use')==$weapons)>
+                            {{ $weapons }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Suspect Status</label>
+                        <select class="form-control form-control-sm" name="suspect_status">
+                            <option value="">--Please Select--</option>
+                            @foreach ($sus_status as $s_status)
+                            <option value="{{ $s_status }}" @selected(old('suspect_status')==$s_status)>
+                                {{ $s_status }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Suspect Motive</label>
+                        <textarea class="form-control form-control-sm" name="suspect_motive" rows="2" placeholder="Type here...">{{ old('suspect_motive') }}</textarea>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-12 mt-2">
-            <div class="card  shadow shadow-card border  border-info">
-                <div class="card-header pb-1">
-                    <div class="d-flex flex-row justify-content-between">
-                        <h5 class="mb-0">OFFENSE</h5>
-                    </div>
-                </div>
-                <hr class="mt-0 py-0 mb-1 horizontal dark">
-                <div class="card-body pt-0">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Name of Investigator On-case</label>
-                                <input type="text" class="form-control form-control-sm" name="investigator" value="{{ old('investigator') }}" placeholder="Name of Investigator in charge of the case">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Stage of Felony</label>
-                                <select class="form-control form-control-sm" name="stage_of_felony">
-                                    <option value="">--Please Select--</option>
-                                    @foreach ($stage_felony as $sfelony)
-                                    <option value="{{ $sfelony }}" @selected(old('stage_of_felony')== $sfelony)>
-                                        {{ $sfelony }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Crime Category</label>
-                                <select class="form-control form-control-sm" name="crime_category">
-                                    <option value="">--Please Select--</option>
-                                    @foreach ($crime_category as $group_label => $group_options)
-                                    <optgroup class="font-weight-bolder" label="{{ $group_label }}">
-                                        @foreach ($group_options as $option_value => $option_label)
-                                        <option value="{{ $option_value }}" @selected(old('crime_category')== $option_value)>
-                                            {{ $option_label }}</option>
-                                        @endforeach
-                                    </optgroup>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Crime Commited</label>
-                                <textarea class="form-control form-control-sm" name="crime_committed" rows="2" placeholder="Type here...">{{ old('crime_committed') }}</textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-info col-md-3 btn-lg">Submit</button>
+    </div>
+    </div>
+    <div class="col-md-12 mt-2">
+        <div class="card  shadow shadow-card border  border-info">
+            <div class="card-header pb-1">
+                <div class="d-flex flex-row justify-content-between">
+                    <h5 class="mb-0">OFFENSE</h5>
                 </div>
             </div>
+            <hr class="mt-0 py-0 mb-1 horizontal dark">
+            <div class="card-body pt-0">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Name of Investigator On-case</label>
+                            <input type="text" class="form-control form-control-sm" name="investigator" value="{{ old('investigator') }}" placeholder="Name of Investigator in charge of the case">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Stage of Felony</label>
+                            <select class="form-control form-control-sm" name="stage_of_felony">
+                                <option value="">--Please Select--</option>
+                                @foreach ($stage_felony as $sfelony)
+                                <option value="{{ $sfelony }}" @selected(old('stage_of_felony')==$sfelony)>
+                                    {{ $sfelony }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Crime Category</label>
+                            <select class="form-control form-control-sm" name="crime_category">
+                                <option value="">--Please Select--</option>
+                                @foreach ($crime_category as $group_label => $group_options)
+                                <optgroup class="font-weight-bolder" label="{{ $group_label }}">
+                                    @foreach ($group_options as $option_value => $option_label)
+                                    <option value="{{ $option_value }}" @selected(old('crime_category')==$option_value)>
+                                        {{ $option_label }}</option>
+                                    @endforeach
+                                </optgroup>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Crime Commited</label>
+                            <textarea class="form-control form-control-sm" name="crime_committed" rows="2" placeholder="Type here...">{{ old('crime_committed') }}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-end">
+                <button type="submit" class="btn btn-info col-md-3 btn-lg">Submit</button>
+            </div>
         </div>
+    </div>
     </div>
 </form>
 @endsection

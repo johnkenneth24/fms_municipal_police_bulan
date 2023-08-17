@@ -1,5 +1,7 @@
 @extends('layouts.user_type.auth')
 
+@livewireStyles
+
 @section('content')
     <div>
         <div class="row">
@@ -34,28 +36,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($crime_records as $case_solved)
+                                    @forelse ($crime_records as $crime_record)
                                         <tr class="text-sm font-weight-bold mb-0 text-center">
-                                            <td>BMPS-{{ $case_solved->blotter_entry_no }}</td>
-                                            <td>{{ $case_solved->date_reported->format('M. d, Y') }}</td>
-                                            <td>{{ $case_solved->date_committed->format('M. d, Y') }}</td>
-                                            <td>{{ $case_solved->incident_location }}</td>
-                                            <td>
-                                                <a href="#" class="me-2" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Export">
-                                                    <i class="fas fa-download text-primary"></i>
-                                                </a>
-                                                <a href="#" class="me-2" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="View">
+                                            <td>BMPS-{{ $crime_record->blotter_entry_no }}</td>
+                                            <td>{{ $crime_record->date_reported->format('M. d, Y') }}</td>
+                                            <td>{{ $crime_record->date_committed->format('M. d, Y') }}</td>
+                                            <td>{{ $crime_record->incident_location }}</td>
+                                            <td class="text-center text-sm mb-0">
+                                                @livewire('crime-rec.export', ['crime_record' => $crime_record], key($crime_record->id))
+                                                <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2" title="View">
                                                     <i class="fas fa-eye text-info"></i>
                                                 </a>
-                                                <a href="#" class="me-2" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Update">
+                                                <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
+                                                    title="Update">
                                                     <i class="fas fa-user-edit text-success"></i>
                                                 </a>
-                                                <a href="#" data-bs-toggle="tooltip" data-bs-original-title="Delete">
-                                                    <i class="fas fa-trash text-danger"></i>
-                                                </a>
+                                                @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
+
                                             </td>
                                         </tr>
                                     @empty
@@ -75,3 +72,5 @@
         </div>
     </div>
 @endsection
+
+@livewireScripts

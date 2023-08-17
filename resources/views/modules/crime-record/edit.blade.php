@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label>Time Commited</label>
                                     <input type="time" class="form-control form-control-sm" name="time_committed"
-                                        required value="{{ $crime_record->time_committed }}">
+                                        required value="{{ $crime_record->time_committed->format('H:i:s') }}">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -77,7 +77,7 @@
                                 <div class="form-group">
                                     <label>Time Reported</label>
                                     <input type="time" class="form-control form-control-sm" name="time_reported"
-                                        value="{{ $crime_record->time_reported ?? date('H:i') }}">
+                                        value="{{ $crime_record->time_reported->format('H:i:s') }}">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -165,7 +165,7 @@
                                 <div class="form-group">
                                     <label>Birthdate <span class="text-danger">*</span> </label>
                                     <input type="date" class="form-control form-control-sm v_bdate" name="v_birthdate"
-                                        required value="{{ $crime_record->victim->birthdate }}">
+                                        required value="{{ $crime_record->victim->birthdate->format('Y-m-d') }}">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -246,23 +246,7 @@
                             <div class="row m-0 px-0">
                                 <div class="col-md-6">
                                     <div class="row">
-                                        <div class="col-md-6">
-                                            <label class="text-center">Is a member of an ethnic group? <span
-                                                    class="text-danger">*</span> </label>
-                                            <div class="form-group d-flex justify-content-center">
-                                                <label class="radio-inline text-muted me-2">
-                                                    <input type="radio" name="is_ethnic_member" value="yes" checked
-                                                        id="ethnicYes" class="form-radio">
-                                                    Yes
-                                                </label>
-                                                <label class="radio-inline text-muted">
-                                                    <input type="radio" name="is_ethnic_member" value="no"
-                                                        id="ethnicNo" class="form-radio">
-                                                    No
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6" id="ethnicGroupContainer" style="display: none;">
+                                        <div class="col-md-6" id="ethnicGroupContainer"">
                                             <div class="form-group">
                                                 <label>Ethnic Group</label>
                                                 <input type="text" class="form-control form-control-sm"
@@ -360,7 +344,7 @@
                                 <div class="form-group">
                                     <label>Birthdate <span class="text-danger">*</span> </label>
                                     <input type="date" class="form-control form-control-sm s_bdate" name="s_birthdate"
-                                        required value="{{ $crime_record->suspect->birthdate }}">
+                                        required value="{{ $crime_record->suspect->birthdate->format('Y-m-d') }}">
                                 </div>
                             </div>
                             <div class="col-md-1">
