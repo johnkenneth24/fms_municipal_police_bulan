@@ -41,10 +41,7 @@
                                             <td>{{ $case_solved->date_committed->format('M. d, Y') }}</td>
                                             <td>{{ $case_solved->incident_location }}</td>
                                             <td>
-                                                <a href="#" class="me-2" data-bs-toggle="tooltip"
-                                                    data-bs-original-title="Export">
-                                                    <i class="fas fa-download text-primary"></i>
-                                                </a>
+                                                @livewire('crime-rec.export', ['crime_record' => $case_solved], key($case_solved->id))
                                                 <a href="#" class="me-2" data-bs-toggle="tooltip"
                                                     data-bs-original-title="View">
                                                     <i class="fas fa-eye text-info"></i>

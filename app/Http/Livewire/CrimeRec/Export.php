@@ -33,7 +33,7 @@ class Export extends Component
         $templateProcessor->setValue('synopsis', $this->crime_record->incident_details);
         $templateProcessor->setValue('investigator', $this->crime_record->investigator);
         $templateProcessor->setValue('felony', $this->crime_record->stage_of_felony);
-        $templateProcessor->setValue('category', $this->crime_record->crime_category);
+        $templateProcessor->setValue('categtory', $this->crime_record->crime_category);
         $templateProcessor->setValue('crime_comm', $this->crime_record->crime_committed);
         //victim
         $templateProcessor->setValue('v_fname', $this->crime_record->victim->firstname);
@@ -74,10 +74,10 @@ class Export extends Component
         $templateProcessor->setValue('s_motive', $this->crime_record->suspect->suspect_motive);
 
         $filename = 'BMPS-'.$this->crime_record->blotter_entry_no . '_incident-report';
-        $tempPath = 'C:\Users\Dayaw\Downloads/' . $filename . '.docx';
+        $tempPath = 'reports/' . $filename . '.docx';
 
         $templateProcessor->saveAs($tempPath);
-        return response()->download($tempPath);
+        return response()->download(public_path($tempPath));
     }
     public function render()
     {
