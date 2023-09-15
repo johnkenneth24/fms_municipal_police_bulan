@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home'])->name('dashboard');
+    Route::get('/get-month-count', [HomeController::class, 'getMonthCount'])->name('get.month.count');
 
     Route::controller(CrimeRecordController::class)
         ->prefix('crime-record')

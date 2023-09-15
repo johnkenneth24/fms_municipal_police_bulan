@@ -10,7 +10,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Case Solved</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    53,000
+                                    {{ $caseSolved }}
                                 </h5>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Case Cleared</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    2,300
+                                    {{ $caseCleared }}
                                 </h5>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Under Investigated</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    3,462
+                                    {{ $caseUnderInvestigation }}
                                 </h5>
                             </div>
                         </div>
@@ -65,7 +65,46 @@
                 </div>
             </div>
         </div>
-
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card mb-3">
+                    <div class="card-header pb-0 d-flex justify-between align-items-center">
+                        <h6 class="mb-0 me-2">SELECT A YEAR</h6>
+                        <form class="col-md-3">
+                            <select id="year" class="form-control">
+                                <option value="{{ date('Y') }}">{{ date('Y') }}</option>
+                                @for ($i = $latestYear - 1; $i >= $oldestYear; $i--)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
+                        </form>
+                    </div>
+                    <div class="card-body p-3 pt-0">
+                        <div class="chart">
+                            <canvas id="line-chart" class="chart-canvas" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="chart">
+                            <canvas id="bar-chart" class="chart-canvas" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-body p-3">
+                        <div class="chart">
+                            <canvas id="bar-hor-chart1" class="chart-canvas" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-4">
             <div class="col-lg-7 mb-lg-0 mb-4">
                 <div class="card">
@@ -75,7 +114,7 @@
                                 <div class="d-flex flex-column h-100">
                                     <p class="mb-1 pt-2 text-bold">Hello Admin!</p>
                                     <h5 class="font-weight-bolder">Bulan MPS - FMS</h5>
-                                    <p class="mb-5 text-justify">The Bulan Municipality Police Station File Management
+                                    <p class="mb-5 text-left">The Bulan Municipality Police Station File Management
                                         System is a digital solution that efficiently organizes and centralizes police
                                         records, enabling faster access and collaboration among law enforcement personnel.
                                     </p>
@@ -112,174 +151,176 @@
         </div>
     @endsection
     @push('scripts')
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            window.onload = function() {
-                var ctx = document.getElementById("chart-bars").getContext("2d");
+            let chartInstance = null;
 
-                new Chart(ctx, {
-                    type: "bar",
-                    data: {
-                        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                        datasets: [{
-                            label: "Sales",
-                            tension: 0.4,
-                            borderWidth: 0,
-                            borderRadius: 4,
-                            borderSkipped: false,
-                            backgroundColor: "#fff",
-                            data: [450, 200, 100, 220, 500, 100, 400, 230, 500],
-                            maxBarThickness: 6
-                        }, ],
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false,
+            $(document).ready(function() {
+                $('#year').change(function() {
+                    var selectedYear = $(this).val();
+
+                    if (selectedYear) {
+                        // AJAX request to get the data for the line chart
+                        $.ajax({
+                            url: '{{ route('get.month.count') }}',
+                            type: 'GET',
+                            data: {
+                                'year': selectedYear
+                            },
+                            success: function(data) {
+                                // Update line chart data with the received data
+                                updateLineChart(data, selectedYear);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error(error);
                             }
-                        },
-                        interaction: {
-                            intersect: false,
-                            mode: 'index',
-                        },
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: false,
-                                    drawOnChartArea: false,
-                                    drawTicks: false,
-                                },
-                                ticks: {
-                                    suggestedMin: 0,
-                                    suggestedMax: 500,
-                                    beginAtZero: true,
-                                    padding: 15,
-                                    font: {
-                                        size: 14,
-                                        family: "Open Sans",
-                                        style: 'normal',
-                                        lineHeight: 2
-                                    },
-                                    color: "#fff"
-                                },
-                            },
-                            x: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: false,
-                                    drawOnChartArea: false,
-                                    drawTicks: false
-                                },
-                                ticks: {
-                                    display: false
-                                },
-                            },
-                        },
-                    },
+                        });
+                    }
                 });
 
+                // Automatically trigger the change event when the page loads
+                $('#year').trigger('change');
+            });
 
-                var ctx2 = document.getElementById("chart-line").getContext("2d");
+            function updateLineChart(data, selectedYear) {
+                const lineChart = document.getElementById('line-chart');
 
-                var gradientStroke1 = ctx2.createLinearGradient(0, 230, 0, 50);
+                // Destroy the existing chart if it exists
+                if (chartInstance) {
+                    chartInstance.destroy();
+                }
 
-                gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
-                gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-                gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
-
-                var gradientStroke2 = ctx2.createLinearGradient(0, 230, 0, 50);
-
-                gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
-                gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-                gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
-                new Chart(ctx2, {
-                    type: "line",
+                chartInstance = new Chart(lineChart, {
+                    type: 'line',
                     data: {
-                        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
                         datasets: [{
-                            label: "Mobile apps",
-                            tension: 0.4,
-                            borderWidth: 0,
-                            pointRadius: 0,
-                            borderColor: "#cb0c9f",
-                            borderWidth: 3,
-                            backgroundColor: gradientStroke1,
-                            fill: true,
-                            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                            maxBarThickness: 6
-
-                        }, {
-                            label: "Websites",
-                            tension: 0.4,
-                            borderWidth: 0,
-                            pointRadius: 0,
-                            borderColor: "#3A416F",
-                            borderWidth: 3,
-                            backgroundColor: gradientStroke2,
-                            fill: true,
-                            data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
-                            maxBarThickness: 6
-                        }, ],
+                            label: 'Crime Cases',
+                            data: [
+                                data.janCount,
+                                data.febCount,
+                                data.marCount,
+                                data.aprCount,
+                                data.mayCount,
+                                data.junCount,
+                                data.julCount,
+                                data.augCount,
+                                data.septCount,
+                                data.octCount,
+                                data.novCount,
+                                data.decCount
+                            ],
+                            fill: false,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2
+                        }]
                     },
                     options: {
                         responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false,
-                            }
-                        },
-                        interaction: {
-                            intersect: false,
-                            mode: 'index',
-                        },
                         scales: {
                             y: {
-                                grid: {
-                                    drawBorder: false,
+                                beginAtZero: true,
+                                title: {
                                     display: true,
-                                    drawOnChartArea: true,
-                                    drawTicks: false,
-                                    borderDash: [5, 5]
-                                },
-                                ticks: {
-                                    display: true,
-                                    padding: 10,
-                                    color: '#b2b9bf',
-                                    font: {
-                                        size: 11,
-                                        family: "Open Sans",
-                                        style: 'normal',
-                                        lineHeight: 2
-                                    },
+                                    text: 'Number of Cases'
                                 }
                             },
                             x: {
-                                grid: {
-                                    drawBorder: false,
-                                    display: false,
-                                    drawOnChartArea: false,
-                                    drawTicks: false,
-                                    borderDash: [5, 5]
-                                },
-                                ticks: {
+                                title: {
                                     display: true,
-                                    color: '#b2b9bf',
-                                    padding: 20,
-                                    font: {
-                                        size: 11,
-                                        family: "Open Sans",
-                                        style: 'normal',
-                                        lineHeight: 2
-                                    },
+                                    text: 'Month'
                                 }
-                            },
+                            }
                         },
-                    },
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Crime Cases for ' + selectedYear,
+                                position: 'top'
+                            },
+                            legend: {
+                                display: false
+                            }
+                        }
+                    }
                 });
             }
+
+            const ctx = document.getElementById('bar-chart');
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Solved', 'Cleared', 'Under Invest.'],
+                    datasets: [{
+                        label: 'Total Cases',
+                        data: [12, 19, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132)', // Color for 'Solved' bar
+                            'rgba(54, 162, 235)', // Color for 'Cleared' bar
+                            'rgba(255, 205, 86)' // Color for 'Under Investigation' bar
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Total Crime Cases', // Title text
+                            position: 'top'
+                        },
+                        legend: {
+                            display: false,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+
+            const ctx2 = document.getElementById('bar-hor-chart1');
+
+            new Chart(ctx2, {
+                type: 'bar',
+                data: {
+                    labels: ['Prosecutiuon', 'Court', 'Other Law Enforcement Agency', 'Dismissed'],
+                    datasets: [{
+                        label: 'Total Cases',
+                        data: [12, 19, 15, 20],
+                        backgroundColor: [
+                            'rgba(54, 162, 235)', // Color for 'Cleared' bar
+                            'rgba(0, 204, 102)', // Color for 'Under Investigation' bar
+                            'rgba(153, 51, 255)', // Color for 'Solved' bar
+                            'rgba(255, 205, 86)' // Color for 'Under Investigation' bar
+
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Case Progress', // Title text
+                            position: 'top'
+                        },
+                        legend: {
+                            display: false,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
         </script>
     @endpush
