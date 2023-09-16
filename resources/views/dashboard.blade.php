@@ -10,7 +10,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Case Solved</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ $caseSolved }}
+                                    {{ $solvedCase }}
                                 </h5>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Case Cleared</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ $caseCleared }}
+                                    {{ $clearedCase }}
                                 </h5>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Under Investigated</p>
                                 <h5 class="font-weight-bolder mb-0">
-                                    {{ $caseUnderInvestigation }}
+                                    {{ $underInvCase }}
                                 </h5>
                             </div>
                         </div>
@@ -68,17 +68,6 @@
         <div class="row mt-4">
             <div class="col-md-12">
                 <div class="card mb-3">
-                    <div class="card-header pb-0 d-flex justify-between align-items-center">
-                        <h6 class="mb-0 me-2">SELECT A YEAR</h6>
-                        <form class="col-md-3">
-                            <select id="year" class="form-control">
-                                <option value="{{ date('Y') }}">{{ date('Y') }}</option>
-                                @for ($i = $latestYear - 1; $i >= $oldestYear; $i--)
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                @endfor
-                            </select>
-                        </form>
-                    </div>
                     <div class="card-body p-3 pt-0">
                         <div class="chart">
                             <canvas id="line-chart" class="chart-canvas" height="100"></canvas>
@@ -149,136 +138,106 @@
                 </div>
             </div>
         </div>
+
+
     @endsection
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            let chartInstance = null;
+            const lineChart = document.getElementById('line-chart');
 
-            $(document).ready(function() {
-                $('#year').change(function() {
-                    var selectedYear = $(this).val();
-
-                    if (selectedYear) {
-                        // AJAX request to get the data for the line chart
-                        $.ajax({
-                            url: '{{ route('get.month.count') }}',
-                            type: 'GET',
-                            data: {
-                                'year': selectedYear
-                            },
-                            success: function(data) {
-                                // Update line chart data with the received data
-                                updateLineChart(data, selectedYear);
-                            },
-                            error: function(xhr, status, error) {
-                                console.error(error);
-                            }
-                        });
+            new Chart(lineChart, {
+            type: 'line',
+            data: {
+                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC'],
+                datasets: [{
+                label: 'Crime Cases',
+                data: [
+                    {{ $janCount }},
+                {{ $febCount }},
+                {{ $marCount }},
+                {{ $aprCount }},
+                {{ $mayCount }},
+                {{ $junCount }},
+                {{ $julCount }},
+                {{ $augCount }},
+                {{ $septCount }},
+                {{ $octCount }},
+                {{ $novCount }},
+                {{ $decCount }}
+                ],
+                fill: false,
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                    display: true,
+                    text: 'Number of Cases'
                     }
-                });
-
-                // Automatically trigger the change event when the page loads
-                $('#year').trigger('change');
-            });
-
-            function updateLineChart(data, selectedYear) {
-                const lineChart = document.getElementById('line-chart');
-
-                // Destroy the existing chart if it exists
-                if (chartInstance) {
-                    chartInstance.destroy();
+                },
+                x: {
+                    title: {
+                    display: true,
+                    text: 'Year'
+                    }
                 }
-
-                chartInstance = new Chart(lineChart, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
-                        datasets: [{
-                            label: 'Crime Cases',
-                            data: [
-                                data.janCount,
-                                data.febCount,
-                                data.marCount,
-                                data.aprCount,
-                                data.mayCount,
-                                data.junCount,
-                                data.julCount,
-                                data.augCount,
-                                data.septCount,
-                                data.octCount,
-                                data.novCount,
-                                data.decCount
-                            ],
-                            fill: false,
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                title: {
-                                    display: true,
-                                    text: 'Number of Cases'
-                                }
-                            },
-                            x: {
-                                title: {
-                                    display: true,
-                                    text: 'Month'
-                                }
-                            }
-                        },
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: 'Crime Cases for ' + selectedYear,
-                                position: 'top'
-                            },
-                            legend: {
-                                display: false
-                            }
-                        }
-                    }
-                });
+                },
+                plugins: {
+                title: {
+                    display: true,
+                    text: 'Crime Cases This Year',
+                    position: 'top'
+                },
+                legend: {
+                    display: false
+                }
+                }
             }
+            });
 
             const ctx = document.getElementById('bar-chart');
 
             new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Solved', 'Cleared', 'Under Invest.'],
-                    datasets: [{
-                        label: 'Total Cases',
-                        data: [12, 19, 3],
-                        backgroundColor: [
+                type: 'bar'
+                , data: {
+                    labels: ['Solved', 'Cleared', 'Under Invest.']
+                    , datasets: [{
+                        label: 'Total Cases'
+                        , data: [
+                            {{ $solvedCase }},
+                            {{ $clearedCase }},
+                            {{ $underInvCase }}
+                        ]
+                        , backgroundColor: [
                             'rgba(255, 99, 132)', // Color for 'Solved' bar
                             'rgba(54, 162, 235)', // Color for 'Cleared' bar
                             'rgba(255, 205, 86)' // Color for 'Under Investigation' bar
-                        ],
-                        borderWidth: 1
+                        ]
+                        , borderWidth: 1
                     }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    scales: {
+                }
+                , options: {
+                    indexAxis: 'y'
+                    , scales: {
                         x: {
                             beginAtZero: true
                         }
-                    },
-                    plugins: {
+                    }
+                    , plugins: {
                         title: {
-                            display: true,
-                            text: 'Total Crime Cases', // Title text
+                            display: true
+                            , text: 'Total Crime Cases', // Title text
                             position: 'top'
-                        },
-                        legend: {
-                            display: false,
-                            position: 'bottom'
+                        }
+                        , legend: {
+                            display: false
+                            , position: 'bottom'
                         }
                     }
                 }
@@ -289,10 +248,15 @@
             new Chart(ctx2, {
                 type: 'bar',
                 data: {
-                    labels: ['Prosecutiuon', 'Court', 'Other Law Enforcement Agency', 'Dismissed'],
+                    labels: ['Prosecutiuon', 'Court', 'Law Agency', 'Dismissed'],
                     datasets: [{
                         label: 'Total Cases',
-                        data: [12, 19, 15, 20],
+                        data: [
+                            {{ $prosecutor }},
+                            {{ $filedCourt }},
+                            {{ $lawAgency }},
+                            {{ $dismissed }}
+                        ],
                         backgroundColor: [
                             'rgba(54, 162, 235)', // Color for 'Cleared' bar
                             'rgba(0, 204, 102)', // Color for 'Under Investigation' bar

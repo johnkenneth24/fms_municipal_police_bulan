@@ -28,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', [HomeController::class, 'home'])->name('dashboard');
-    Route::get('/get-month-count', [HomeController::class, 'getMonthCount'])->name('get.month.count');
+    // Route::get('/get-month-count', [HomeController::class, 'getMonthCount'])->name('get.month.count');
+
 
     Route::controller(CrimeRecordController::class)
         ->prefix('crime-record')
@@ -46,7 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
         ->prefix('crime-graph')
         ->group(function () {
             Route::get('/', 'index')->name('crime-graph.index');
-
+            Route::get('/get-year-count', 'getYearCount')->name('get.year.count');
         });
 
     Route::controller(CaseSolvedController::class)
