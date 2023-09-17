@@ -30,8 +30,17 @@ class CrimeRecordController extends Controller
             'Theft' => 'Theft',
         ],
         "Non-Index Crimes" => [
-            'sample 1' => 'Sample 1',
-            'sample 2' => 'Sample 2',
+            'Republic Act' => 'Republic Act',
+            'President Decrees' => 'President Decrees',
+            'Batas Pambansa' => 'Batas Pambansa',
+            'Offense of Revise Penal Code not Categorized as Index' => 'Offense of Revise Penal Code not Categorized as Index',
+        ],
+        "Public Safety" => [
+            'RIR to Homicide' => 'RIR to Homicide',
+            'RIR to Physical Injury' => 'RIR to Physical Injury',
+            'RIR Damage to Property' => 'RIR Damage to Property',
+            'Other Quasi Offenses' => 'Other Quasi Offenses',
+            'Imprudence & Negligence' => 'Imprudence & Negligence',
         ],
     ];
 
@@ -267,5 +276,5 @@ class CrimeRecordController extends Controller
         ]);
 
         return redirect()->route('crime-record.index')->with('success', 'Crime record successfully updated!');
-    } 
+    }
     }

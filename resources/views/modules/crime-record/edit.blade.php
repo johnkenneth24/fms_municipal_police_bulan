@@ -12,7 +12,6 @@
                             <h5 class="mb-0">CASE DETAILS</h5>
                         </div>
                         <div class="card-toolbar">
-                            <a href="{{ route('crime-record.index') }}" class="btn btn-danger btn-sm">Cancel</a>
                         </div>
                     </div>
                     <hr class="mt-0 py-0 mb-1 horizontal dark">
@@ -512,6 +511,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end py-1">
+                        <a href="{{ route('crime-record.index') }}" class="btn btn-danger btn-lg me-3">Cancel</a>
                         <button type="submit" class="btn btn-info col-md-3 btn-lg">Update</button>
                     </div>
                 </div>

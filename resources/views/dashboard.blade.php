@@ -208,7 +208,7 @@
                 , data: {
                     labels: ['Solved', 'Cleared', 'Under Invest.']
                     , datasets: [{
-                        label: 'Total Cases'
+                        label: 'Case Status This Year'
                         , data: [
                             {{ $solvedCase }},
                             {{ $clearedCase }},
@@ -232,7 +232,7 @@
                     , plugins: {
                         title: {
                             display: true
-                            , text: 'Total Crime Cases', // Title text
+                            , text: 'Case Status This Year', // Title text
                             position: 'top'
                         }
                         , legend: {
@@ -250,7 +250,7 @@
                 data: {
                     labels: ['Prosecutiuon', 'Court', 'Law Agency', 'Dismissed'],
                     datasets: [{
-                        label: 'Total Cases',
+                        label: 'Case Progress this Year',
                         data: [
                             {{ $prosecutor }},
                             {{ $filedCourt }},
@@ -276,7 +276,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Case Progress', // Title text
+                            text: 'Case Progress this Year', // Title text
                             position: 'top'
                         },
                         legend: {
