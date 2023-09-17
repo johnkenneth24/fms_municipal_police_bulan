@@ -49,7 +49,7 @@
                                                 </a>
                                                 <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
                                                     title="Update">
-                                                    <i class="fas fa-user-edit text-success"></i>
+                                                    <i class="fas fa-user-edit text-success" ></i>
                                                 </a>
                                                 @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
 

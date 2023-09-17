@@ -11,7 +11,6 @@
                         <h5 class="mb-0">CASE DETAILS</h5>
                     </div>
                     <div class="card-toolbar">
-                        <a href="{{ route('crime-record.index') }}" class="btn btn-danger btn-sm">Cancel</a>
                     </div>
                 </div>
                 <hr class="mt-0 py-0 mb-1 horizontal dark">
@@ -207,7 +206,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Contact Number</label>
-                                <input type="text" class="form-control form-control-sm" name="v_contact_number" value="{{ old('v_contact_number') }}" placeholder="Enter Contact No.">
+                                <input type="number" class="form-control form-control-sm" name="v_contact_number" value="{{ old('v_contact_number') }}" placeholder="Enter Contact No.">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -357,7 +356,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Contact Number</label>
-                        <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
+                        <input type="number" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -457,6 +456,7 @@
                 </div>
             </div>
             <div class="card-footer d-flex justify-content-end">
+                <a href="{{ route('crime-record.index') }}" class="btn btn-danger btn-lg me-3">Cancel</a>
                 <button type="submit" class="btn btn-info col-md-3 btn-lg">Submit</button>
             </div>
         </div>
