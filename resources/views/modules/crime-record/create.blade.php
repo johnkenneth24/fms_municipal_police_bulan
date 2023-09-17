@@ -206,7 +206,7 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>Contact Number</label>
-                                <input type="text" class="form-control form-control-sm" name="v_contact_number" value="{{ old('v_contact_number') }}" placeholder="Enter Contact No.">
+                                <input type="number" class="form-control form-control-sm" name="v_contact_number" value="{{ old('v_contact_number') }}" placeholder="Enter Contact No.">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -356,7 +356,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label>Contact Number</label>
-                        <input type="text" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
+                        <input type="number" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
                     </div>
                 </div>
                 <div class="col-md-3">

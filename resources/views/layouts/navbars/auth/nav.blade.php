@@ -1,7 +1,7 @@
 <!-- Navbar -->
 
-<nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
-    navbar-scroll="true">
+<nav class="bg-white mt-3 sticky-top navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
+    navbar-scroll="true" style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;">
     <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
             <h6 class="font-weight-bolder mb-0 text-uppercase">
