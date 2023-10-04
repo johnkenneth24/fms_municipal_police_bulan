@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('victims', function (Blueprint $table) {
             $table->id();
-            // foreign_id based on crime_records table
             $table->foreignId('crime_record_id')->constrained('crime_records')->onDelete('cascade');
             $table->string('firstname');
             $table->string('middlename')->nullable();
