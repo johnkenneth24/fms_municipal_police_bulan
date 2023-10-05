@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('blotter_entry_no');
             $table->string('case_status');
             $table->string('case_progress');
-            $table->string('date_committed');
+            $table->date('date_committed');
             $table->string('time_committed');
-            $table->string('date_reported');
+            $table->date('date_reported');
             $table->string('time_reported');
             $table->string('incident_location');
             $table->longText('incident_details');

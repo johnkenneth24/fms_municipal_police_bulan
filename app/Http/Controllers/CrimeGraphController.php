@@ -10,21 +10,19 @@ use App\Models\Suspect;
 class CrimeGraphController extends Controller
 {
     public function index()
-    {$latestDate = CrimeRecord::max('date_committed');
+    {
+        $latestDate = CrimeRecord::max('date_committed');
         $oldestDate = CrimeRecord::min('date_committed');
 
         // Convert to Carbon instance and then format to get the year
         $latestYear = Carbon::parse($latestDate)->format('Y');
         $oldestYear = Carbon::parse($oldestDate)->format('Y');
 
-        $caseData = [
-            'latestYear' => $latestYear,
-            'oldestYear' => $oldestYear,
-            'caseSolved' => CrimeRecord::where('case_status', 'Solved')->count(),
-            'caseCleared' => CrimeRecord::where('case_status', 'Cleared')->count(),
-            'caseUnderInvestigation' => CrimeRecord::where('case_status', 'Under Investigation')->count(),
-        ];
-        return view('modules.crime-infograph.index', $caseData);
+        $caseSolved = CrimeRecord::where('case_status', 'Solved')->count();
+        $caseCleared = CrimeRecord::where('case_status', 'Cleared')->count();
+        $caseUnderInvestigation = CrimeRecord::where('case_status', 'Under Investigation')->count();
+
+        return view('modules.crime-infograph.index', compact('latestYear', 'oldestYear' ,'caseSolved', 'caseCleared', 'caseUnderInvestigation'));
     }
 
     public function getYearCount(Request $request)
