@@ -73,7 +73,7 @@ class Export extends Component
         $templateProcessor->setValue('s_weapon', $this->crime_record->suspect->used_weapon);
         $templateProcessor->setValue('s_motive', $this->crime_record->suspect->suspect_motive);
 
-        $filename = 'BMPS-'.$this->crime_record->blotter_entry_no . '_incident-report';
+        $filename = 'BMPS-' . $this->crime_record->blotter_entry_no . '_incident-report';
         $tempPath = 'reports/' . $filename . '.docx';
 
         $templateProcessor->saveAs($tempPath);
