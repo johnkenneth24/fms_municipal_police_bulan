@@ -12,7 +12,7 @@ class Restore extends Component
 
     public function restoreConfirm()
     {
-        $this->dispatchBrowserEvent('swal:confirm', [
+        $this->dispatchBrowserEvent('swal:restore', [
             'id' => $this->crime_record->id,
             'message' => 'Are you sure?',
         ]);
@@ -20,12 +20,15 @@ class Restore extends Component
 
     public function restore($id)
     {
-        $crime_record = CrimeRecord::with('suspect', 'victim')->where('id', $id)->first();
-        if ($crime_record != null) {
-            $crime_record->delete();
+        CrimeRecord::withTrashed()->where('id' , $id)->restore();
+
+        // if ($crime_record != null) {
+
+
+
             return redirect()->route('crime-record.index');
-        }
-        return redirect()->route('crime-record.index')->with('error', 'Something went wrong');
+        // }
+        // return redirect()->route('crime-record.index')->with('error', 'Something went wrong');
     }
 
     public function render()

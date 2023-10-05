@@ -11,7 +11,7 @@ class ArchiveController extends Controller
 
     public function index()
     {
-        $crime_records = CrimeRecord::withTrashed()->paginate(10);
+        $crime_records = CrimeRecord::onlyTrashed()->paginate(10);
 
         return view('modules.archive.index', compact('crime_records'));
     }

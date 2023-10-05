@@ -172,6 +172,28 @@
                 }
             });
         });
+
+        window.addEventListener('swal:restore', event => {
+            Swal.fire({
+                position: 'top-center',
+                icon: 'warning',
+                title: event.detail.message,
+                showCancelButton: true,
+                confirmButtonText: `Yes`,
+                denyButtonText: `Cancel`
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.livewire.emit('restore', event.detail.id)
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Successfully Restored',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+            });
+        });
     </script>
 </body>
 
