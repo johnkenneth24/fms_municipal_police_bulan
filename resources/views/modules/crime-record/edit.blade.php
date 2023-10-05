@@ -276,7 +276,11 @@
                 <div class="card  shadow shadow-card border  border-info">
                     <div class="card-header pb-1">
                         <div class="d-flex flex-row justify-content-between">
-                            <h5 class="mb-0">SUSPECT'S INFORMATION</h5>
+                            @if($crime_record->case_status == 'Under Investigation' )
+                    <h5 class="mb-0">PERSON OF INTEREST INFORMATION</h5>
+                    @else
+                    <h5 class="mb-0">SUSPECT'S INFORMATION</h5>
+                    @endif
                         </div>
                     </div>
                     <hr class="mt-0 py-0 mb-1 horizontal dark">
@@ -287,7 +291,7 @@
                                     <label>First Name <span class="text-danger">*</span> </label>
                                     <input type="text" name="s_firstname"
                                         class="form-control form-control-sm @error('s_firstname') is-invalid @enderror"
-                                        value="{{ $crime_record->suspect->firstname }}" required
+                                        value="{{ $crime_record->suspect->firstname }}"
                                         placeholder="Enter First Name">
                                     @error('s_firstname')
                                         <span class="invalid-feedback" role="alert">
@@ -308,7 +312,7 @@
                                     <label>Last Name <span class="text-danger">*</span> </label>
                                     <input type="text" name="s_lastname"
                                         class="form-control form-control-sm @error('s_lastname') is-invalid @enderror"
-                                        value="{{ $crime_record->suspect->lastname }}" required
+                                        value="{{ $crime_record->suspect->lastname }}"
                                         placeholder="Enter Last Name">
                                     @error('s_lastname')
                                         <span class="invalid-feedback" role="alert">
@@ -333,14 +337,14 @@
                                 <div class="form-group">
                                     <label>Birthdate <span class="text-danger">*</span> </label>
                                     <input type="date" class="form-control form-control-sm s_bdate" name="s_birthdate"
-                                        required value="{{ $crime_record->suspect->birthdate->format('Y-m-d') }}">
+                                         value="{{ $crime_record?->suspect?->birthdate?->format('Y-m-d') ?? '' }}">
                                 </div>
                             </div>
                             <div class="col-md-1">
                                 <div class="form-group">
                                     <label>Age</label>
                                     <input type="number" name="s_age" value="{{ $s_age }}"
-                                        class="form-control form-control-sm text-end s_age" readonly required
+                                        class="form-control form-control-sm text-end s_age" readonly
                                         placeholder="0">
                                 </div>
                             </div>
@@ -348,14 +352,14 @@
                                 <div class="form-group">
                                     <label>Birthplace <span class="text-danger">*</span> </label>
                                     <input type="text" class="form-control form-control-sm" name="s_birthplace"
-                                        required value="{{ $crime_record->suspect->birthplace }}"
+                                         value="{{ $crime_record->suspect->birthplace }}"
                                         placeholder="Enter Birthplace">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Gender <span class="text-danger">*</span> </label>
-                                    <select class="form-control form-control-sm" name="s_gender" required>
+                                    <select class="form-control form-control-sm" name="s_gender" >
                                         <option value="">--Please Select--</option>
                                         <option value="male" @selected($crime_record->suspect->gender == 'male')>Male</option>
                                         <option value="female" @selected($crime_record->suspect->gender == 'female')>Female</option>
@@ -365,7 +369,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label>Marital Status <span class="text-danger">*</span> </label>
-                                    <select class="form-control form-control-sm" name="s_marital_status" required>
+                                    <select class="form-control form-control-sm" name="s_marital_status" >
                                         <option value="">--Please Select--</option>
                                         @foreach ($mar_status as $m_status)
                                             <option value="{{ $m_status }}" @selected($crime_record->suspect->marital_status == $m_status)>

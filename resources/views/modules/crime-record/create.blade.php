@@ -251,8 +251,8 @@
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>First Name <span class="text-danger">*</span> </label>
-                                <input type="text" name="s_firstname" class="form-control form-control-sm @error('s_firstname') is-invalid @enderror" value="{{ old('s_firstname') }}" required placeholder="Enter First Name">
+                                <label>First Name </label>
+                                <input type="text" name="s_firstname" class="form-control form-control-sm @error('s_firstname') is-invalid @enderror" value="{{ old('s_firstname') }}"  placeholder="Enter First Name">
                                 @error('s_firstname')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -268,8 +268,8 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Last Name <span class="text-danger">*</span> </label>
-                                <input type="text" name="s_lastname" class="form-control form-control-sm @error('s_lastname') is-invalid @enderror" value="{{ old('s_lastname') }}" required placeholder="Enter Last Name">
+                                <label>Last Name </label>
+                                <input type="text" name="s_lastname" class="form-control form-control-sm @error('s_lastname') is-invalid @enderror" value="{{ old('s_lastname') }}"  placeholder="Enter Last Name">
                                 @error('s_lastname')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -291,14 +291,14 @@
                         </div>
                         <div class="col-md-2">
                             <div class="form-group">
-                                <label>Birthdate <span class="text-danger">*</span> </label>
-                                <input type="date" class="form-control form-control-sm s_bdate" name="s_birthdate" required value="{{ old('s_birthdate') }}">
+                                <label>Birthdate </label>
+                                <input type="date" class="form-control form-control-sm s_bdate" name="s_birthdate"  value="{{ old('s_birthdate') }}">
                             </div>
                         </div>
                         <div class="col-md-1">
                             <div class="form-group">
                                 <label>Age</label>
-                                <input type="number" name="s_age" class="form-control form-control-sm text-end s_age" readonly required placeholder="0">
+                                <input type="number" name="s_age" class="form-control form-control-sm text-end s_age" readonly  placeholder="0">
                             </div>
                         </div>
                         {{-- <div class="col-md-3">
@@ -309,14 +309,14 @@
                 </div> --}}
                 <div class="col-md-5">
                     <div class="form-group">
-                        <label>Birthplace <span class="text-danger">*</span> </label>
-                        <input type="text" class="form-control form-control-sm" name="s_birthplace" required value="{{ old('s_birthplace') }}" placeholder="Enter Birthplace">
+                        <label>Birthplace </label>
+                        <input type="text" class="form-control form-control-sm" name="s_birthplace"  value="{{ old('s_birthplace') }}" placeholder="Enter Birthplace">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label>Gender <span class="text-danger">*</span> </label>
-                        <select class="form-control form-control-sm" name="s_gender" required>
+                        <label>Gender </label>
+                        <select class="form-control form-control-sm" name="s_gender" >
                             <option value="">--Please Select--</option>
                             <option value="male" @selected(old('s_gender')=='male' )>Male</option>
                             <option value="female" @selected(old('s_gender')=='female' )>Female</option>
@@ -325,8 +325,8 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label>Marital Status <span class="text-danger">*</span> </label>
-                        <select class="form-control form-control-sm" name="s_marital_status" required>
+                        <label>Marital Status </label>
+                        <select class="form-control form-control-sm" name="s_marital_status" >
                             <option value="">--Please Select--</option>
                             @foreach ($mar_status as $m_status)
                             <option value="{{ $m_status }}" @selected(old('s_marital_status')==$m_status)>
@@ -355,13 +355,13 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Address <span class="text-danger">*</span> </label>
+                        <label>Address </label>
                         <input type="text" class="form-control form-control-sm" name="s_address" value="{{ old('s_address') }}" placeholder="(House No., Street Name, Barangay, Municipality, Province)">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Nationality <span class="text-danger">*</span> </label>
+                        <label>Nationality </label>
                         <input type="text" class="form-control form-control-sm" name="s_citizenship" value="{{ old('s_citizenship') }}" placeholder="Enter Nationality">
                     </div>
                 </div>
@@ -415,14 +415,14 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label>Name of Investigator On-case</label>
-                            <input type="text" class="form-control form-control-sm" name="investigator" value="{{ old('investigator') }}" placeholder="Name of Investigator in charge of the case">
+                            <label>Name of Investigator On-case<span class="text-danger">*</span> </label>
+                            <input type="text" required class="form-control form-control-sm" name="investigator" value="{{ old('investigator') }}" placeholder="Name of Investigator in charge of the case">
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Stage of Felony</label>
-                            <select class="form-control form-control-sm" name="stage_of_felony">
+                            <label>Stage of Felony<span class="text-danger">*</span> </label>
+                            <select class="form-control form-control-sm" name="stage_of_felony" required>
                                 <option value="">--Please Select--</option>
                                 @foreach ($stage_felony as $sfelony)
                                 <option value="{{ $sfelony }}" @selected(old('stage_of_felony')==$sfelony)>
@@ -433,8 +433,8 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Crime Category</label>
-                            <select class="form-control form-control-sm" name="crime_category">
+                            <label>Crime Category<span class="text-danger">*</span> </label>
+                            <select class="form-control form-control-sm" name="crime_category" required>
                                 <option value="">--Please Select--</option>
                                 @foreach ($crime_category as $group_label => $group_options)
                                 <optgroup class="font-weight-bolder" label="{{ $group_label }}">

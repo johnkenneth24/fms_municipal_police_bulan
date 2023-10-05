@@ -252,7 +252,11 @@
         <div class="card  shadow shadow-card border  border-info">
             <div class="card-header pb-1">
                 <div class="d-flex flex-row justify-content-between">
+                    @if($crime_record->case_status == 'Under Investigation' )
+                    <h5 class="mb-0">PERSON OF INTEREST INFORMATION</h5>
+                    @else
                     <h5 class="mb-0">SUSPECT'S INFORMATION</h5>
+                    @endif
                 </div>
             </div>
             <hr class="mt-0 py-0 mb-1 horizontal dark">
@@ -301,7 +305,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             <label>Birthdate <span class="text-danger">*</span> </label>
-                            <input readonly type="date" class="form-control form-control-sm s_bdate" name="s_birthdate" required value="{{ $crime_record->suspect->birthdate->format('Y-m-d') }}">
+                            <input readonly type="date" class="form-control form-control-sm s_bdate" name="s_birthdate" required value="{{ $crime_record?->suspect?->birthdate?->format('Y-m-d') ?? '' }}">
                         </div>
                     </div>
                     <div class="col-md-1">
