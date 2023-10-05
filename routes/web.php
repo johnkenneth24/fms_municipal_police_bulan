@@ -12,6 +12,7 @@ use App\Http\Controllers\ResetController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SuspectController;
 use App\Http\Controllers\VictimController;
+use App\Http\Controllers\ArchiveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,6 +62,13 @@ Route::group(['middleware' => 'auth'], function () {
         ->prefix('case-cleared')
         ->group(function () {
             Route::get('/', 'index')->name('case-cleared.index');
+
+        });
+
+    Route::controller(ArchiveController::class)
+        ->prefix('archive')
+        ->group(function () {
+            Route::get('/', 'index')->name('archive.index');
 
         });
 

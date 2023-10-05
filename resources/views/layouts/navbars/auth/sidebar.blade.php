@@ -69,10 +69,6 @@
                     <span class="nav-link-text ms-1">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item mt-2">
-                <h6 class="text-uppercase text-xs font-weight-bolder text-left ms-5 opacity-6">
-                    Records</h6>
-            </li>
             <li class="nav-item">
                 <a class="nav-link  {{ request()->routeIs('crime-record.*') ? 'active' : '' }}"
                     href="{{ route('crime-record.index') }}">
@@ -146,7 +142,7 @@
                     <span class="nav-link-text ms-1">Victim</span>
                 </a>
             </li>
-            <li class="nav-item pb-2">
+            <li class="nav-item ">
                 <a class="nav-link {{ request()->routeIs('crime-graph.*') ? 'active' : '' }}"
                     href="{{ route('crime-graph.index') }}">
                     <div
@@ -159,7 +155,19 @@
                     <span class="nav-link-text ms-1">Crime Infographs</span>
                 </a>
             </li>
+            <li class="nav-item pb-2">
+                <a class="nav-link {{ request()->routeIs('archive.*') ? 'active' : '' }}"
+                    href="{{ route('archive.index') }}">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 
+                        <i style="font-size: 1rem;"
+                            class="fa fa-solid fa-trash ps-2 pe-2 text-center text-dark {{ request()->routeIs('archive.*') ? 'text-white' : '' }}"
+                            aria-hidden="true"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Archive</span>
+                </a>
+            </li>
         </ul>
     </div>
 </aside>

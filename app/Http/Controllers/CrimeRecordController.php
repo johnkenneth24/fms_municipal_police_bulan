@@ -65,7 +65,7 @@ class CrimeRecordController extends Controller
                 ->orWhere('date_committed', 'like', '%' . $search . '%');
         }
 
-        $crime_records = $query->paginate(10);
+        $crime_records = $query->paginate(10); 
 
         return view('modules.crime-record.index', compact('crime_records'));
     }

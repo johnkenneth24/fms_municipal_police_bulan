@@ -20,8 +20,10 @@ class Delete extends Component
 
     public function delete($id)
     {
-        $crime_record = CrimeRecord::where('id', $id)->first();
+        $crime_record = CrimeRecord::with('suspect', 'victim')->where('id', $id)->first();
         if ($crime_record != null) {
+            $crime_record->suspect->delete();
+            $crime_record->victim->delete();
             $crime_record->delete();
             return redirect()->route('crime-record.index');
         }

@@ -37,7 +37,7 @@
                                     @forelse ($victims as $victim)
                                         <tr>
                                             <td class="text-center text-xs font-weight-bold mb-0">
-                                                BMPS-{{ $victim->crimeRecord->blotter_entry_no }}
+                                                BMPS-{{ $victim?->crimeRecord?->blotter_entry_no ?? '' }}
                                             </td>
                                             <td class="text-center text-xs font-weight-bold mb-0">
                                                 {{ implode(' ', array_filter([$victim->firstname, $victim->middlename, $victim->lastname, $victim->suffix])) }}
