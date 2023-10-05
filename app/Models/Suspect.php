@@ -44,6 +44,6 @@ class Suspect extends Model
 
     public function crimeRecord()
     {
-        return $this->belongsTo(CrimeRecord::class);
+        return $this->belongsTo(CrimeRecord::class, 'crime_record_id');
     }
 }

@@ -156,13 +156,13 @@
                 </a>
             </li>
             <li class="nav-item pb-2">
-                <a class="nav-link {{ request()->routeIs('crime-graph.*') ? 'active' : '' }}"
-                    href="{{ route('crime-graph.index') }}">
+                <a class="nav-link {{ request()->routeIs('archive.*') ? 'active' : '' }}"
+                    href="{{ route('archive.index') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
 
                         <i style="font-size: 1rem;"
-                            class="fa fa-solid fa-trash ps-2 pe-2 text-center text-dark {{ request()->routeIs('crime-graph.*') ? 'text-white' : '' }}"
+                            class="fa fa-solid fa-trash ps-2 pe-2 text-center text-dark {{ request()->routeIs('archive.*') ? 'text-white' : '' }}"
                             aria-hidden="true"></i>
                     </div>
                     <span class="nav-link-text ms-1">Archive</span>

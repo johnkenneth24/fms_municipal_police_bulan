@@ -5,12 +5,12 @@ namespace App\Http\Livewire\CrimeRec;
 use Livewire\Component;
 use App\Models\CrimeRecord;
 
-class Delete extends Component
+class Restore extends Component
 {
-    protected $listeners = ['delete'];
+
     public $crime_record;
 
-    public function deleteConfirm()
+    public function restoreConfirm()
     {
         $this->dispatchBrowserEvent('swal:confirm', [
             'id' => $this->crime_record->id,
@@ -18,7 +18,7 @@ class Delete extends Component
         ]);
     }
 
-    public function delete($id)
+    public function restore($id)
     {
         $crime_record = CrimeRecord::with('suspect', 'victim')->where('id', $id)->first();
         if ($crime_record != null) {
@@ -30,6 +30,6 @@ class Delete extends Component
 
     public function render()
     {
-        return view('livewire.crime-rec.delete');
+        return view('livewire.crime-rec.restore');
     }
 }
