@@ -43,15 +43,15 @@
                                     <td class="text-sm text-center mb-0">
                                         BMPS-{{ $crime_record->blotter_entry_no }}</td>
                                     <td class="text-center text-sm mb-0">
-                                        {{ $crime_record->date_reported->format('M.d,Y')}}</td>
+                                        {{ $crime_record->date_reported->format('M.d,Y') }}</td>
                                     <td class="text-center text-sm mb-0">
-                                        {{$crime_record->date_committed->format('M.d,Y') }}</td>
+                                        {{ $crime_record->date_committed->format('M.d,Y') }}</td>
                                     <td class="text-center text-sm mb-0">
                                         {{ $crime_record->incident_location }}</td>
-                                        <td class="text-center text-sm mb-0">
-                                            {{ $crime_record->case_status }}</td>
-                                            <td class="text-center text-sm mb-0">
-                                                {{ $crime_record->case_progress }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->case_status }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->case_progress }}</td>
                                     <td class="d-flex justify-content-center align-items-center">
                                         @livewire('crime-rec.restore', ['crime_record' => $crime_record], key($crime_record->id))
                                     </td>
@@ -72,4 +72,3 @@
     </div>
 @endsection
 @livewireScripts
-

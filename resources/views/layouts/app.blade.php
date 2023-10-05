@@ -189,7 +189,7 @@
                         icon: 'success',
                         title: 'Successfully Restored',
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 1500
                     })
                 }
             });
