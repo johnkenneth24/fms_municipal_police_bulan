@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Case Status</label>
+                                <label>Case Status<span class="text-danger">*</span> </label>
                                 <select class="form-control form-control-sm" name="case_status" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($case_status as $c_status)
@@ -39,7 +39,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Case Progress</label>
+                                <label>Case Progress<span class="text-danger">*</span></label>
                                 <select class="form-control form-control-sm" name="case_progress" required>
                                     <option value="">--Please Select--</option>
                                     @foreach ($case_progress as $c_progress)
@@ -51,31 +51,31 @@
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Date Commited</label>
+                                <label>Date Commited<span class="text-danger">*</span> </label>
                                 <input type="date" class="form-control form-control-sm" name="date_committed" required value="{{ old('date_committed') }}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Time Commited</label>
+                                <label>Time Commited<span class="text-danger">*</span> </label>
                                 <input type="time" class="form-control form-control-sm" name="time_committed" required value="{{ old('time_committed') }}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Date Reported</label>
+                                <label>Date Reported<span class="text-danger">*</span> </label>
                                 <input type="date" class="form-control form-control-sm" name="date_reported" value="{{ old('date_reported') ?? date('Y-m-d') }}">
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label>Time Reported</label>
+                                <label>Time Reported<span class="text-danger">*</span> </label>
                                 <input type="time" class="form-control form-control-sm" name="time_reported" value="{{ old('time_reported') ?? date('H:i') }}">
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Place of Incident</label>
+                                <label>Place of Incident<span class="text-danger">*</span> </label>
                                 <select class="form-control form-control-sm" name="incident_location" placeholder="Specify location where incident occurred" required>
                                     <option value="">--Please specify location where incident occurred--</option>
                                     @foreach ($barangays as $barangay)
@@ -87,7 +87,7 @@
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
-                                <label>Synopsis/Narrative</label>
+                                <label>Synopsis/Narrative<span class="text-danger">*</span> </label>
                                 <textarea class="form-control form-control-sm" required name="incident_details" rows="2" placeholder="Type here...">{{ old('incident_details') }}</textarea>
                             </div>
                         </div>
@@ -116,13 +116,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Middle Name</label>
                                 <input type="text" name="v_middlename" class="form-control form-control-sm" value="{{ old('v_middlename') }}" placeholder="Enter Middle Name">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Last Name <span class="text-danger">*</span> </label>
                                 <input type="text" name="v_lastname" class="form-control form-control-sm @error('v_lastname') is-invalid @enderror" value="{{ old('v_lastname') }}" required placeholder="Enter Last Name">
@@ -133,7 +133,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Suffix <span class="text-muted font-italic">(Optional)</span></label>
                                 <select name="v_suffix" class="form-control form-control-sm">
@@ -145,7 +145,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Birthdate <span class="text-danger">*</span> </label>
                                 <input type="date" class="form-control form-control-sm v_bdate" name="v_birthdate" required value="{{ old('v_birthdate') }}">
@@ -197,19 +197,19 @@
                                 <input type="text" class="form-control form-control-sm" name="v_education" value="{{ old('v_education') }}" placeholder="Enter Educational Attainment">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Address <span class="text-danger">*</span> </label>
                                 <input type="text" class="form-control form-control-sm" name="v_address" value="{{ old('v_address') }}" placeholder="(House No., Street Name, Barangay, Municipality, Province)">
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Contact Number</label>
                                 <input type="number" class="form-control form-control-sm" name="v_contact_number" value="{{ old('v_contact_number') }}" placeholder="Enter Contact No.">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>Nationality <span class="text-danger">*</span> </label>
                                 <input type="text" class="form-control form-control-sm" name="v_citizenship" value="{{ old('v_citizenship') }}" placeholder="Enter Nationality">
@@ -221,11 +221,11 @@
                                 <input type="text" class="form-control form-control-sm" name="v_ethnic" id="ethnicInput" value="{{ old('v_ethnic') }}" placeholder="Input only if applicable">
                             </div>
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-6 form-group">
                             <label>Relation to Suspect</label>
                             <input type="text" class="form-control form-control-sm" name="relation_to_suspect" value="{{ old('relation_to_suspect') }}" placeholder="Enter Relation to Suspect">
                         </div>
-                        <div class="col-md-4 form-group">
+                        <div class="col-md-6 form-group">
                             <label>Victim Status <span class="text-danger">*</span> </label>
                             <select class="form-control form-control-sm" name="victim_status">
                                 <option value="">--Please Select--</option>
@@ -243,7 +243,7 @@
             <div class="card  shadow shadow-card border  border-info">
                 <div class="card-header pb-1">
                     <div class="d-flex flex-row justify-content-between">
-                        <h5 class="mb-0">SUSPECT'S INFORMATION</h5>
+                        <h5 class="mb-0">PERSON OF INTEREST INFORMATION</h5>
                     </div>
                 </div>
                 <hr class="mt-0 py-0 mb-1 horizontal dark">
@@ -260,13 +260,13 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Middle Name</label>
                                 <input type="text" name="s_middlename" class="form-control form-control-sm" value="{{ old('s_middlename') }}" placeholder="Enter Middle Name">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Last Name <span class="text-danger">*</span> </label>
                                 <input type="text" name="s_lastname" class="form-control form-control-sm @error('s_lastname') is-invalid @enderror" value="{{ old('s_lastname') }}" required placeholder="Enter Last Name">
@@ -277,7 +277,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>Suffix <span class="text-muted font-italic">(Optional)</span></label>
                                 <select name="s_suffix" class="form-control form-control-sm">
@@ -335,28 +335,28 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Occupation</label>
                         <input type="text" class="form-control form-control-sm" name="s_occupation" value="{{ old('s_occupation') }}" placeholder="Enter Occupation">
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Educational Attainment</label>
                         <input type="text" class="form-control form-control-sm" name="s_education" value="{{ old('s_education') }}" placeholder="Enter Educational Attainment">
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label>Address <span class="text-danger">*</span> </label>
-                        <input type="text" class="form-control form-control-sm" name="s_address" value="{{ old('s_address') }}" placeholder="(House No., Street Name, Barangay, Municipality, Province)">
-                    </div>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>Contact Number</label>
                         <input type="number" class="form-control form-control-sm" name="s_contact_number" value="{{ old('s_contact_number') }}" placeholder="Enter Contact No.">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Address <span class="text-danger">*</span> </label>
+                        <input type="text" class="form-control form-control-sm" name="s_address" value="{{ old('s_address') }}" placeholder="(House No., Street Name, Barangay, Municipality, Province)">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -383,7 +383,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label>Suspect Status</label>
+                        <label>Status</label>
                         <select class="form-control form-control-sm" name="suspect_status">
                             <option value="">--Please Select--</option>
                             @foreach ($sus_status as $s_status)
@@ -395,7 +395,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label>Suspect Motive</label>
+                        <label>Motive</label>
                         <textarea class="form-control form-control-sm" name="suspect_motive" rows="2" placeholder="Type here...">{{ old('suspect_motive') }}</textarea>
                     </div>
                 </div>
