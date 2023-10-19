@@ -13,9 +13,9 @@
                     <div class="card-tool d-flex justify-content-end align-items-center">
                         <form action="{{ route('crime-record.index') }}" method="get" class="">
                             @csrf
-                            <div class="form-group pt-3">
-                                <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
-                                    placeholder="Search..." name="search" style="width: 300px;">
+                            <div class="form-group">
+                                <input class="form-control form-control-sm" type="search" autocomplete="off" autofocus
+                                    placeholder="Search..." name="search">
                             </div>
                         </form>
 

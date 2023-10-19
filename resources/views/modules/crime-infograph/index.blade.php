@@ -14,6 +14,13 @@
                             @endfor
                         </select>
                     </form>
+                    {{-- <form class="ms-2 col-md-3">
+                        <select id="month" class="form-control">
+                            @for ($i = 1; $i <= 12; $i++)
+                                <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 1)) }}</option>
+                            @endfor
+                        </select>
+                    </form> --}}
                 </div>
                 <div class="card-body p-3 pt-0">
                     <div class="chart">
@@ -188,7 +195,9 @@
             pubSafetyInstance = new Chart(crime_pubSafety, {
                 type: 'bar',
                 data: {
-                    labels: ['RIR to Homicide', 'RIR to Physical Injury', 'RIR to Damage to Property', 'Other Quasi Offenses', 'Imprudence & Negligence'],
+                    labels: ['RIR to Homicide', 'RIR to Physical Injury', 'RIR to Damage to Property',
+                        'Other Quasi Offenses', 'Imprudence & Negligence'
+                    ],
                     datasets: [{
                         label: 'Total Cases',
                         data: [
@@ -393,6 +402,7 @@
             });
         }
 
+
         function updateLineChart(data, selectedYear) {
             const lineChart = document.getElementById('line-chart');
             // Destroy the existing chart if it exists
@@ -432,7 +442,7 @@
                             title: {
                                 display: true,
                                 text: 'Month'
-                            }
+                            },
                         }
                     },
                     plugins: {
@@ -559,7 +569,8 @@
                     datasets: [{
                         label: 'Suspect Gender',
                         data: [data.countMaleSus, data
-                        .countFemaleSus], // Example data, you can replace with actual values
+                            .countFemaleSus
+                        ], // Example data, you can replace with actual values
                         backgroundColor: [
                             'rgba(54, 162, 235)', // Color for 'Male' slice
                             'rgba(255, 99, 132)' // Color for 'Female' slice
@@ -596,7 +607,9 @@
                     labels: ['Male', 'Female'],
                     datasets: [{
                         label: 'Victim Gender',
-                        data: [data.countMaleVic, data.countFemaleVic], // Example data, you can replace with actual values
+                        data: [data.countMaleVic, data
+                            .countFemaleVic
+                        ], // Example data, you can replace with actual values
                         backgroundColor: [
                             'rgba(54, 162, 235)', // Color for 'Male' slice
                             'rgba(255, 99, 132)' // Color for 'Female' slice
@@ -623,7 +636,7 @@
         function updateVictimStatChart(data, selectedYear) {
             const ctx1 = document.getElementById('bar-hor-chart');
 
-            if(victimStatChartInstance) {
+            if (victimStatChartInstance) {
                 victimStatChartInstance.destroy();
             }
 
@@ -674,14 +687,16 @@
         function updateSuspectStatChart(data, selectedYear) {
             const ctx1 = document.getElementById('suspect-status');
 
-            if(suspectStatChartInstance) {
+            if (suspectStatChartInstance) {
                 suspectStatChartInstance.destroy();
             }
 
             suspectStatChartInstance = new Chart(ctx1, {
                 type: 'bar',
                 data: {
-                    labels: ['Arrested', 'On-bail', 'At-Large', 'Released', 'Deceased', 'On Probation', 'Convicted', 'Serving Sentence', 'Turn-over to MSWD', 'Turned-over to BRGY', 'Turn-over to Guardian' ],
+                    labels: ['Arrested', 'On-bail', 'At-Large', 'Released', 'Deceased', 'On Probation', 'Convicted',
+                        'Serving Sentence', 'Turn-over to MSWD', 'Turned-over to BRGY', 'Turn-over to Guardian'
+                    ],
                     datasets: [{
                         label: 'Total Cases',
                         data: [

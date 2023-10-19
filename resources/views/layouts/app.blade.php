@@ -45,6 +45,18 @@
         div {
             font-family: 'Poppins', sans-serif !important;
         }
+
+        input[name="search"] {
+            width: 300px;
+            display: inline-block;
+        }
+
+        @media (max-width: 767px) {
+            input[name="search"] {
+                width: 150px;
+                display: inline-block;
+            }
+        }
     </style>
 </head>
 
