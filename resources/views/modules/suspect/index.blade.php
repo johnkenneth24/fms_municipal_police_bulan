@@ -13,8 +13,8 @@
                             <div class="ms-auto px-5">
                                 <form action="{{ route('suspect.index') }}" method="get">
                                     <div class="form-group">
-                                        <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
-                                            placeholder="Search..." name="search" style="width: 300px;">
+                                        <input class="form-control form-control-sm" type="search" autocomplete="off"
+                                            autofocus placeholder="Search..." name="search">
                                     </div>
                                 </form>
                             </div>

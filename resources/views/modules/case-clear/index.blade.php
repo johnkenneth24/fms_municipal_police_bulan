@@ -15,8 +15,8 @@
                             <div class="ms-auto px-5">
                                 <form action="{{ route('case-solved.index') }}" method="get">
                                     <div class="form-group">
-                                        <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
-                                            placeholder="Search..." name="search" style="width: 300px;">
+                                        <input class="form-control form-control-sm" type="search" autocomplete="off"
+                                            autofocus placeholder="Search..." name="search">
                                     </div>
                                 </form>
                             </div>
@@ -44,12 +44,13 @@
                                             <td>{{ $crime_record->incident_location }}</td>
                                             <td class="text-center text-sm mb-0">
                                                 @livewire('crime-rec.export', ['crime_record' => $crime_record], key($crime_record->id))
-                                                <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2" title="View">
+                                                <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2"
+                                                    title="View">
                                                     <i class="fas fa-eye text-info"></i>
                                                 </a>
                                                 <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
                                                     title="Update">
-                                                    <i class="fas fa-user-edit text-success" ></i>
+                                                    <i class="fas fa-user-edit text-success"></i>
                                                 </a>
                                                 @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
 
