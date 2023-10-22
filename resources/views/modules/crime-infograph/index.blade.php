@@ -5,6 +5,7 @@
         <div class="col-md-12">
             <div class="card mb-3">
                 <div class="card-header pb-0 d-flex justify-between align-items-center">
+
                     <div class="me-5 d-flex align-items-center">
                         <h6 class="mb-0 me-2">FROM</h6>
                         <input type="date" id="from" name="from" class="form-control">
@@ -13,6 +14,7 @@
                         <h6 class="mb-0 me-2">TO</h6>
                         <input type="date" name="to" id="to" class="form-control">
                     </div>
+
                 </div>
                 <div class="card-body p-3 pt-0">
                     <div class="chart">
@@ -396,7 +398,9 @@
             });
         }
 
+
         function updateLineChart(data) {
+
             const lineChart = document.getElementById('line-chart');
             // Destroy the existing chart if it exists
             if (lineChartInstance) {
@@ -435,7 +439,7 @@
                             title: {
                                 display: true,
                                 text: 'Month'
-                            }
+                            },
                         }
                     },
                     plugins: {
@@ -601,7 +605,9 @@
                     datasets: [{
                         label: 'Victim Gender',
                         data: [data.countMaleVic, data
+
                         .countFemaleVic], // Example data, you can replace with actual values
+
                         backgroundColor: [
                             'rgba(54, 162, 235)', // Color for 'Male' slice
                             'rgba(255, 99, 132)' // Color for 'Female' slice

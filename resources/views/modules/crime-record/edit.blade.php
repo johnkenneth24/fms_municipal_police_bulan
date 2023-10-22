@@ -1,7 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-    <form action="{{ route('crime-record.update', $crime_record->id) }}" method="post">
+    <form action="{{ route('crime-record.update', $crime_record->id) }}" method="post" autocomplete="off">
         @csrf
         @method('PUT')
         <div class="row">

@@ -27,10 +27,9 @@
                             @csrf
                             <div class="form-group pt-3">
                                 <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
-                                    placeholder="Search..." name="search" style="width: 150px;">
+                                    placeholder="Search..." name="search" style="width: 150px;" autocomplete="off" autofocus>
                             </div>
                         </form>
-
                         <a href="{{ route('crime-record.create') }}" class="btn btn-sm bg-gradient-info">
                             <span><i class="fa fa-plus" aria-hidden="true"></i></span> Add New Record</a>
                     </div>
@@ -60,13 +59,14 @@
                                         {{ $crime_record->date_committed->format('M. d, Y') }}</td>
                                     <td class="text-center text-sm mb-0">
                                         {{ $crime_record->incident_location }}</td>
-                                        <td class="text-center text-sm mb-0">
-                                            {{ $crime_record->case_status }}</td>
-                                            <td class="text-center text-sm mb-0">
-                                                {{ $crime_record->case_progress }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->case_status }}</td>
+                                    <td class="text-center text-sm mb-0">
+                                        {{ $crime_record->case_progress }}</td>
                                     <td class="text-center text-sm mb-0">
                                         @livewire('crime-rec.export', ['crime_record' => $crime_record], key($crime_record->id))
-                                        <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2" title="View">
+                                        <a href="{{ route('crime-record.view', $crime_record->id) }}" class="me-2"
+                                            title="View">
                                             <i class="fas fa-eye text-info"></i>
                                         </a>
                                         <a href="{{ route('crime-record.edit', $crime_record->id) }}" class="me-2"
@@ -93,4 +93,3 @@
     </div>
 @endsection
 @livewireScripts
-
