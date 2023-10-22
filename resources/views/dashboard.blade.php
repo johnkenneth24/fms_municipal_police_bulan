@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Case Solved</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Case Solved </p>
                                 <h5 class="font-weight-bolder mb-0">
                                     {{ $solvedCase }}
                                 </h5>
@@ -138,8 +138,6 @@
                 </div>
             </div>
         </div>
-
-
     @endsection
     @push('scripts')
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -147,97 +145,97 @@
             const lineChart = document.getElementById('line-chart');
 
             new Chart(lineChart, {
-            type: 'line',
-            data: {
-                labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC'],
-                datasets: [{
-                label: 'Crime Cases',
-                data: [
-                    {{ $janCount }},
-                {{ $febCount }},
-                {{ $marCount }},
-                {{ $aprCount }},
-                {{ $mayCount }},
-                {{ $junCount }},
-                {{ $julCount }},
-                {{ $augCount }},
-                {{ $septCount }},
-                {{ $octCount }},
-                {{ $novCount }},
-                {{ $decCount }}
-                ],
-                fill: false,
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 2
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                y: {
-                    beginAtZero: true,
-                    title: {
-                    display: true,
-                    text: 'Number of Cases'
+                type: 'line',
+                data: {
+                    labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEPT', 'OCT', 'NOV', 'DEC'],
+                    datasets: [{
+                        label: 'Crime Cases',
+                        data: [
+                            {{ $janCount }},
+                            {{ $febCount }},
+                            {{ $marCount }},
+                            {{ $aprCount }},
+                            {{ $mayCount }},
+                            {{ $junCount }},
+                            {{ $julCount }},
+                            {{ $augCount }},
+                            {{ $septCount }},
+                            {{ $octCount }},
+                            {{ $novCount }},
+                            {{ $decCount }}
+                        ],
+                        fill: false,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Cases'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Year ' + '{{ date('Y') }}',
+                            }
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Crime Cases This Year ' + '{{ date('Y') }}',
+                            position: 'top'
+                        },
+                        legend: {
+                            display: false
+                        }
                     }
-                },
-                x: {
-                    title: {
-                    display: true,
-                    text: 'Year'
-                    }
                 }
-                },
-                plugins: {
-                title: {
-                    display: true,
-                    text: 'Crime Cases This Year',
-                    position: 'top'
-                },
-                legend: {
-                    display: false
-                }
-                }
-            }
             });
 
             const ctx = document.getElementById('bar-chart');
 
             new Chart(ctx, {
-                type: 'bar'
-                , data: {
-                    labels: ['Solved', 'Cleared', 'Under Invest.']
-                    , datasets: [{
-                        label: 'Case Status This Year'
-                        , data: [
+                type: 'bar',
+                data: {
+                    labels: ['Solved', 'Cleared', 'Under Invest.'],
+                    datasets: [{
+                        label: 'Case Status This Year ' + '{{ date('Y') }}',
+                        data: [
                             {{ $solvedCase }},
                             {{ $clearedCase }},
                             {{ $underInvCase }}
-                        ]
-                        , backgroundColor: [
+                        ],
+                        backgroundColor: [
                             'rgba(255, 99, 132)', // Color for 'Solved' bar
                             'rgba(54, 162, 235)', // Color for 'Cleared' bar
                             'rgba(255, 205, 86)' // Color for 'Under Investigation' bar
-                        ]
-                        , borderWidth: 1
+                        ],
+                        borderWidth: 1
                     }]
-                }
-                , options: {
-                    indexAxis: 'y'
-                    , scales: {
+                },
+                options: {
+                    indexAxis: 'y',
+                    scales: {
                         x: {
                             beginAtZero: true
                         }
-                    }
-                    , plugins: {
+                    },
+                    plugins: {
                         title: {
-                            display: true
-                            , text: 'Case Status This Year', // Title text
+                            display: true,
+                            text: 'Case Status This Year ' + '{{ date('Y') }}', // Title text
                             position: 'top'
-                        }
-                        , legend: {
-                            display: false
-                            , position: 'bottom'
+                        },
+                        legend: {
+                            display: false,
+                            position: 'bottom'
                         }
                     }
                 }
@@ -250,7 +248,7 @@
                 data: {
                     labels: ['Prosecutiuon', 'Court', 'Law Agency', 'Dismissed'],
                     datasets: [{
-                        label: 'Case Progress this Year',
+                        label: 'Case Progress this Year ' + '{{ date('Y') }}',
                         data: [
                             {{ $prosecutor }},
                             {{ $filedCourt }},
@@ -276,7 +274,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Case Progress this Year', // Title text
+                            text: 'Case Progress this Year ' + '{{ date('Y') }}',
                             position: 'top'
                         },
                         legend: {
