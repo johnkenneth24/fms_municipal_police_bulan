@@ -225,7 +225,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Non-Index Crime  ', // Title text
+                            text: 'Total Public Safety  ', // Title text
                             position: 'top'
                         },
                         legend: {
