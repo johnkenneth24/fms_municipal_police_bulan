@@ -50,6 +50,8 @@ class CrimeRecordController extends Controller
 
     public function index(Request $request)
     {
+        $barangays = $this->barangay;
+
         $search = $request->input('search');
 
         $query = CrimeRecord::query()->with(['victim', 'suspect'])->orderBy('blotter_entry_no', 'asc');
@@ -65,9 +67,9 @@ class CrimeRecordController extends Controller
                 ->orWhere('date_committed', 'like', '%' . $search . '%');
         }
 
-        $crime_records = $query->paginate(10); 
+        $crime_records = $query->paginate(10);
 
-        return view('modules.crime-record.index', compact('crime_records'));
+        return view('modules.crime-record.index', compact('crime_records', 'barangays'));
     }
 
     public function create()

@@ -13,9 +13,21 @@
                     <div class="card-tool d-flex justify-content-end align-items-center">
                         <form action="{{ route('crime-record.index') }}" method="get" class="">
                             @csrf
+                            <div class="form-group pt-3 d-flex align-items-center ">
+                               <select name="search" class="form-control form-control-sm" id="">
+                                <option value="">Select Barangay</option>
+                                @foreach ($barangays as $brgy)
+                                <option value="{{ $brgy }}">{{ $brgy }}</option>
+                                @endforeach
+                               </select>
+                                <button type="submit" class="btn btn-sm btn-info mx-2 mb-0">Filter</button>
+                            </div>
+                        </form>
+                        <form action="{{ route('crime-record.index') }}" method="get" class="">
+                            @csrf
                             <div class="form-group pt-3">
                                 <input class="form-control form-control-sm d-sm-none d-md-block me-3" type="search"
-                                    placeholder="Search..." name="search" style="width: 300px;">
+                                    placeholder="Search..." name="search" style="width: 150px;">
                             </div>
                         </form>
 
