@@ -5,22 +5,16 @@
         <div class="col-md-12">
             <div class="card mb-3">
                 <div class="card-header pb-0 d-flex justify-between align-items-center">
-                    <h6 class="mb-0 me-2">SELECT A YEAR</h6>
-                    <form class="col-md-3">
-                        <select id="year" class="form-control">
-                            <option value="{{ date('Y') }}">{{ date('Y') }}</option>
-                            @for ($i = $latestYear - 1; $i >= $oldestYear; $i--)
-                                <option value="{{ $i }}">{{ $i }}</option>
-                            @endfor
-                        </select>
-                    </form>
-                    {{-- <form class="ms-2 col-md-3">
-                        <select id="month" class="form-control">
-                            @for ($i = 1; $i <= 12; $i++)
-                                <option value="{{ $i }}">{{ date('F', mktime(0, 0, 0, $i, 1)) }}</option>
-                            @endfor
-                        </select>
-                    </form> --}}
+
+                    <div class="me-5 d-flex align-items-center">
+                        <h6 class="mb-0 me-2">FROM</h6>
+                        <input type="date" id="from" name="from" class="form-control">
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0 me-2">TO</h6>
+                        <input type="date" name="to" id="to" class="form-control">
+                    </div>
+
                 </div>
                 <div class="card-body p-3 pt-0">
                     <div class="chart">
@@ -141,21 +135,22 @@
         let nonIndexCrimeInstance = null;
         let pubSafetyInstance = null;
 
-
         $(document).ready(function() {
-            $('#year').change(function() {
-                var selectedYear = $(this).val();
+            $('#from, #to').change(function() {
+                var from = $('#from').val();
+                var to = $('#to').val();
 
-                if (selectedYear) {
+                if (from && to) {
                     // AJAX request to get the data for the line chart
                     $.ajax({
                         url: '{{ route('get.year.count') }}',
                         type: 'GET',
                         data: {
-                            'year': selectedYear
+                            'from': from,
+                            'to': to
                         },
                         success: function(data) {
-                            updateCharts(data, selectedYear);
+                            updateCharts(data, from, to);
                             console.log(data);
                         },
                         error: function(xhr, status, error) {
@@ -166,25 +161,26 @@
             });
 
             // Automatically trigger the change event when the page loads
-            $('#year').trigger('change');
+            $('#from, #to').trigger('change');
         });
 
-        function updateCharts(data, selectedYear) {
-            updateLineChart(data, selectedYear);
-            updateBarChart(data, selectedYear);
-            updateBarHorChart(data, selectedYear);
-            updateSuspectChart(data, selectedYear);
-            updateVicitmChart(data, selectedYear);
-            updateVictimStatChart(data, selectedYear);
-            updateSuspectStatChart(data, selectedYear);
-            updateStageFelonyChart(data, selectedYear);
-            updateIndexChart(data, selectedYear);
-            updateNonIndexChart(data, selectedYear);
-            updatePubSafetyChart(data, selectedYear);
+
+        function updateCharts(data) {
+            updateLineChart(data);
+            updateBarChart(data);
+            updateBarHorChart(data);
+            updateSuspectChart(data);
+            updateVicitmChart(data);
+            updateVictimStatChart(data);
+            updateSuspectStatChart(data);
+            updateStageFelonyChart(data);
+            updateIndexChart(data);
+            updateNonIndexChart(data);
+            updatePubSafetyChart(data);
 
         }
 
-        function updatePubSafetyChart(data, selectedYear) {
+        function updatePubSafetyChart(data) {
             const crime_pubSafety = document.getElementById('crime_pubSafety');
 
             // Destroy the existing chart if it exists
@@ -229,7 +225,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Non-Index Crime for ' + selectedYear, // Title text
+                            text: 'Total Non-Index Crime for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -241,7 +237,7 @@
             });
         }
 
-        function updateNonIndexChart(data, selectedYear) {
+        function updateNonIndexChart(data) {
             const crime_nonindex = document.getElementById('crime_nonindex');
 
             // Destroy the existing chart if it exists
@@ -283,7 +279,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Non-Index Crime for ' + selectedYear, // Title text
+                            text: 'Total Non-Index Crime for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -295,7 +291,7 @@
             });
         }
 
-        function updateIndexChart(data, selectedYear) {
+        function updateIndexChart(data) {
             const crime_index = document.getElementById('crime_index');
 
             // Destroy the existing chart if it exists
@@ -340,7 +336,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Index Crime for ' + selectedYear, // Title text
+                            text: 'Total Index Crime for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -352,7 +348,7 @@
             });
         }
 
-        function updateBarHorChart(data, selectedYear) {
+        function updateBarHorChart(data) {
             const barHorChart = document.getElementById('bar-hor-chart1')
 
             if (horChartInstance) {
@@ -390,7 +386,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Case Progress for ' + selectedYear, // Title text
+                            text: 'Case Progress for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -403,7 +399,8 @@
         }
 
 
-        function updateLineChart(data, selectedYear) {
+        function updateLineChart(data) {
+
             const lineChart = document.getElementById('line-chart');
             // Destroy the existing chart if it exists
             if (lineChartInstance) {
@@ -448,7 +445,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Crime Cases for ' + selectedYear,
+                            text: 'Crime Cases for ',
                             position: 'top'
                         },
                         legend: {
@@ -459,7 +456,7 @@
             });
         }
 
-        function updateBarHorChart(data, selectedYear) {
+        function updateBarHorChart(data) {
             const barHorChart = document.getElementById('bar-hor-chart1')
 
             if (horChartInstance) {
@@ -497,7 +494,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Case Progress for ' + selectedYear, // Title text
+                            text: 'Case Progress for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -509,7 +506,7 @@
             });
         }
 
-        function updateBarChart(data, selectedYear) {
+        function updateBarChart(data) {
             const barChart = document.getElementById('bar-chart');
 
             // Destroy the existing chart if it exists
@@ -542,7 +539,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Case Status for ' + selectedYear, // Title text
+                            text: 'Total Case Status for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -554,7 +551,7 @@
             });
         }
 
-        function updateSuspectChart(data, selectedYear) {
+        function updateSuspectChart(data) {
             const suspect = document.getElementById('pie-chart1');
 
             if (suspectChartInstance) {
@@ -583,7 +580,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Suspect Gender for ' + selectedYear, // Title text
+                            text: 'Suspect Gender for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -594,7 +591,7 @@
             });
         }
 
-        function updateVicitmChart(data, selectedYear) {
+        function updateVicitmChart(data) {
             const vicitm = document.getElementById('pie-chart2');
 
             if (victimChartInstance) {
@@ -608,8 +605,9 @@
                     datasets: [{
                         label: 'Victim Gender',
                         data: [data.countMaleVic, data
-                            .countFemaleVic
-                        ], // Example data, you can replace with actual values
+
+                        .countFemaleVic], // Example data, you can replace with actual values
+
                         backgroundColor: [
                             'rgba(54, 162, 235)', // Color for 'Male' slice
                             'rgba(255, 99, 132)' // Color for 'Female' slice
@@ -622,7 +620,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Victim Gender fro ' + selectedYear, // Title text
+                            text: 'Victim Gender fro ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -633,7 +631,7 @@
             });
         }
 
-        function updateVictimStatChart(data, selectedYear) {
+        function updateVictimStatChart(data) {
             const ctx1 = document.getElementById('bar-hor-chart');
 
             if (victimStatChartInstance) {
@@ -672,7 +670,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Victim Status for ' + selectedYear, // Title text
+                            text: 'Victim Status for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -684,7 +682,7 @@
             });
         }
 
-        function updateSuspectStatChart(data, selectedYear) {
+        function updateSuspectStatChart(data) {
             const ctx1 = document.getElementById('suspect-status');
 
             if (suspectStatChartInstance) {
@@ -731,7 +729,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Suspect Status for ' + selectedYear, // Title text
+                            text: 'Suspect Status for ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -743,7 +741,7 @@
             });
         }
 
-        function updateStageFelonyChart(data, selectedYear) {
+        function updateStageFelonyChart(data) {
             const stageFelony = document.getElementById('stage-felony');
 
             // Destroy the existing chart if it exists
@@ -776,7 +774,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Stage of Felony Status for ' + selectedYear, // Title text
+                            text: 'Stage of Felony Status for ', // Title text
                             position: 'top'
                         },
                         legend: {

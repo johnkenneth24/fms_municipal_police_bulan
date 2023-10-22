@@ -27,140 +27,145 @@ class CrimeGraphController extends Controller
 
     public function getYearCount(Request $request)
     {
-        $year = $request->input('year');
+        $fromDate = $request->input('from');
+        $toDate = $request->input('to');
 
-        $janCount = CrimeRecord::whereYear('date_committed', $year)
+        $from = \DateTime::createFromFormat('Y-m-d', $fromDate)->format('Y-m-d');
+        $to = \DateTime::createFromFormat('Y-m-d', $toDate)->format('Y-m-d');
+
+
+        $janCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 1)
             ->count();
-        $febCount = CrimeRecord::whereYear('date_committed', $year)
+        $febCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 2)
             ->count();
-        $marCount = CrimeRecord::whereYear('date_committed', $year)
+        $marCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 3)
             ->count();
-        $aprCount = CrimeRecord::whereYear('date_committed', $year)
+        $aprCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 4)
             ->count();
-        $mayCount = CrimeRecord::whereYear('date_committed', $year)
+        $mayCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 5)
             ->count();
-        $junCount = CrimeRecord::whereYear('date_committed', $year)
+        $junCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 6)
             ->count();
-        $julCount = CrimeRecord::whereYear('date_committed', $year)
+        $julCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 7)
             ->count();
-        $augCount = CrimeRecord::whereYear('date_committed', $year)
+        $augCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 8)
             ->count();
-        $septCount = CrimeRecord::whereYear('date_committed', $year)
+        $septCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 9)
             ->count();
-        $octCount = CrimeRecord::whereYear('date_committed', $year)
+        $octCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 10)
             ->count();
-        $novCount = CrimeRecord::whereYear('date_committed', $year)
+        $novCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 11)
             ->count();
-        $decCount = CrimeRecord::whereYear('date_committed', $year)
+        $decCount = CrimeRecord::whereYear('date_committed', $from)
             ->whereMonth('date_committed', 12)
             ->count();
 
-        $solvedCase = CrimeRecord::where('case_status', 'Solved')->whereYear('date_committed', $year)->count();
-        $clearedCase = CrimeRecord::where('case_status', 'Cleared')->whereYear('date_committed', $year)->count();
-        $underInvCase = CrimeRecord::where('case_status', 'Under Investigation')->whereYear('date_committed', $year)->count();
+        $solvedCase = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_status', 'Solved')->count();
+        $clearedCase = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_status', 'Cleared')->count();
+        $underInvCase = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_status', 'Under Investigation')->count();
 
-        $prosecutor = CrimeRecord::where('case_progress', 'Referred to Prosecutor')->whereYear('date_committed', $year)->count();
-        $filedCourt = CrimeRecord::where('case_progress', 'Filed in Court')->whereYear('date_committed', $year)->count();
-        $lawAgency = CrimeRecord::where('case_progress', 'Referred to other Law Enforcement Agency')->whereYear('date_committed', $year)->count();
-        $dismissed = CrimeRecord::where('case_progress', 'Dismissed')->whereYear('date_committed', $year)->count();
+        $prosecutor = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_progress', 'Referred to Prosecutor')->count();
+        $filedCourt = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_progress', 'Filed in Court')->count();
+        $lawAgency = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_progress', 'Referred to other Law Enforcement Agency')->count();
+        $dismissed = CrimeRecord::whereBetween('date_committed', [$from, $to])->where('case_progress', 'Dismissed')->count();
 
-        $suspectMale = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $suspectMale = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('gender', 'male');
         })->count();
-        $suspectFemale = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $suspectFemale = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('gender', 'female');
         })->count();
 
-        $victimMale = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $victimMale = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('gender', 'male');
         })->count();
-        $victimFemale = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $victimFemale = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('gender', 'female');
         })->count();
 
-        $unharmed = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $unharmed = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('victim_status', 'Unharmed');
         })->count();
-        $harmed = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $harmed = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('victim_status', 'Harmed');
         })->count();
-        $wounded = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $wounded = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('victim_status', 'Wounded');
         })->count();
-        $killed = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $killed = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('victim_status', 'Killed');
         })->count();
-        $deceased = CrimeRecord::whereYear('date_committed', $year)->whereHas('victim', function ($query) {
+        $deceased = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('victim', function ($query) {
             $query->where('victim_status', 'Deceased');
         })->count();
 
-        $arrested = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $arrested = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Arrested');
         })->count();
-        $onbail = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $onbail = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'On-bail');
         })->count();
-        $atLarge = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $atLarge = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'At-large');
         })->count();
-        $released = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $released = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Released');
         })->count();
-        $deceased_suspect = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $deceased_suspect = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Deceased');
         })->count();
-        $onprobation = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $onprobation = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'On Probation');
         })->count();
-        $convicted = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $convicted = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Convicted');
         })->count();
-        $serving_sentence = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $serving_sentence = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Serving Sentence');
         })->count();
-        $turnoverMswd = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $turnoverMswd = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Turn-over to MSWD');
         })->count();
-        $turnoverBrgy = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $turnoverBrgy = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Turn-over to Barangay');
         })->count();
-        $turnoverParent = CrimeRecord::whereYear('date_committed', $year)->whereHas('suspect', function ($query) {
+        $turnoverParent = CrimeRecord::whereBetween('date_committed', [$from, $to])->whereHas('suspect', function ($query) {
             $query->where('suspect_status', 'Turn-over to Parents/Legal Guardian');
         })->count();
 
-        $attempted = CrimeRecord::where('stage_of_felony', 'Attempted')->whereYear('date_committed', $year)->count();
-        $frustrated = CrimeRecord::where('stage_of_felony', 'Frustrated')->whereYear('date_committed', $year)->count();
-        $consummated = CrimeRecord::where('stage_of_felony', 'Consummated')->whereYear('date_committed', $year)->count();
+        $attempted = CrimeRecord::where('stage_of_felony', 'Attempted')->whereBetween('date_committed', [$from, $to])->count();
+        $frustrated = CrimeRecord::where('stage_of_felony', 'Frustrated')->whereBetween('date_committed', [$from, $to])->count();
+        $consummated = CrimeRecord::where('stage_of_felony', 'Consummated')->whereBetween('date_committed', [$from, $to])->count();
 
-        $murder = CrimeRecord::where('crime_category', 'Murder')->whereYear('date_committed', $year)->count();
-        $homicide = CrimeRecord::where('crime_category', 'Homicide')->whereYear('date_committed', $year)->count();
-        $physicalInjury = CrimeRecord::where('crime_category', 'Physical Injury')->whereYear('date_committed', $year)->count();
-        $rape = CrimeRecord::where('crime_category', 'Rape')->whereYear('date_committed', $year)->count();
-        $robbery = CrimeRecord::where('crime_category', 'Robbery')->whereYear('date_committed', $year)->count();
-        $carnapping = CrimeRecord::where('crime_category', 'Carnapping')->whereYear('date_committed', $year)->count();
-        $theft = CrimeRecord::where('crime_category', 'Theft')->whereYear('date_committed', $year)->count();
+        $murder = CrimeRecord::where('crime_category', 'Murder')->whereBetween('date_committed', [$from, $to])->count();
+        $homicide = CrimeRecord::where('crime_category', 'Homicide')->whereBetween('date_committed', [$from, $to])->count();
+        $physicalInjury = CrimeRecord::where('crime_category', 'Physical Injury')->whereBetween('date_committed', [$from, $to])->count();
+        $rape = CrimeRecord::where('crime_category', 'Rape')->whereBetween('date_committed', [$from, $to])->count();
+        $robbery = CrimeRecord::where('crime_category', 'Robbery')->whereBetween('date_committed', [$from, $to])->count();
+        $carnapping = CrimeRecord::where('crime_category', 'Carnapping')->whereBetween('date_committed', [$from, $to])->count();
+        $theft = CrimeRecord::where('crime_category', 'Theft')->whereBetween('date_committed', [$from, $to])->count();
 
-        $repAct = CrimeRecord::where('crime_category', 'Republic Act')->whereYear('date_committed', $year)->count();
-        $presDecree = CrimeRecord::where('crime_category', 'President Decrees')->whereYear('date_committed', $year)->count();
-        $batas = CrimeRecord::where('crime_category', 'Batas Pambansa')->whereYear('date_committed', $year)->count();
-        $offensePenal = CrimeRecord::where('crime_category', 'Offense of Revise Penal Code not Categorized as Index')->whereYear('date_committed', $year)->count();
+        $repAct = CrimeRecord::where('crime_category', 'Republic Act')->whereBetween('date_committed', [$from, $to])->count();
+        $presDecree = CrimeRecord::where('crime_category', 'President Decrees')->whereBetween('date_committed', [$from, $to])->count();
+        $batas = CrimeRecord::where('crime_category', 'Batas Pambansa')->whereBetween('date_committed', [$from, $to])->count();
+        $offensePenal = CrimeRecord::where('crime_category', 'Offense of Revise Penal Code not Categorized as Index')->whereBetween('date_committed', [$from, $to])->count();
 
-        $rirHomi = CrimeRecord::where('crime_category', 'RIR to Homicide')->whereYear('date_committed', $year)->count();
-        $rirPhysicalInj = CrimeRecord::where('crime_category', 'RIR to Physical Injury')->whereYear('date_committed', $year)->count();
-        $rirDamage = CrimeRecord::where('crime_category', 'RIR Damage to Property')->whereYear('date_committed', $year)->count();
-        $quasiOffense = CrimeRecord::where('crime_category', 'Other Quasi Offenses')->whereYear('date_committed', $year)->count();
-        $imprudence = CrimeRecord::where('crime_category', 'Imprudence & Negligence')->whereYear('date_committed', $year)->count();
+        $rirHomi = CrimeRecord::where('crime_category', 'RIR to Homicide')->whereBetween('date_committed', [$from, $to])->count();
+        $rirPhysicalInj = CrimeRecord::where('crime_category', 'RIR to Physical Injury')->whereBetween('date_committed', [$from, $to])->count();
+        $rirDamage = CrimeRecord::where('crime_category', 'RIR Damage to Property')->whereBetween('date_committed', [$from, $to])->count();
+        $quasiOffense = CrimeRecord::where('crime_category', 'Other Quasi Offenses')->whereBetween('date_committed', [$from, $to])->count();
+        $imprudence = CrimeRecord::where('crime_category', 'Imprudence & Negligence')->whereBetween('date_committed', [$from, $to])->count();
 
 
 
