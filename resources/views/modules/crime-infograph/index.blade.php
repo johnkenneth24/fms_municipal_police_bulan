@@ -225,7 +225,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Non-Index Crime for ', // Title text
+                            text: 'Total Non-Index Crime  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -279,7 +279,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Non-Index Crime for ', // Title text
+                            text: 'Total Non-Index Crime' , // Title text
                             position: 'top'
                         },
                         legend: {
@@ -336,7 +336,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Index Crime for ', // Title text
+                            text: 'Total Index Crime  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -386,7 +386,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Case Progress for ', // Title text
+                            text: 'Case Progress  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -418,7 +418,7 @@
                 data: {
                     labels: months,
                     datasets: [{
-                        label: 'Crime Cases',
+                        label: 'Crime Cases for',
                         data: counts,
                         fill: false,
                         borderColor: 'rgba(54, 162, 235, 1)',
@@ -445,7 +445,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Crime Cases for ',
+                            text: 'Crime Cases for '  + data.fromYear,
                             position: 'top'
                         },
                         legend: {
@@ -494,7 +494,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Case Progress for ', // Title text
+                            text: 'Case Progress  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -539,7 +539,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Case Status for ', // Title text
+                            text: 'Total Case Status  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -569,8 +569,8 @@
                             .countFemaleSus
                         ], // Example data, you can replace with actual values
                         backgroundColor: [
-                            'rgba(54, 162, 235)', // Color for 'Male' slice
-                            'rgba(255, 99, 132)' // Color for 'Female' slice
+                            'rgba(54, 162, 235)', // Color  'Male' slice
+                            'rgba(255, 99, 132)' // Color  'Female' slice
                         ],
                         borderWidth: 1
                     }]
@@ -580,7 +580,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Suspect Gender for ', // Title text
+                            text: 'Suspect Gender  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -609,8 +609,8 @@
                         .countFemaleVic], // Example data, you can replace with actual values
 
                         backgroundColor: [
-                            'rgba(54, 162, 235)', // Color for 'Male' slice
-                            'rgba(255, 99, 132)' // Color for 'Female' slice
+                            'rgba(54, 162, 235)', // Color  'Male' slice
+                            'rgba(255, 99, 132)' // Color  'Female' slice
                         ],
                         borderWidth: 1
                     }]
@@ -670,7 +670,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Victim Status for ', // Title text
+                            text: 'Victim Status  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -729,7 +729,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Suspect Status for ', // Title text
+                            text: 'Suspect Status  ', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -774,7 +774,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Stage of Felony Status for ', // Title text
+                            text: 'Stage of Felony Status  ', // Title text
                             position: 'top'
                         },
                         legend: {
