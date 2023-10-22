@@ -32,6 +32,7 @@ class CrimeGraphController extends Controller
 
         $from = \DateTime::createFromFormat('Y-m-d', $fromDate)->format('Y-m-d');
         $to = \DateTime::createFromFormat('Y-m-d', $toDate)->format('Y-m-d');
+        $fromYear = \DateTime::createFromFormat('Y-m-d', $fromDate)->format('Y');
 
 
         $janCount = CrimeRecord::whereYear('date_committed', $from)
@@ -171,6 +172,7 @@ class CrimeGraphController extends Controller
 
         return response()->json([
             'rirHomi'  => $rirHomi,
+            'fromYear' => $fromYear,
             'rirPhysicalInj' => $rirPhysicalInj,
             'rirDamage' => $rirDamage,
             'quasiOffense' => $quasiOffense,
