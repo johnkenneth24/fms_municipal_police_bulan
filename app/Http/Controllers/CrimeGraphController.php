@@ -22,7 +22,7 @@ class CrimeGraphController extends Controller
         $caseCleared = CrimeRecord::where('case_status', 'Cleared')->count();
         $caseUnderInvestigation = CrimeRecord::where('case_status', 'Under Investigation')->count();
 
-        return view('modules.crime-infograph.index', compact('latestYear', 'oldestYear' ,'caseSolved', 'caseCleared', 'caseUnderInvestigation'));
+        return view('modules.crime-infograph.index', compact('latestYear', 'oldestYear', 'caseSolved', 'caseCleared', 'caseUnderInvestigation'));
     }
 
     public function getYearCount(Request $request)
@@ -173,6 +173,8 @@ class CrimeGraphController extends Controller
         return response()->json([
             'rirHomi'  => $rirHomi,
             'fromYear' => $fromYear,
+            'fromDate' => $fromDate,
+            'toDate' => $toDate,
             'rirPhysicalInj' => $rirPhysicalInj,
             'rirDamage' => $rirDamage,
             'quasiOffense' => $quasiOffense,
@@ -194,10 +196,10 @@ class CrimeGraphController extends Controller
             'arrested' => $arrested,
             'onbail' => $onbail,
             'atLarge' => $atLarge,
-            'released'=>$released,
+            'released' => $released,
             'deceased_suspect' => $deceased_suspect,
-            'convicted'=>  $convicted,
-            'onprobation'=> $onprobation,
+            'convicted' =>  $convicted,
+            'onprobation' => $onprobation,
             'serving_sentence' => $serving_sentence,
             'turnoverMswd' => $turnoverMswd,
             'turnoverBrgy' => $turnoverBrgy,
