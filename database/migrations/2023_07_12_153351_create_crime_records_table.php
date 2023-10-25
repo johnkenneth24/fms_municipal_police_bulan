@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('crime_records', function (Blueprint $table) {
             $table->id();
             $table->string('blotter_entry_no');
-            $table->string('case_status');
+            $table->string('case_status')->nullable();
             $table->string('case_progress');
             $table->date('date_committed');
             $table->string('time_committed');

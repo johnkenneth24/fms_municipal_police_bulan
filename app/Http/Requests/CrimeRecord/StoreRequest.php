@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
         return [
 
             'blotter_entry_no' => 'required',
-            'case_status' => 'required',
+            'case_status' => 'nullable',
             'case_progress' => 'required',
             'date_committed' => 'required',
             'time_committed' => 'required',

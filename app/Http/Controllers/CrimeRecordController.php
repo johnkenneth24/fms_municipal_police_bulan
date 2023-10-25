@@ -99,7 +99,7 @@ class CrimeRecordController extends Controller
 
         $crime_record = CrimeRecord::create([
             'blotter_entry_no' => $validated['blotter_entry_no'],
-            'case_status' => $validated['case_status'],
+            'case_status' => $validated['case_status'] ?? '',
             'case_progress' => $validated['case_progress'],
             'date_committed' => $validated['date_committed'],
             'time_committed' => $validated['time_committed'],
