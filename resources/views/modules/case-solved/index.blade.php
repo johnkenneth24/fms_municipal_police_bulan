@@ -52,7 +52,6 @@
                                                 <i class="fas fa-user-edit text-success"></i>
                                             </a>
                                             @livewire('crime-rec.delete', ['crime_record' => $crime_record], key($crime_record->id))
-
                                         </td>
                                     </tr>
                                 @empty

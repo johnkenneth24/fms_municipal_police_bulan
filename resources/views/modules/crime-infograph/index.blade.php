@@ -4,18 +4,6 @@
     <div class="row mt-4">
         <div class="col-md-12">
             <div class="card mb-3">
-                <div class="card-header pb-0 d-flex justify-between align-items-center">
-
-                    <div class="me-5 d-flex align-items-center">
-                        <h6 class="mb-0 me-2">FROM</h6>
-                        <input type="date" id="from" name="from" class="form-control">
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <h6 class="mb-0 me-2">TO</h6>
-                        <input type="date" name="to" id="to" class="form-control">
-                    </div>
-
-                </div>
                 <div class="card-body p-3 pt-0">
                     <div class="chart">
                         <canvas id="line-chart" class="chart-canvas" height="100"></canvas>
@@ -25,6 +13,18 @@
         </div>
         <div class="col-md-12">
             <div class="card mb-3">
+                <div class="card-header pb-0 d-flex justify-between align-items-center">
+                    <div class="me-5 d-flex align-items-center">
+                        <h6 class="mb-0 me-2">FROM</h6>
+                        <input type="date" id="from" name="from" class="form-control"
+                            value="{{ date('Y') . '-01-01' }}">
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <h6 class="mb-0 me-2">TO</h6>
+                        <input type="date" name="to" id="to" class="form-control"
+                            value="{{ date('Y') . '-12-31' }}">
+                    </div>
+                </div>
                 <div class="card-body p-3">
                     <div class="chart">
                         <canvas id="crime_index" class="chart-canvas" height="100"></canvas>
@@ -126,22 +126,45 @@
         let chartInstance = null;
         let horChartInstance = null;
         let lineChartInstance = null;
-        let suspectChartInstance = null;
+        let pubSafetyInstance = null;
+        let indexCrimeInstance = null;
         let victimChartInstance = null;
+        let suspectChartInstance = null;
+        let nonIndexCrimeInstance = null;
         let victimStatChartInstance = null;
         let suspectStatChartInstance = null;
         let stageFelonyChartInstance = null;
-        let indexCrimeInstance = null;
-        let nonIndexCrimeInstance = null;
-        let pubSafetyInstance = null;
+
+        const currentYear = new Date().getFullYear();
+
 
         $(document).ready(function() {
+
+            const defFrom = $('#from').val();
+            const defTo = $('#to').val();
+
+            $.ajax({
+                url: '{{ route('get.year.count') }}',
+                type: 'GET',
+                data: {
+                    'from': defFrom,
+                    'to': defTo
+                },
+                success: function(data) {
+                    updateCharts(data, defFrom, defTo);
+                    console.log(data);
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                }
+            });
+
+
             $('#from, #to').change(function() {
-                var from = $('#from').val();
-                var to = $('#to').val();
+                const from = $('#from').val();
+                const to = $('#to').val();
 
                 if (from && to) {
-                    // AJAX request to get the data for the line chart
                     $.ajax({
                         url: '{{ route('get.year.count') }}',
                         type: 'GET',
@@ -160,8 +183,7 @@
                 }
             });
 
-            // Automatically trigger the change event when the page loads
-            $('#from, #to').trigger('change');
+            $('#from, #to').trigger('input');
         });
 
 
@@ -179,6 +201,130 @@
             updatePubSafetyChart(data);
 
         }
+
+        function updateLineChart(data) {
+
+            const lineChart = document.getElementById('line-chart');
+
+            // Destroy the existing chart if it exists
+            if (lineChartInstance) {
+                lineChartInstance.destroy();
+            }
+
+            // get months ranging from the data.fromDate to data.toDate
+            // const range = (start, end) => {
+            //     if (start === end) return [start];
+            //     return [start, ...range(start + 1, end)];
+            // }
+
+            // const fromYear = new Date(data.fromDate).getFullYear();
+            // const toYear = new Date(data.toDate).getFullYear();
+
+            // const months = range(fromYear, toYear);
+
+            // const counts = months.map(month => {
+            //     const monthData = data.months.find(m => m.month === month);
+            //     return monthData ? monthData.count : 0;
+            // });
+
+            // const counts = [
+            //     data.janCount, data.febCount, data.marCount, data.aprCount, data.mayCount, data.junCount,
+            //     data.julCount, data.augCount, data.septCount, data.octCount, data.novCount, data.decCount
+            // ];
+
+            // lineChartInstance = new Chart(lineChart, {
+            //     type: 'line',
+            //     data: {
+            //         labels: months,
+            //         datasets: [{
+            //             label: 'Crime Cases',
+            //             data: counts,
+            //             fill: false,
+            //             borderColor: 'rgba(54, 162, 235, 1)',
+            //             borderWidth: 2
+            //         }]
+            //     },
+            //     options: {
+            //         responsive: true,
+            //         scales: {
+            //             y: {
+            //                 beginAtZero: true,
+            //                 title: {
+            //                     display: true,
+            //                     text: 'Number of Cases'
+            //                 }
+            //             },
+            //             x: {
+            //                 title: {
+            //                     display: true,
+            //                     text: 'Year'
+            //                 },
+            //             }
+            //         },
+            //         plugins: {
+            //             title: {
+            //                 display: true,
+            //                 text: 'Crime Cases from ' + data.fromYear + ' to ' + data.toYear,
+            //                 position: 'top'
+            //             },
+            //             legend: {
+            //                 display: false
+            //             }
+            //         }
+            //     }
+            // });
+
+            // const lineChart = document.getElementById('line-chart');
+
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+            const counts = [
+                data.janCount, data.febCount, data.marCount, data.aprCount, data.mayCount, data.junCount,
+                data.julCount, data.augCount, data.septCount, data.octCount, data.novCount, data.decCount
+            ];
+
+            lineChartInstance = new Chart(lineChart, {
+                type: 'line',
+                data: {
+                    labels: months,
+                    datasets: [{
+                        label: 'Crime Cases',
+                        data: counts,
+                        fill: false,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Cases'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            },
+                        }
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Crime Cases for ' + data.fromYear,
+                            position: 'top'
+                        },
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
 
         function updatePubSafetyChart(data) {
             const crime_pubSafety = document.getElementById('crime_pubSafety');
@@ -279,7 +425,7 @@
                     plugins: {
                         title: {
                             display: true,
-                            text: 'Total Non-Index Crime' , // Title text
+                            text: 'Total Non-Index Crime', // Title text
                             position: 'top'
                         },
                         legend: {
@@ -392,64 +538,6 @@
                         legend: {
                             display: false,
                             position: 'bottom'
-                        }
-                    }
-                }
-            });
-        }
-
-
-        function updateLineChart(data) {
-
-            const lineChart = document.getElementById('line-chart');
-            // Destroy the existing chart if it exists
-            if (lineChartInstance) {
-                lineChartInstance.destroy();
-            }
-
-            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-            const counts = [
-                data.janCount, data.febCount, data.marCount, data.aprCount, data.mayCount, data.junCount,
-                data.julCount, data.augCount, data.septCount, data.octCount, data.novCount, data.decCount
-            ];
-
-            lineChartInstance = new Chart(lineChart, {
-                type: 'line',
-                data: {
-                    labels: months,
-                    datasets: [{
-                        label: 'Crime Cases for',
-                        data: counts,
-                        fill: false,
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Number of Cases'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Month'
-                            },
-                        }
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Crime Cases for '  + data.fromYear,
-                            position: 'top'
-                        },
-                        legend: {
-                            display: false
                         }
                     }
                 }
@@ -606,7 +694,8 @@
                         label: 'Victim Gender',
                         data: [data.countMaleVic, data
 
-                        .countFemaleVic], // Example data, you can replace with actual values
+                            .countFemaleVic
+                        ], // Example data, you can replace with actual values
 
                         backgroundColor: [
                             'rgba(54, 162, 235)', // Color  'Male' slice
