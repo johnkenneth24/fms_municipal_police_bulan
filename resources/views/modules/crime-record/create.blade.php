@@ -29,7 +29,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Case Status <span class="text-danger">*</span> </label>
-                                    <select class="form-control form-control-sm" name="case_status" required>
+                                    <select class="form-control form-control-sm" name="case_status">
                                         <option value="">--Please Select--</option>
                                         @foreach ($case_status as $c_status)
                                             <option value="{{ $c_status }}" @selected(old('case_status') == $c_status)>
