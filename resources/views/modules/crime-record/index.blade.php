@@ -34,8 +34,12 @@
                             <span><i class="fa fa-plus" aria-hidden="true"></i></span> Add New Record</a>
                     </div>
                 </div>
-                <hr class="horizontal dark mt-2 mb-0">
-                <div class="card-body px-0 pt-2 pb-2" style="overflow-x: scroll;">
+
+
+                <div class="card-body px-0 pt-2 pb-2"  style="overflow-x: scroll;">
+                    @livewire('crime-rec.export-compilation')
+                    <div class="table-responsive pt-2">
+                        <hr class="horizontal dark mb-1 mt-1">
                     <table class="table table-hover table-responsive align-items-center mb-">
                         <thead>
                             <tr class="text-center text-secondary text-sm font-weight-bolder opacity-10">

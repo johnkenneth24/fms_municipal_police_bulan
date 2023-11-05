@@ -10,7 +10,7 @@
                     <div class="card-header pb-0">
                         <div class="d-flex flex-row justify-content-between">
                             <div>
-                                <h5 class="mb-0">Case Solved</h5>
+                                <h5 class="mb-0">Case Cleared</h5>
                             </div>
                             <div class="ms-auto px-5">
                                 <form action="{{ route('case-solved.index') }}" method="get">
@@ -22,9 +22,10 @@
                             </div>
                         </div>
                     </div>
-                    <hr class="horizontal dark mb-1 mt-1">
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive">
+                    <div class="card-body px-0 pt-2 pb-2">
+                        @livewire('case-cleared.export-compilation')
+                        <div class="table-responsive pt-2">
+                            <hr class="horizontal dark mb-1 mt-1">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr class="text-center  text-secondary text-sm font-weight-bolder opacity-7">
