@@ -1,5 +1,7 @@
 @extends('layouts.user_type.auth')
 
+@livewireStyles()
+
 @section('content')
     <div>
         <div class="row">
@@ -20,8 +22,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body px-0 pt-4 pb-2">
-                        <div class="table-responsive">
+                    <div class="card-body px-0 pt-2 pb-2">
+                        @livewire('victim.export')
+                        <div class="table-responsive pt-2">
                             <table class="table align-items-center mb-0">
                                 <thead>
                                     <tr class="text-center text-secondary text-xs font-weight-bolder opacity-7">
@@ -89,3 +92,5 @@
         </div>
     </div>
 @endsection
+
+@livewireScripts()
