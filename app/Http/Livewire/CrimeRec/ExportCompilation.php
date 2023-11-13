@@ -35,13 +35,12 @@ class ExportCompilation extends Component
         $templateProcessor->cloneRow('bn', count($crimeRecords));
 
         foreach ($crimeRecords as $index => $record) {
-
-            $templateProcessor->setValue('bn#' . ($index + 1), $record->blotter_entry_no); // Populate row number
-            $templateProcessor->setValue('date_committed#' . ($index + 1), $record->date_committed->format('F d, Y'));
-            $templateProcessor->setValue('progress#' . ($index + 1), $record->case_progress);
-            $templateProcessor->setValue('status#' . ($index + 1), $record->case_status);
-
+            $templateProcessor->setValue('bn#' . ($index + 1), $record->blotter_entry_no !== null ? $record->blotter_entry_no : '');
+            $templateProcessor->setValue('date_committed#' . ($index + 1), $record->date_committed !== null ? $record->date_committed->format('F d, Y') : '');
+            $templateProcessor->setValue('progress#' . ($index + 1), $record->case_progress !== null ? $record->case_progress : '');
+            $templateProcessor->setValue('status#' . ($index + 1), $record->case_status !== null ? $record->case_status : '');
         }
+
 
         $filename = 'Crime Record  Compilation-' . now()->format('Y-m-d');
         $tempPath = 'reports/' . $filename . '.docx';
